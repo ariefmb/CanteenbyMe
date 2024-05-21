@@ -10,8 +10,6 @@ interface CanteensContainerProps {
 export default function CanteensContainer({
   canteens = [],
 }: CanteensContainerProps) {
-  console.log(canteens);
-  
   return (
     <div className=''>
       {!canteens?.length ? (
