@@ -1,19 +1,13 @@
-import Image from "next/image";
-import CanteenbyMeLogo from "@/images/logo/cbm-logo.png";
+import Head from "next/head";
 
 export default function Home() {
   return (
-    <div className="absolute inset-0 grid place-items-center bg-[#F1F6F9]">
-      <div className="flex flex-col justify-center items-center gap-y-2 text-sm font-bold text-slate-800">
-        <Image
-          src={CanteenbyMeLogo}
-          alt="CanteenbyMe Logo"
-          className="animate-bounce"
-          width={150}
-          priority
-        />
-        <div>Loading...</div>
-      </div>
-    </div>
+    <main className='min-h-screen bg-background p-10 text-slate-800'>
+      <Head>
+        <title>CanteenbyMe</title>
+        <meta name="description" content="CanteenbyMe is a solution for efficient food menu ordering in the UPNVJ canteen. With CanteenbyMe, we hope to facilitate the ordering process and build social relationships between sellers and consumers in the UPNVJ canteen"/>
+        <meta name="keywords" content="Food, Beverage, NextJS, TailwindCSS"/>
+      </Head>
+    </main>
   );
 }
