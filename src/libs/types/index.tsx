@@ -1,4 +1,4 @@
-export type TSignatureMenus = {
+export type TSignatureMenu = {
   menuName: string;
   menuPrice: number;
   menuDescription: string;
@@ -9,6 +9,7 @@ export type TCanteens = {
   id: string;
   name: string;
   imageUrl: string;
+  open: boolean;
   createdAt: string;
-  signatureMenus: TSignatureMenus[];
+  signatureMenu: string[];
 };
