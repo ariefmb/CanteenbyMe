@@ -1,22 +1,28 @@
-import { retrieveAllCanteens, retrieveDetailCanteenWithId } from '@/libs/apis';
-import { TCanteens } from '@/libs/types';
-import React from 'react';
+import { retrieveDetailCanteenWithId } from '@/libs/apis';
+import { TMenus } from '@/libs/types';
 
 type TResponse = {
   success: boolean;
-  data: TCanteens;
+  data: TMenus;
   message?: string;
 };
 
 interface CanteenProps {
   params: {
-    canteenId: string;
+    canteensId: string;
   };
 }
 
 export default async function Canteen({ params }: CanteenProps) {
-  const { canteenId } = params;
-  const response: TResponse = await retrieveDetailCanteenWithId(canteenId);
-  const canteen = response.data as TCanteens;
-  return <div>{canteen.name}</div>;
+  
+  const { canteensId } = params;
+  console.log(`canteensId: ${canteensId}`);
+  
+  const response: TMenus = await retrieveDetailCanteenWithId(canteensId);
+  console.log(`response: ${response}`);
+  
+  const menu = response as TMenus;
+  console.log(`menu ${menu}`);
+  
+  return <div className='text-black'>{menu.name}</div>;
 }

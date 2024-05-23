@@ -1,7 +1,7 @@
 import { TCanteens } from '@/libs/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { usePathname } from 'next/navigation';
 
@@ -9,18 +9,15 @@ interface CanteenCardProps {
   canteen: TCanteens;
 }
 export default function CanteenCard({ canteen }: CanteenCardProps) {
+  const [isOpen, setIsOpen] = useState(true);
   const pathname = usePathname();
-  
+
   return (
     <section
-      className='h-[105px] w-[327px] bg-center bg-cover bg-no-repeat rounded-lg md:w-[498px] md:h-[160px]'
+      className={`h-[105px] w-[327px] bg-center bg-cover bg-no-repeat rounded-lg md:w-[498px] md:h-[160px]`}
       style={{ backgroundImage: `url(${canteen.imageUrl})` }}
     >
-      {!canteen.open ? (
-        <div className="w-full h-full bg-slate-900/20 backdrop-blur rounded-lg overflow-hidden relative"></div>
-      ) : null}
       <Link href={`${pathname}canteens/${canteen.id}`} target='_blank'>
-        
         <div className='h-full rounded-lg overflow-hidden bg-gradient-to-t from-slate-900 flex flex-col text-white'>
           <div className='flex h-1/2 justify-end'>
             {!canteen.open ? (
@@ -42,9 +39,8 @@ export default function CanteenCard({ canteen }: CanteenCardProps) {
               <div className='w-[96px] h-[35px] flex items-center justify-center px-2 py-5 bg-slate-600/20 backdrop-blur rounded-lg overflow-hidden md:w-[146px] md:h-[53px]'>
                 <p className='text-[8px] w-full text-center md:text-[11px]'>
                   {canteen.signatureMenu.map((signature, index) => (
-                      <p key={index}>{signature}</p>
-                    )
-                  )}
+                    <p key={index}>{signature}</p>
+                  ))}
                 </p>
                 <svg
                   className='w-16 h-16 ms-2 text-yellow-300'
