@@ -1,4 +1,4 @@
-import CanteensContainer from '@/components/canteens/canteens-container';
+import CanteensContainer from '@/components/container/canteens-container';
 import { retrieveAllCanteens } from '@/libs/apis';
 import { TCanteens } from '@/libs/types';
 import React from 'react';
