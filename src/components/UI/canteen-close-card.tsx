@@ -28,7 +28,7 @@ export default function CanteenCloseCard({ canteen }: CanteenCardProps) {
           className='canteen-card w-full h-full rounded-lg transition-transform duration-500 bg-center bg-cover transform bg-slate-800 bg-blend-multiply'
           style={{ backgroundImage: `url(${canteen.imageUrl})` }}
         >
-          <div className='w-full h-full rounded-lg transition-transform duration-500 text-white transform -z-50'>
+          <div className='w-full h-full rounded-lg transition-transform duration-500 text-white'>
             <div className='flex h-1/2 justify-end'>
               {!canteen.open ? (
                 <Badge color='pink' size='md'>
