@@ -3,7 +3,7 @@ import { TMenus } from '@/libs/types';
 
 type TResponse = {
   success: boolean;
-  data: TMenus;
+  data: TMenus[];
   message?: string;
 };
 
@@ -14,15 +14,19 @@ interface CanteenProps {
 }
 
 export default async function Canteen({ params }: CanteenProps) {
-  
   const { canteensId } = params;
-  console.log(`canteensId: ${canteensId}`);
-  
-  const response: TMenus = await retrieveDetailCanteenWithId(canteensId);
-  console.log(`response: ${response}`);
-  
-  const menu = response as TMenus;
-  console.log(`menu ${menu}`);
-  
-  return <div className='text-black'>{menu.name}</div>;
+
+  const response: TMenus[] = await retrieveDetailCanteenWithId(canteensId);
+
+  const menus = response as TMenus[];
+
+  return (
+    <div>
+        {menus.map((menu) => (
+          <div key={menu.id} className='min-h-screen bg-background text-black'>
+            {menu.name}
+          </div>
+        ))}
+    </div>
+  );
 }
