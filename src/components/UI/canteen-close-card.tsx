@@ -1,8 +1,5 @@
 import { TCanteens } from '@/libs/types';
 import { Badge, CustomFlowbiteTheme, Flowbite } from 'flowbite-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import React from 'react';
 
 interface CanteenCardProps {
   canteen: TCanteens;
@@ -17,6 +14,10 @@ const customTheme: CustomFlowbiteTheme = {
       },
     },
   },
+};
+
+const truncateText = (text: string, maxLength: number) => {
+  return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
 };
 
 export default function CanteenCloseCard({ canteen }: CanteenCardProps) {
@@ -45,7 +46,11 @@ export default function CanteenCloseCard({ canteen }: CanteenCardProps) {
                 <div className='w-[96px] h-[35px] flex items-center justify-center px-2 py-5 bg-slate-600/20 backdrop-blur rounded-lg md:w-[146px] md:h-[53px]'>
                   <div className='text-[8px] w-full text-center md:text-[11px]'>
                     {canteen.signatureMenu.map((signature, index) => (
-                      <p key={index}>{signature}</p>
+                      <p key={index}>
+                        {canteen.signatureMenu.length > 1
+                          ? truncateText(signature, 11)
+                          : truncateText(signature, 16)}
+                      </p>
                     ))}
                   </div>
                   <svg
