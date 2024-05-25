@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/src/app/globals.css
 /.pnp
 .pnp.js
 .yarn/install-state.gz
