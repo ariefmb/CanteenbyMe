@@ -13,7 +13,7 @@ const customTheme: CustomFlowbiteTheme['badge'] = {
 export default function Header() {
   return (
     <div className='bg-background h-24'>
-      <div className='w-full bg-[#E0E4F9] h-full rounded-b-[50px] flex items-center px-5 justify-between'>
+      <div className='w-full bg-[#E0E4F9] h-full rounded-b-[50px] flex items-center px-5 justify-between md:px-10'>
         <Image
           src={CBMHeader}
           alt='CanteenbyMe Header Logo'
