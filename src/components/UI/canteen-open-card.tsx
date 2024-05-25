@@ -14,7 +14,7 @@ const truncateText = (text: string, maxLength: number) => {
 export default function CanteenOpenCard({ canteen }: CanteenCardProps) {
   const pathname = usePathname();
   const content = (
-    <div className='w-fit h-fit text-[10px] text-slate-200 bg-slate-800 rounded-md overflow-hidden'>
+    <div className='w-fit h-fit text-[8px] md:text-[10px] text-slate-200 bg-slate-800 rounded-md overflow-hidden'>
       <div className='p-2'>
         {canteen.signatureMenu.map((signature, index) => (
           <p key={index}>{signature}</p>
@@ -26,11 +26,11 @@ export default function CanteenOpenCard({ canteen }: CanteenCardProps) {
   return (
     <section className='group relative h-[105px] w-[327px] md:w-[498px] md:h-[160px] rounded-lg overflow-hidden'>
       <div
-        className='canteen-card w-full h-full rounded-lg transition-transform duration-500 bg-center bg-cover transform group-hover:scale-110'
+        className='absolute inset-0 z-0 w-full h-full transition-transform duration-500 bg-center bg-cover transform group-hover:scale-110'
         style={{ backgroundImage: `url(${canteen.imageUrl})` }}
       >
         <Link href={`${pathname}canteens/${canteen.id}`} target='_blank'>
-          <div className='w-full h-full rounded-lg transition-transform duration-500 bg-gradient-to-t from-slate-900 text-white transform flex items-end justify-center group-hover:scale-95'>
+          <div className='relative z-10 w-full h-full rounded-lg transition-transform duration-500 bg-gradient-to-t from-slate-900 text-white flex items-end justify-center group-hover:scale-95'>
             <div className='flex h-1/2 w-full items-end'>
               <div className='w-full h-[50px] flex gap-2 justify-between items-end md:h-[60px]'>
                 <div className='w-[200px] h-full flex items-center px-5'>
@@ -45,7 +45,7 @@ export default function CanteenOpenCard({ canteen }: CanteenCardProps) {
                   trigger='hover'
                 >
                   <div className='w-[96px] h-[35px] flex items-center justify-center px-2 py-5 bg-slate-600/20 backdrop-blur rounded-lg md:w-[146px] md:h-[53px]'>
-                    <div className='text-[8px] w-full text-center md:text-[11px]'>
+                    <div className='text-[6px] w-full text-left md:text-[11px]'>
                       {canteen.signatureMenu.map((signature, index) => (
                         <p key={index}>
                           {canteen.signatureMenu.length > 1
