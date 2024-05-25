@@ -1,63 +1,53 @@
-// SearchBar.js
+// search-bar.tsx
 'use client';
-import React, { useContext } from 'react';
-import { Autocomplete } from '../search/AutoCompletion';
-import router, { useRouter } from 'next/router';
-import { useLazyRef } from '@/hook/useLazyRef';
-// import { SearchContext } from '@/context/SearchContext';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 
 const SearchBar = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
+
+  const onSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const encodedSearchQuery = encodeURI(searchQuery);
+    router.push(`/search?q=${encodedSearchQuery}`);
+
+    console.log('current query', encodedSearchQuery);
+  };
   return (
-    <form>
+    <form className='flex justify-center w-full' onSubmit={onSearch}>
       <label
         htmlFor='default-search'
         className='mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white'
       >
         Search
       </label>
-      <div className='relative'>
-        <Autocomplete
-          initialState={
-            {
-              // query: (router.query.query as string) || '',
-            }
-          }
-          openOnFocus={true}
+      <div className='relative w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl'>
+        <div className='absolute inset-y-0 left-3 flex items-center pointer-events-none'>
+          <svg
+            className='w-4 h-4 text-gray-500 dark:text-gray-400'
+            aria-hidden='true'
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 20 20'
+          >
+            <path
+              stroke='currentColor'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth='2'
+              d='m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z'
+            />
+          </svg>
+        </div>
+        <input
+          type='text'
+          onChange={(event) => setSearchQuery(event.target.value)}
+          id='default-search'
+          autoComplete='off'
+          value={searchQuery}
+          className='block w-full bg-zinc-100 p-4 pl-10 my-2 text-sm rounded-lg placeholder-gray-400 text-zinc-500  focus:border-[#E0E4F9]'
           placeholder='Mau makan apa?'
-          detachedMediaQuery='(max-width: 1024px)'
-          classNames={{
-            form: 'relative rounded-md ',
-            inputWrapperPrefix:
-              'absolute inset-y-0 left-0 flex items-center pl-3',
-            inputWrapperSuffix:
-              'absolute inset-y-0 right-0 flex items-center pr-2',
-            label: 'flex items-center ',
-            // submitButton: 'h-5 w-5 text-gray-400',
-            // clearButton: 'h-5 w-5 text-gray-400 ',
-            input:
-              'block h-[50px] w-full rounded-md border-black  pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm',
-            panel:
-              'flex-1 lg:flex-none lg:absolute lg:mt-2 lg:py-1 z-10 lg:ring-1 lg:ring-black lg:ring-opacity-5 lg:text-sm text-gray-500 bg-white lg:shadow-lg lg:rounded-md overflow-y-scroll lg:max-h-96',
-            // detachedSearchButton: 'p-2 text-gray-400 hover:text-gray-500',
-            // detachedSearchButtonPlaceholder: 'sr-only',
-            // detachedSearchButtonIcon:
-            //   'w-6 h-6 flex items-center justify-center',
-            // detachedContainer:
-            //   'fixed inset-0 flex flex-col divide-y divide-gray-200/50 ',
-            // detachedFormContainer: 'flex p-2 bg-white ',
-            // detachedCancelButton:
-            //   'bg-white px-2 ml-2 text-gray-500 hover:text-gray-600 transition-colors',
-          }}
-          className='lg:w-4/6 mx-auto '
-          navigator={{
-            navigate({ itemUrl }) {
-              router.push(itemUrl);
-            },
-          }}
-          onSubmit={({ state }) => {
-            router.push(`/search/?query=${state.query}`);
-          }}
-          //   plugins={[getRecentSearchesPlugin(), getQuerySuggestionsPlugin()]}
         />
       </div>
     </form>

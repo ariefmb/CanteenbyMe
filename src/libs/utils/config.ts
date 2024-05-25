@@ -1,0 +1,6 @@
+export const ALGOLIA_APPLICATION_ID =
+  process.env.NEXT_PUBLIC_ALGOLIA_APPLICATION_ID ?? '';
+export const ALGOLIA_SEARCH_ONLY_API_KEY =
+  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_ONLY_API_KEY ?? '';
+export const ALGOLIA_ADMIN_KEY =
+  process.env.NEXT_PUBLIC_ALGOLIA_ADMIN_KEY ?? '';
