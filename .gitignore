@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+src/app/globals.css
 .pnp.js
 .yarn/install-state.gz
 pnpm-lock.yaml
