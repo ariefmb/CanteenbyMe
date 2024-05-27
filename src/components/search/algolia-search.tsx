@@ -1,13 +1,17 @@
 //import InstantSearch component from the hooks library we just installed
-import { InstantSearch } from 'react-instantsearch-hooks-web';
+import { InstantSearch } from 'react-instantsearch';
 // import newly created Algolia client
-import { alogliaClient } from '@/libs/apis/search.services';
+import { algoliaClient } from '@/libs/apis/search.services';
 import { FC, PropsWithChildren } from 'react';
 
 const AlgoliaProvider: FC<PropsWithChildren> = ({ children }) => {
-  const indexName = 'Your Algolia Index Name';
+  const indexName = 'menus';
   return (
-    <InstantSearch searchClient={alogliaClient} indexName={indexName}>
+    <InstantSearch
+      searchClient={algoliaClient}
+      indexName={indexName}
+      future={{ preserveSharedStateOnUnmount: true }}
+    >
       {children}
     </InstantSearch>
   );

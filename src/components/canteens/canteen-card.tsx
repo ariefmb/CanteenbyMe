@@ -1,3 +1,4 @@
+'use client';
 import { TCanteens } from '@/libs/types';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,7 +18,7 @@ export default function CanteenCard({ canteen }: CanteenCardProps) {
       className={`h-[105px] w-[327px] bg-center bg-cover bg-no-repeat rounded-lg md:w-[498px] md:h-[160px]`}
       style={{ backgroundImage: `url(${canteen.imageUrl})` }}
     >
-      <Link href={`${pathname}canteens/${canteen.id}`} target='_blank'>
+      <Link href={`${pathname}/${canteen.id}`}>
         <div className='h-full rounded-lg overflow-hidden bg-gradient-to-t from-slate-900 flex flex-col text-white'>
           <div className='flex h-1/2 justify-end'>
             {!canteen.open ? (

@@ -9,14 +9,14 @@ import React from 'react';
 
 export default async function Canteens() {
   const table = useSearchParams();
-  const params = table ? table.get('num') : null;
+  const params = table ? table.get('table') : null;
   const canteens: TCanteens[] = await retrieveAllCanteens();
 
   return (
     <section>
-      <section className='searchBar'>
+      <section className='mx-auto py-5 px-10 bg-background'>
         <TableNumber tableNumber={params!!} />
-        <SearchBar />
+        <SearchBar canteens={canteens} />
       </section>
       <section className='CanteensContainer'>
         <CanteensContainer canteens={canteens} />

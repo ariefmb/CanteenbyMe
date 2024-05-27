@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useInstantSearch } from 'react-instantsearch-hooks-web';
+import { useInstantSearch } from 'react-instantsearch';
 
 const SearchResults: FC = () => {
   const { results } = useInstantSearch();
