@@ -1,9 +1,9 @@
 'use client';
+
 import CanteensContainer from '@/components/container/canteens-container';
 import SearchBar from '@/components/UI/search-bar';
 import { retrieveAllCanteens } from '@/libs/apis';
 import { TCanteens } from '@/libs/types';
-import { useSearchParams } from 'next/navigation';
 import React from 'react';
 
 export default async function Canteens() {

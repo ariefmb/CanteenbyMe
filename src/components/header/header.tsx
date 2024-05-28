@@ -4,6 +4,7 @@ import CBMHeader from '@/images/logo/cbm-upnvj-header.png';
 import Image from 'next/image';
 import { Badge, CustomFlowbiteTheme, Flowbite, theme } from 'flowbite-react';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 const customTheme: CustomFlowbiteTheme['badge'] = {
   root: {
@@ -25,13 +26,15 @@ export default function Header() {
           className='w-[235px] md:w-[350px]'
           priority
         />
-        <Badge
-          theme={customTheme}
-          color='purple'
-          className='w-[63px] h-[63px] rounded-2xl text-center py-5 px-2 font-normal text-slate-800'
-        >
-          Meja <span className='font-extrabold'>{params}</span>
-        </Badge>
+        <Suspense>
+          <Badge
+            theme={customTheme}
+            color='purple'
+            className='w-[63px] h-[63px] rounded-2xl text-center py-5 px-2 font-normal text-slate-800'
+          >
+            Meja <span className='font-extrabold'>{params}</span>
+          </Badge>
+        </Suspense>
       </div>
     </div>
   );
