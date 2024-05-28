@@ -21,25 +21,36 @@ export async function retrieveAllCanteens() {
   }
 }
 
-export async function retrieveDetailCanteenWithId(canteenId: string) {
-  try {
-    console.log(`id: ${canteenId}`);
+// export async function retrieveDetailCanteenWithId(canteenId: string) {
+//   try {
+//     const response = await axios.get(`${API_URL}/canteens/menu/${canteenId}`, {
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     });
 
-    const response = await axios.get(`${API_URL}/canteens/menu/${canteenId}`, {
+//     if (response.status >= 400 && response.status <= 500) {
+//       throw new Error(`HTTP error! status: ${response.statusText}`);
+//     }
+
+//     console.log(`result: ${response.data}`);
+
+//     return response.data.data;
+//   } catch (error) {
+//     console.error('Error fetching canteens:', error);
+//     throw error;
+//   }
+// }
+
+export async function retrieveDetailCanteenWithId(canteenId: string) {
+  return await axios
+    .get(`${API_URL}/canteens/menu/${canteenId}`, {
       headers: {
         'Content-Type': 'application/json',
       },
+    })
+    .then((response) => response.data.data)
+    .catch((error) => {
+      console.error('Error fetching canteens:', error);
     });
-
-    if (response.status >= 400 && response.status <= 500) {
-      throw new Error(`HTTP error! status: ${response.statusText}`);
-    }
-
-    console.log(JSON.stringify(response.data.data));
-
-    return response.data.data;
-  } catch (error) {
-    console.error('Error fetching canteens:', error);
-    throw error;
-  }
 }

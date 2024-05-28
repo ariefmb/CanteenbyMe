@@ -8,7 +8,6 @@ const SearchButton = () => {
   const { setOnClick, onClick } = useSearchContext();
 
   useEffect(() => {
-    console.log('onClick on search button:', onClick);
   }, [onClick]);
 
   return (

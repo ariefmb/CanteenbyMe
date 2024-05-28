@@ -5,7 +5,9 @@ interface MenuCardProps {
   menu: TMenus;
 }
 export default function MenusCard({ menu }: MenuCardProps) {
-  console.log(`menu: ${menu}`);
-
-  return <div>menu.name</div>;
+  return (
+    <section>
+      <div className="">{menu.name}</div>
+    </section>
+  );
 }

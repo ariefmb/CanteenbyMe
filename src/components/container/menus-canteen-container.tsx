@@ -19,6 +19,7 @@ const customTheme: CustomFlowbiteTheme['alert'] = {
 export default function MenusCanteenContainer({
   menus,
 }: MenusCanteenContainerProps) {
+
   return (
     <>
       <div className='text-slate-800'>
@@ -27,7 +28,7 @@ export default function MenusCanteenContainer({
             <p className='px-3'>All Menus will be displayed here.</p>
           </Alert>
         ) : (
-          menus.map((menu) => <MenusCard menu={menu} />)
+          menus.map((menu) => <MenusCard key={menu.id} menu={menu} />)
         )}
       </div>
     </>
