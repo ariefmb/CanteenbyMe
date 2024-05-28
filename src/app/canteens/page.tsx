@@ -13,8 +13,8 @@ export default async function Canteens() {
   const canteens: TCanteens[] = await retrieveAllCanteens();
 
   return (
-    <section>
-      <section className='mx-auto py-5 px-10 bg-background'>
+    <section className='mx-auto py-5 px-10 bg-background'>
+      <section>
         <TableNumber tableNumber={params!!} />
         <SearchBar canteens={canteens} />
       </section>
