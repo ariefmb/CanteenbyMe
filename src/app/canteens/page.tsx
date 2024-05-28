@@ -1,5 +1,3 @@
-'use client';
-
 import CanteensContainer from '@/components/container/canteens-container';
 import SearchBar from '@/components/UI/search-bar';
 import { retrieveAllCanteens } from '@/libs/apis';
