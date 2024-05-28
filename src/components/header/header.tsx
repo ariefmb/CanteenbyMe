@@ -23,7 +23,7 @@ export default function Header() {
         <Badge
           theme={customTheme}
           color='purple'
-          className='w-[63px] h-[63px] rounded-2xl text-center py-5 px-2 font-normal text-slate-800'
+          className='w-[63px] h-[63px] flex justify-center rounded-2xl text-center py-5 px-3 font-normal md:px-3 md:text-lg text-slate-800 text-lg leading-tight'
         >
           Meja <span className='font-extrabold'>01</span>
         </Badge>
