@@ -29,7 +29,7 @@ export default function CanteenOpenCard({ canteen }: CanteenCardProps) {
         className='absolute inset-0 z-0 w-full h-full transition-transform duration-500 bg-center bg-cover transform group-hover:scale-110'
         style={{ backgroundImage: `url(${canteen.imageUrl})` }}
       >
-        <Link href={`${pathname}canteens/${canteen.id}`} target='_blank'>
+        <Link href={`${pathname}canteens/${canteen.id}`}>
           <div className='relative z-10 w-full h-full rounded-lg transition-transform duration-500 bg-gradient-to-t from-slate-900 text-white flex items-end justify-center group-hover:scale-95'>
             <div className='flex h-1/2 w-full items-end'>
               <div className='w-full h-[50px] flex gap-2 justify-between items-end md:h-[60px]'>
