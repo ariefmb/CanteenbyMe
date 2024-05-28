@@ -20,11 +20,11 @@ export default async function Canteen({ params }: CanteenProps) {
   const menus = response as TMenus[];
   return (
     <div>
-        {menus.map((menu) => (
-          <div key={menu.id} className='min-h-screen bg-background text-black'>
-            {menu.name}
-          </div>
-        ))}
+      {menus.map((menu) => (
+        <div key={menu.id} className='min-h-screen bg-background text-black'>
+          {menu.name}
+        </div>
+      ))}
     </div>
   );
 }

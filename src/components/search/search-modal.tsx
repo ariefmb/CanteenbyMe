@@ -1,5 +1,5 @@
 'use client';
-import { modalTheme } from '@/components/UI/custom-theme';
+import { modalTheme } from '@/components/themes/modal-theme';
 import { useSearchContext } from '@/context/search.context';
 import { TCanteens } from '@/libs/types';
 import { Modal } from 'flowbite-react';

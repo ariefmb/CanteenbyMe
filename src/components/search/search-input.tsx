@@ -31,7 +31,7 @@ const SearchInput = ({ props }: { props: UseSearchBoxProps }) => {
   return (
     <>
       <form
-        className='flex justify-center w-full'
+        className='flex justify-center w-full outline-none'
         onSubmit={(event) => {
           event.preventDefault();
           event.stopPropagation();
@@ -69,7 +69,7 @@ const SearchInput = ({ props }: { props: UseSearchBoxProps }) => {
               id='default-search'
               autoComplete='off'
               value={inputValue}
-              className='block w-full bg-zinc-100 p-4 pl-10 my-2 text-sm rounded-lg placeholder-gray-400 text-zinc-500  focus:border-[#E0E4F9]'
+              className='block w-full p-4 pl-10 my-2 text-sm rounded-lg placeholder-gray-400 text-zinc-500 focus:none'
               placeholder='Mau makan apa?'
             />
           </div>
