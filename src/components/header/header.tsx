@@ -8,7 +8,7 @@ import { Suspense } from 'react';
 
 const customTheme: CustomFlowbiteTheme['badge'] = {
   root: {
-    base: 'w-[63px] h-[63px] flex items-center justify-center text-center font-normal text-slate-900',
+    base: 'w-[63px] h-[63px] flex items-center justify-center text-center font-normal text-slate-900 md:w-[70px] md:h-[70px] md:text-xl',
     color: {
       purple: 'bg-[#A8B2DE]/50 rounded-2xl',
     },

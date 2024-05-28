@@ -1,8 +1,7 @@
-import { TMenus } from '@/libs/types';
-import React from 'react';
-import MenusCard from '../UI/menus-card';
+import { TCanteens, TMenus } from '@/libs/types';
+import { Alert, CustomFlowbiteTheme } from 'flowbite-react';
 import { HiInformationCircle } from 'react-icons/hi';
-import { Alert, CustomFlowbiteTheme, Flowbite } from 'flowbite-react';
+import MenusCard from '../UI/menus-card';
 
 interface MenusCanteenContainerProps {
   menus: TMenus[];
@@ -40,30 +39,26 @@ export default function MenusCanteenContainer({
   const sortedMenus = sortMenus(menus);
 
   return (
-    <>
-      <div className='text-slate-800'>
-        {!menus?.length ? (
-          <Alert theme={customTheme} color='failure' icon={HiInformationCircle}>
-            <p className='px-3'>All Menus will be displayed here.</p>
-          </Alert>
-        ) : (
-          <>
-            <div className='container flex flex-col items-center gap-5 mx-auto'>
-              {Object.keys(sortedMenus).map((type) => (
-                <div
-                  key={type}
-                  className='w-full flex flex-col items-center gap-5'
-                >
-                  <h1 className='w-full font-bold text-lg text-left'>{type}</h1>
-                  {sortedMenus[type].map((menu) => (
-                    <MenusCard key={menu.id} menu={menu} />
-                  ))}
-                </div>
+    <div className='text-slate-800'>
+      {!menus?.length ? (
+        <Alert theme={customTheme} color='failure' icon={HiInformationCircle}>
+          <p className='px-3'>All Menus will be displayed here.</p>
+        </Alert>
+      ) : (
+        <div className='container flex flex-col items-center gap-5 mx-auto'>
+          {Object.keys(sortedMenus).map((type) => (
+            <div
+              key={type}
+              className='w-full flex flex-col items-center gap-5 md:items-start md:px-5'
+            >
+              <h1 className='w-full font-bold text-base text-left md:text-xl'>{type}</h1>
+              {sortedMenus[type].map((menu) => (
+                <MenusCard key={menu.id} menu={menu} />
               ))}
             </div>
-          </>
-        )}
-      </div>
-    </>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
