@@ -1,4 +1,4 @@
-'use client';
+import MenusCanteenContainer from '@/components/container/menus-canteen-container';
 import { retrieveDetailCanteenWithId } from '@/libs/apis';
 import { TMenus } from '@/libs/types';
 
@@ -16,15 +16,16 @@ interface CanteenProps {
 
 export default async function Canteen({ params }: CanteenProps) {
   const { canteensId } = params;
-  const response: TMenus[] = await retrieveDetailCanteenWithId(canteensId);
-  const menus = response as TMenus[];
+  const response: TResponse = await retrieveDetailCanteenWithId(canteensId);
+  const menus = response.data as TMenus[];
+  console.log(`menus: ${menus}`);
+
   return (
-    <div>
-      {menus.map((menu) => (
-        <div key={menu.id} className='min-h-screen bg-background text-black'>
-          {menu.name}
-        </div>
-      ))}
-    </div>
+    <section className='mx-auto min-h-screen py-5 px-10 bg-background'>
+      <section className='dropdown'></section>
+      <section>
+        <MenusCanteenContainer menus={menus} />
+      </section>
+    </section>
   );
 }
