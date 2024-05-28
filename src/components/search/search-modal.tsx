@@ -8,15 +8,10 @@ import { Hits, SearchBoxProps, useInstantSearch } from 'react-instantsearch';
 import SearchInput from './search-input';
 
 const SearchModal = ({ canteens }: { canteens: TCanteens[] }) => {
-  // console.log(`canteens: ${}`);
-
   const queryHook: SearchBoxProps['queryHook'] = (query, search) => {
     search(query);
   };
-
   const { onClick, setOnClick } = useSearchContext();
-
-  console.log('onclick : ', onClick);
 
   type HitProps = {
     hit: AlgoliaHit<{
