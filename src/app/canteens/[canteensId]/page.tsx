@@ -1,3 +1,4 @@
+'use client';
 import { retrieveDetailCanteenWithId } from '@/libs/apis';
 import { TMenus } from '@/libs/types';
 
@@ -15,11 +16,8 @@ interface CanteenProps {
 
 export default async function Canteen({ params }: CanteenProps) {
   const { canteensId } = params;
-
   const response: TMenus[] = await retrieveDetailCanteenWithId(canteensId);
-
   const menus = response as TMenus[];
-
   return (
     <div>
         {menus.map((menu) => (
