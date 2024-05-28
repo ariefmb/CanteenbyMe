@@ -21,7 +21,7 @@ export default function Loading() {
       <Image
         src={WaveofLove}
         alt='Wave of Love Background'
-        className='absolute -top-0 md:-top-5 w-full rotate-180'
+        className='absolute -top-0 md:-top-9 w-full rotate-180'
         priority
       />
       <div className='absolute flex items-center justify-center'>
@@ -52,7 +52,7 @@ export default function Loading() {
       <Image
         src={WaveofLove}
         alt='Wave of Love Background'
-        className='absolute -bottom-0 md:-bottom-5 w-full'
+        className='absolute -bottom-0 md:-bottom-9 w-full'
         priority
       />
     </div>
