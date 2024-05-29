@@ -1,6 +1,8 @@
 'use client';
 import Head from 'next/head';
-import Canteens from './canteens/page';
+import CanteensPage from './canteens/page';
+import { CanteenProvider } from '@/context/data.context';
+import { TableProvider } from '@/context/table.context';
 
 export default function Home() {
   return (
@@ -13,7 +15,7 @@ export default function Home() {
         />
         <meta name='keywords' content='Food, Beverage, NextJS, TailwindCSS' />
       </Head>
-      <Canteens />
+      <CanteensPage />
     </main>
   );
 }

@@ -27,7 +27,9 @@ export default async function Canteen({ params }: CanteenProps) {
 
   return (
     <section className='mx-auto min-h-screen py-5 px-10 bg-background'>
-      <h1 className='font-bold text-base mb-5 text-slate-800 md:text-2xl'>{canteenName}</h1>
+      <h1 className='font-bold text-base mb-5 text-slate-800 md:text-2xl'>
+        {canteenName}
+      </h1>
       <section className='dropdown'></section>
       <section>
         <MenusCanteenContainer menus={menus} />

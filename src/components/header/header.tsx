@@ -1,10 +1,8 @@
 'use client';
 
 import CBMHeader from '@/images/logo/cbm-upnvj-header.png';
-import { Badge, CustomFlowbiteTheme } from 'flowbite-react';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
-import { Suspense } from 'react';
+import { Badge, CustomFlowbiteTheme } from 'flowbite-react';
 
 const customTheme: CustomFlowbiteTheme['badge'] = {
   root: {
@@ -18,9 +16,11 @@ const customTheme: CustomFlowbiteTheme['badge'] = {
   },
 };
 
-export default function Header() {
-  const table = useSearchParams();
-  const params = table ? table.get('table') : null;
+export default function Header({
+  tableNumber,
+}: {
+  tableNumber: string | null;
+}) {
   return (
     <div className='bg-background h-24'>
       <div className='w-full bg-[#E0E4F9] h-full rounded-b-[50px] flex items-center px-5 justify-between md:px-10'>
@@ -30,11 +30,15 @@ export default function Header() {
           className='w-[235px] md:w-[350px]'
           priority
         />
-        <Suspense>
-          <Badge theme={customTheme} color='purple'>
-            Meja <span className='font-extrabold'>{!params ? '' : params}</span>
+        {tableNumber === null ? null : (
+          <Badge
+            theme={customTheme}
+            color='purple'
+            className='w-[63px] h-[63px] rounded-2xl text-center py-5 px-2 font-normal text-slate-800'
+          >
+            Meja <span className='font-extrabold'>{tableNumber}</span>
           </Badge>
-        </Suspense>
+        )}
       </div>
     </div>
   );
