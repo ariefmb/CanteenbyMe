@@ -63,7 +63,7 @@ const customTheme: CustomFlowbiteTheme = {
     },
     size: {
       xs: 'p-1 text-xs',
-      sm: 'px-3 py-1.5 text-xs',
+      sm: 'p-2 text-xs',
       md: 'px-4 py-2 text-lg',
     },
   },
@@ -89,7 +89,9 @@ export default function MenusCard({ menu }: MenuCardProps) {
       <Card className='flex'>
         <div className='w-2/3 pl-3 flex flex-col gap-2 justify-center'>
           {menu.signature && <Badge color='bestSeller'>Best Seller</Badge>}
-          <h3 className='text-sm font-bold text-primary md:text-lg'>{menu.name}</h3>
+          <h3 className='text-sm font-bold text-primary md:text-lg'>
+            {menu.name}
+          </h3>
           <p className='text-xs md:text-base'>{menu.description}</p>
           <h4 className='text-[15px] pl-3 text-slate-800 font-bold'>
             Rp. {menu.price},-
@@ -103,7 +105,7 @@ export default function MenusCard({ menu }: MenuCardProps) {
             height={82}
             className='rounded-[10px] w-[94px] h-[82px] md:w-[101px] md:h-[89px]'
           />
-          <div className='w-full h-10 flex justify-center items-end transition-all duration-500 transform'>
+          <div className='w-fit px-2 h-12 flex justify-center items-center transition-all duration-500 transform'>
             {quantity === 0 ? (
               <Button color='primary' size='sm' onClick={handleAddClick} pill>
                 <HiPlus />
@@ -113,7 +115,7 @@ export default function MenusCard({ menu }: MenuCardProps) {
               <div className='flex items-center gap-1'>
                 <Button
                   color='primary'
-                  size='xs'
+                  size='sm'
                   onClick={handleMinusQuantity}
                   pill
                 >
@@ -122,7 +124,7 @@ export default function MenusCard({ menu }: MenuCardProps) {
                 <p className='w-8 text-center'>{quantity}</p>
                 <Button
                   color='primary'
-                  size='xs'
+                  size='sm'
                   onClick={handlePlusQuantity}
                   pill
                 >

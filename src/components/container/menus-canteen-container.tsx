@@ -45,7 +45,7 @@ export default function MenusCanteenContainer({
           <p className='px-3'>All Menus will be displayed here.</p>
         </Alert>
       ) : (
-        <div className='container flex flex-col items-center gap-5 mx-auto'>
+        <div className='flex flex-col items-center gap-5 mx-auto'>
           {Object.keys(sortedMenus).map((type) => (
             <div
               key={type}

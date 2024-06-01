@@ -1,4 +1,6 @@
-import MenusCanteenContainer from '@/components/container/menus-canteen-container';
+import BackCTA from '@/components/UI/back-cta';
+import MenusDesktopContainer from '@/components/container/menus-desktop-container';
+import MenusMobileContainer from '@/components/container/menus-mobile-container';
 import { retrieveAllCanteens, retrieveDetailCanteenWithId } from '@/libs/apis';
 import { TCanteens, TMenus } from '@/libs/types';
 
@@ -26,12 +28,17 @@ export default async function Canteen({ params }: CanteenProps) {
       : 'Kantin';
 
   return (
-    <section className='mx-auto min-h-screen py-5 px-10 bg-background'>
-      <h1 className='font-bold text-base mb-5 text-slate-800 md:text-2xl'>{canteenName}</h1>
-      <section className='dropdown'></section>
-      <section>
-        <MenusCanteenContainer menus={menus} />
-      </section>
+    <section className='mx-auto min-h-screen py-5 px-5 md:px-10 bg-background'>
+      <div className='w-full flex items-center gap-5 font-bold text-base mb-5 text-slate-800 md:text-2xl'>
+        <BackCTA />
+        {canteenName}
+      </div>
+      <div className='w-full flex flex-col gap-2 py-2 mb-5 md:hidden'>
+        <MenusMobileContainer menus={menus} />
+      </div>
+      <div className='hidden md:flex justify-center w-full py-2 mb-5'>
+        <MenusDesktopContainer menus={menus} />
+      </div>
     </section>
   );
 }
