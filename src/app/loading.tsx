@@ -17,7 +17,7 @@ const customTheme: CustomFlowbiteTheme['spinner'] = {
 
 export default function Loading() {
   return (
-    <div className='absolute inset-0 flex flex-col justify-center items-center bg-background'>
+    <div className='max-h-dvh absolute inset-0 flex flex-col justify-center items-center bg-background overflow-hidden'>
       <Image
         src={WaveofLove}
         alt='Wave of Love Background'

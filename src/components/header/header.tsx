@@ -19,8 +19,9 @@ const customTheme: CustomFlowbiteTheme['badge'] = {
 };
 
 export default function Header() {
-  const table = useSearchParams();
-  const params = table ? table.get('table') : null;
+  const params = useSearchParams();
+  const tableParams = params ? params.get('table') : null;
+
   return (
     <div className='bg-background h-24'>
       <div className='w-full bg-[#E0E4F9] h-full rounded-b-[50px] flex items-center px-5 justify-between md:px-10'>
@@ -30,11 +31,14 @@ export default function Header() {
           className='w-[235px] md:w-[350px]'
           priority
         />
-        <Suspense>
-          <Badge theme={customTheme} color='purple'>
-            Meja <span className='font-extrabold'>{!params ? '' : params}</span>
-          </Badge>
-        </Suspense>
+        {tableParams !== null && (
+          <Suspense>
+            <Badge theme={customTheme} color='purple'>
+              Meja{' '}
+              <span className='font-extrabold'>{tableParams}</span>
+            </Badge>
+          </Suspense>
+        )}
       </div>
     </div>
   );

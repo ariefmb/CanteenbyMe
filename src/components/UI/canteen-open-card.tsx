@@ -1,7 +1,7 @@
 import { TCanteens } from '@/libs/types';
 import { Popover } from 'flowbite-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 interface CanteenCardProps {
   canteen: TCanteens;
@@ -13,6 +13,8 @@ const truncateText = (text: string, maxLength: number) => {
 
 export default function CanteenOpenCard({ canteen }: CanteenCardProps) {
   const pathname = usePathname();
+  const params = useSearchParams();
+
   const content = (
     <div className='w-fit h-fit text-[8px] md:text-[10px] text-slate-200 bg-slate-800 rounded-md overflow-hidden'>
       <div className='p-2'>
@@ -29,7 +31,7 @@ export default function CanteenOpenCard({ canteen }: CanteenCardProps) {
         className='absolute inset-0 z-0 w-full h-full transition-transform duration-500 bg-center bg-cover transform group-hover:scale-110'
         style={{ backgroundImage: `url(${canteen.imageUrl})` }}
       >
-        <Link href={`${pathname}/${canteen.id}`}>
+        <Link href={`${pathname}/${canteen.id}?${params}`}>
           <div className='relative z-10 w-full h-full rounded-lg transition-transform duration-500 bg-gradient-to-t from-slate-900 text-white flex items-end justify-center group-hover:scale-95'>
             <div className='flex h-1/2 w-full items-end'>
               <div className='w-full h-[50px] flex gap-2 justify-between items-end md:h-[60px]'>
