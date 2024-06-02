@@ -13,7 +13,7 @@ import {
 import { Hit as AlgoliaHit } from 'instantsearch.js';
 import { Hits, SearchBoxProps, useInstantSearch } from 'react-instantsearch';
 import SearchInput from './search-input';
-import { CanteenProvider } from '@/context/data.context';
+import Providers from '@/providers';
 import { useEffect, useState } from 'react';
 import { HiShoppingCart } from 'react-icons/hi2';
 
@@ -142,11 +142,11 @@ const SearchModal = ({ canteens }: { canteens?: TCanteens[] }) => {
           <SearchInput props={{ queryHook: queryHook }} />
         </Modal.Header>
         <Modal.Body>
-          <CanteenProvider>
+          <Providers>
             <div className='space-y-6'>
               <Hits hitComponent={SearchResult} />
             </div>
-          </CanteenProvider>
+          </Providers>
         </Modal.Body>
         {chart.length > 0 && (
           <Modal.Footer className='bg-[#6B76AD] rounded-lg'>

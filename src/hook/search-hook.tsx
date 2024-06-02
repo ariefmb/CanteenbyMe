@@ -1,4 +1,4 @@
-import { useCanteenContext } from '@/context/data.context';
+import { useCanteenContext } from '@/context/canteens-context';
 import { AlgoliaHit } from 'instantsearch.js';
 import { FC } from 'react';
 import { useInstantSearch } from 'react-instantsearch';

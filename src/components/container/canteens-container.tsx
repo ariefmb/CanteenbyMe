@@ -1,7 +1,7 @@
 'use client';
 
 import { TCanteens } from '@/libs/types';
-import CanteenCard from '../UI/canteen-card';
+import CanteenCard from '@/components/UI/canteen-card';
 import { HiInformationCircle } from 'react-icons/hi';
 import { Alert, CustomFlowbiteTheme } from 'flowbite-react';
 import Skeleton from 'react-loading-skeleton';

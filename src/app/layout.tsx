@@ -1,10 +1,8 @@
+import { TableProvider } from '@/context/table.context';
+import Providers from '@/providers';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import { TableProvider } from '@/context/table.context';
-import { InstantSearchSSRProvider } from 'react-instantsearch';
-import AlgoliaProvider from '@/components/search/algolia-search';
-import { CanteenProvider } from '@/context/data.context';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400', display: 'swap' });
 
@@ -21,11 +19,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <CanteenProvider>
+      <Providers>
         <TableProvider>
           <body className={poppins.className}>{children}</body>
         </TableProvider>
-      </CanteenProvider>
+      </Providers>
     </html>
   );
 }

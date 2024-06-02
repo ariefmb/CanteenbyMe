@@ -1,10 +1,8 @@
 'use client';
 
 import { TCanteens } from '@/libs/types';
-import CanteenCloseCard from './canteen-close-card';
-import CanteenOpenCard from './canteen-open-card';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import { Card } from 'flowbite-react';
+import CanteenOpenCard from '@/components/UI/canteen-open-card';
+import CanteenCloseCard from '@/components/UI/canteen-close-card';
 
 interface CanteenCardProps {
   canteen: TCanteens;
