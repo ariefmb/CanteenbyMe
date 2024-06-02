@@ -1,8 +1,8 @@
 'use client';
 
 import CBMHeader from '@/images/logo/cbm-upnvj-header.png';
-import { Badge, CustomFlowbiteTheme } from 'flowbite-react';
 import Image from 'next/image';
+import { Badge, CustomFlowbiteTheme } from 'flowbite-react';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 

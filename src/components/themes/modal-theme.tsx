@@ -37,7 +37,7 @@ export const modalTheme: CustomFlowbiteTheme['modal'] = {
       'relative flex max-h-[90dvh] flex-col rounded-lg bg-white shadow dark:bg-gray-700',
   },
   body: {
-    base: 'flex-1 overflow-auto p-6',
+    base: 'flex-1 overflow-auto p-2',
     popup: 'pt-0',
   },
   header: {
@@ -45,7 +45,7 @@ export const modalTheme: CustomFlowbiteTheme['modal'] = {
     popup: 'border-b-0 p-2',
     title: 'text-xl font-medium text-gray-900 dark:text-white w-full',
     close: {
-      base: 'ml-auto w-15 items-center ml-5 rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white',
+      base: ' w-15 items-center ml-5 rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white',
       icon: 'h-5 w-5 ',
     },
   },

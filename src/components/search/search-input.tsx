@@ -1,7 +1,7 @@
 // search-bar.tsx
 // import Link from 'next/link';
 // import { usePathname, useRouter } from 'next/navigation';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Highlight,
   Hits,
@@ -12,14 +12,13 @@ import {
 
 import { Button, Modal, Select } from 'flowbite-react';
 import { TCanteens } from '@/libs/types';
+import { useSearchContext } from '@/context/search.context';
 
 const SearchInput = ({ props }: { props: UseSearchBoxProps }) => {
   const { query, refine } = useSearchBox(props);
-  const { status } = useInstantSearch();
+
   const [inputValue, setInputValue] = useState(query);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const isSearchStalled = status === 'stalled';
 
   // console.log('canteen results :', canteens);
 

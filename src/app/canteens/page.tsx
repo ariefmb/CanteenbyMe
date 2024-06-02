@@ -1,19 +1,22 @@
-import CanteensContainer from '@/components/container/canteens-container';
-import SearchBar from '@/components/UI/search-bar';
-import { retrieveAllCanteens } from '@/libs/apis';
-import { TCanteens } from '@/libs/types';
-import React from 'react';
+'use client';
 
-export default async function Canteens() {
-  const canteens: TCanteens[] = await retrieveAllCanteens();
+import CanteensContainer from '@/components/container/canteens-container';
+import AlgoliaProvider from '@/components/search/algolia-search';
+import SearchBar from '@/components/UI/search-bar';
+import { useCanteenContext } from '@/context/canteens-context';
+
+export default function Canteens() {
+  const { canteens, loading } = useCanteenContext();
 
   return (
     <section className='mx-auto py-5 px-10 bg-background'>
       <section>
-        <SearchBar canteens={canteens} />
+        <AlgoliaProvider>
+          <SearchBar canteens={canteens} />
+        </AlgoliaProvider>
       </section>
-      <section className='CanteensContainer'>
-        <CanteensContainer canteens={canteens} />
+      <section>
+        <CanteensContainer loading={loading} canteens={canteens} />
       </section>
     </section>
   );

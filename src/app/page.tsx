@@ -1,6 +1,6 @@
 'use client';
 import Head from 'next/head';
-import Canteens from './canteens/page';
+import Canteens from '@/app/canteens/page';
 
 export default function Home() {
   return (
