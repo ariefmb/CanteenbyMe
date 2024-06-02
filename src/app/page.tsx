@@ -1,8 +1,6 @@
 'use client';
 import Head from 'next/head';
 import CanteensPage from './canteens/page';
-import { CanteenProvider } from '@/context/data.context';
-import { TableProvider } from '@/context/table.context';
 
 export default function Home() {
   return (
