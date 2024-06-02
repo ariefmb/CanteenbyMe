@@ -37,7 +37,7 @@ export default function MenusDesktopContainer({ menus }: MenusContainerProps) {
       </section>
       <section
         className={`scrollbar w-[350px] max-h-[350px] flex flex-col justify-start items-center gap-5 transition-all duration-500 sticky top-0 ${
-          isFixed ? 'fixed top-10' : 'sticky -top-20'
+          isFixed ? 'fixed top-10' : 'sticky -top-52'
         }`}
       >
         <div className='w-full text-left font-bold text-slate-800 text-xl'>

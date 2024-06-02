@@ -1,9 +1,7 @@
-import { TableProvider } from '@/context/table.context';
 import Providers from '@/providers';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import Header from '@/components/header/header';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400', display: 'swap' });
 
@@ -21,9 +19,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <Providers>
-        <TableProvider>
-          <body className={poppins.className}>{children}</body>
-        </TableProvider>
+        <body className={poppins.className}>{children}</body>
       </Providers>
     </html>
   );
