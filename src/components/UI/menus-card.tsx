@@ -11,6 +11,7 @@ import {
 } from 'flowbite-react';
 import { HiMinus, HiPlus } from 'react-icons/hi';
 import Image from 'next/image';
+import { useCartContext } from '@/context/cart-context';
 
 interface MenuCardProps {
   menu: TMenus;
@@ -70,18 +71,26 @@ const customTheme: CustomFlowbiteTheme = {
 };
 
 export default function MenusCard({ menu }: MenuCardProps) {
-  const [quantity, setQuantity] = useState(0);
+  const { cart, addToCart, updateQuantity, removeFromCart } = useCartContext();
+  const cartItem = cart.find((item) => item.id === menu.id);
+  const quantity = cartItem ? cartItem.quantity || 0 : 0;
+  // const [quantity, setQuantity] = useState(0);
 
   const handleAddClick = () => {
-    setQuantity(quantity + 1);
+    // setQuantity(quantity + 1);
+    addToCart(menu);
   };
 
   const handlePlusQuantity = () => {
-    setQuantity(quantity + 1);
+    updateQuantity(menu.id, quantity + 1);
+    // setQuantity(quantity + 1);
   };
 
   const handleMinusQuantity = () => {
-    setQuantity(quantity > 0 ? quantity - 1 : 0);
+    quantity > 1
+      ? updateQuantity(menu.id, quantity - 1)
+      : removeFromCart(menu.id);
+    // setQuantity(quantity > 0 ? quantity - 1 : 0);
   };
 
   return (
