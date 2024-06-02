@@ -11,7 +11,7 @@ import {
 } from 'flowbite-react';
 import { HiMinus, HiPlus } from 'react-icons/hi';
 import Image from 'next/image';
-import { useCartContext } from '@/context/cart-context';
+import { useCartContext } from '@/context/cart.context';
 
 interface MenuCardProps {
   menu: TMenus;

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCartContext } from '@/context/cart-context';
+import { useCartContext } from '@/context/cart.context';
 import { Button, Card, CustomFlowbiteTheme, Flowbite } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
 import { HiShoppingCart } from 'react-icons/hi';

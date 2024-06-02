@@ -3,7 +3,7 @@
 import CanteensContainer from '@/components/container/canteens-container';
 import AlgoliaProvider from '@/components/search/algolia-search';
 import SearchBar from '@/components/UI/search-bar';
-import { useCanteenContext } from '@/context/canteens-context';
+import { useCanteenContext } from '@/context/canteens.context';
 
 export default function Canteens() {
   const { canteens, loading } = useCanteenContext();

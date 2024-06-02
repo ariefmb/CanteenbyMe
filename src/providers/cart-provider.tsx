@@ -1,6 +1,6 @@
 'use client';
 
-import { CartContext } from '@/context/cart-context';
+import { CartContext } from '@/context/cart.context';
 import React, { useState } from 'react';
 
 interface MenuItem {
