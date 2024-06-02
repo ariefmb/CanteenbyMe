@@ -1,15 +1,14 @@
 // data.context.tsx
 'use client';
 
-import Canteens from '@/app/canteens/page';
 import { retrieveAllCanteens } from '@/libs/apis';
 import { TCanteens } from '@/libs/types';
-import React, {
+import {
+  ReactNode,
   createContext,
   useContext,
-  useState,
-  ReactNode,
   useEffect,
+  useState,
 } from 'react';
 
 interface CanteenContextType {
