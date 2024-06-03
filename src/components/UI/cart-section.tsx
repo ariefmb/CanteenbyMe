@@ -47,7 +47,7 @@ const customTheme: CustomFlowbiteTheme = {
 export default function CartSection() {
   const [isVisible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const { getTotalItems, getTotalPrice } = useCartContext();
+  const { cart, getTotalItems, getTotalPrice } = useCartContext();
 
   const controlCartBar = () => {
     if (window.scrollY !== lastScrollY) {
@@ -71,7 +71,9 @@ export default function CartSection() {
       <Card
         className={`fixed w-full h-[62px] transition-all duration-500 ${
           isVisible ? 'bottom-0' : '-bottom-20'
-        } md:absolute md:bottom-5 md:w-[350px] md:rounded-xl`}
+        } ${
+          !cart.length ? 'translate-y-20' : 'translate-y-0'
+        } md:absolute md:translate-y-0 md:bottom-5 md:w-[350px] md:rounded-xl`}
       >
         <div className='flex h-[40px] items-center font-bold justify-between bg-white rounded-[10px] px-5 w-2/3 shadow-[0px_1px_5px_#000,inset_0_1px_5px_#000]'>
           <p className='text-sm text-slate-800'>{getTotalItems()} item</p>

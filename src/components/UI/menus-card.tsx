@@ -74,23 +74,19 @@ export default function MenusCard({ menu }: MenuCardProps) {
   const { cart, addToCart, updateQuantity, removeFromCart } = useCartContext();
   const cartItem = cart.find((item) => item.id === menu.id);
   const quantity = cartItem ? cartItem.quantity || 0 : 0;
-  // const [quantity, setQuantity] = useState(0);
 
   const handleAddClick = () => {
-    // setQuantity(quantity + 1);
     addToCart(menu);
   };
 
   const handlePlusQuantity = () => {
     updateQuantity(menu.id, quantity + 1);
-    // setQuantity(quantity + 1);
   };
 
   const handleMinusQuantity = () => {
     quantity > 1
       ? updateQuantity(menu.id, quantity - 1)
       : removeFromCart(menu.id);
-    // setQuantity(quantity > 0 ? quantity - 1 : 0);
   };
 
   return (
