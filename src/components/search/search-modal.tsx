@@ -145,7 +145,7 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
             Tambah
           </Badge>
         </div> */}
-        <div className='w-fit px-2 h-12 flex justify-center items-center transition-all duration-500 transform'>
+        {/* <div className='w-fit px-2 h-12 flex justify-center items-center transition-all duration-500 transform'>
           {quantity === 0 ? (
             <Button color='primary' size='sm' onClick={() => handleAddClick(menu)} pill>
               <HiPlus />
@@ -172,7 +172,7 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
               </Button>
             </div>
           )}
-        </div>
+        </div> */}
       </article>
     );
   };
