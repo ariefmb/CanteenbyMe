@@ -1,4 +1,3 @@
-'use client';
 import Head from 'next/head';
 import Canteens from '@/app/canteens/page';
 

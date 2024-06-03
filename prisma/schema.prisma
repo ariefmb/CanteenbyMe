@@ -1,0 +1,99 @@
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  role          String?
+  accounts      Account[]
+  sessions      Session[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Account {
+  userId            String @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String @map("provider_account_id")
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  sessionToken String   @unique @map("session_token")
+  userId       String @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+  @@map("verification_tokens")
+}
+
+// Definisi tabel canteens
+model Canteen {
+  id        String   @id @default(uuid()) @db.Text
+  name      String   @db.Text
+  imageUrl  String?  @db.Text @map("image_url")
+  open      Boolean  @default(true) @db.Boolean
+  updatedAt DateTime @default(now()) @map("update_at") @db.Timestamp(6)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp(6)
+  Menus     Menu[]
+
+  @@map("canteens")
+}
+
+// Definisi tabel menus
+model Menu {
+  id          String   @id @default(uuid()) @db.Text
+  canteenId   String   @db.Text @map("canteen_id") 
+  type        String   @db.Text
+  name        String   @db.Text
+  price       Int      @db.Integer
+  signature   Boolean  @default(false) @db.Boolean 
+  imageUrl    String?  @db.Text @map("image_url")
+  description String?  @db.Text
+  updatedAt   DateTime @default(now()) @map("update_at") @db.Timestamp(6)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamp(6)
+  Canteen     Canteen  @relation(fields: [canteenId], references: [id])
+
+  @@map("menus")
+}
