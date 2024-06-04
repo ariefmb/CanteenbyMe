@@ -90,7 +90,7 @@ export default function MenusCard({ menu }: MenuCardProps) {
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
-      <Card className='flex'>
+      <Card className='flex md:px-10'>
         <div className='w-2/3 pl-3 flex flex-col gap-2 justify-center'>
           {menu.signature && <Badge color='bestSeller'>Best Seller</Badge>}
           <h3 className='text-sm font-bold text-primary md:text-lg'>
