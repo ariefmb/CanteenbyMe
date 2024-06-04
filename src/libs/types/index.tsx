@@ -15,14 +15,29 @@ export type TCanteens = {
 };
 
 export type TMenus = {
-  id:          string;
-  canteenId:   string;
-  type:        string;
-  name:        string;
-  price:       number;
-  signature:   boolean;
-  imageUrl?:    string;
+  id: string;
+  canteenId: string;
+  type: string;
+  name: string;
+  price: number;
+  signature: boolean;
+  imageUrl?: string;
   description?: string;
-  updateAt:    Date;
-  createdAt:   Date;
+  updateAt: Date;
+  createdAt: Date;
+};
+
+export type TTransaction = {
+  id: string;
+  menus: TMenus[];
+  payment: string;
+  totalItem: number;
+  totalPrice: number;
+  createdAt: Date;
+  paid: boolean;
+};
+
+export type THistory = {
+  id: string,
+  transaction: TTransaction[]
 }

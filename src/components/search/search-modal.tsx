@@ -182,7 +182,7 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
         dismissible
         size='2xl'
         position='top-center'
-        className='backdrop-blur-sm overflow-hidden rounded-md'
+        className='backdrop-blur-sm overflow-hidden'
         onClose={() => {
           setOnShow(false);
         }}
@@ -197,7 +197,7 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
         </Modal.Body>
         <Modal.Footer
           className={`max-h-[60px] p-0 overflow-hidden rounded-md transition-all duration-500 origin-bottom ${
-            !cart.length ? 'h-10 border-t-2 rounded-none' : 'h-[500px] border-none'
+            !cart.length ? 'h-10 max-h-2 border-t-2 rounded-none' : 'h-[500px] border-none'
           }`}
         >
           <Card
