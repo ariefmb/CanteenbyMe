@@ -2,7 +2,7 @@
 
 import { useCartContext } from '@/context/cart.context';
 import { useSearchContext } from '@/context/search.context';
-import { TCanteens, TMenus } from '@/libs/types';
+import { TCanteens } from '@/libs/types';
 import {
   Button,
   Card,
@@ -10,15 +10,27 @@ import {
   Flowbite,
   Modal,
 } from 'flowbite-react';
-import { AlgoliaHit, Hit } from 'instantsearch.js';
+import { AlgoliaHit } from 'instantsearch.js';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import { HiMinus, HiPlus } from 'react-icons/hi';
 import { HiShoppingCart } from 'react-icons/hi2';
 import { Hits, SearchBoxProps } from 'react-instantsearch';
 import SearchInput from './search-input';
-import MenusCard from '@/components/UI/menus-card';
-import CartSection from '../UI/cart-section';
+
+type HitProps = {
+  hit: AlgoliaHit<{
+    id: string;
+    canteen_id: string;
+    type: string;
+    name: string;
+    price: number;
+    signature: boolean;
+    image_url?: string;
+    description?: string;
+    updateAt: Date;
+    createdAt: Date;
+  }>;
+};
 
 const customTheme: CustomFlowbiteTheme = {
   card: {
@@ -67,68 +79,6 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
   const queryHook: SearchBoxProps['queryHook'] = (query, search) => {
     search(query);
   };
-  const [isVisible, setVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  const controlCartBar = () => {
-    if (window.scrollY !== lastScrollY) {
-      setVisible(false);
-      setTimeout(() => {
-        setVisible(true);
-      }, 1000);
-    }
-    setLastScrollY(window.scrollY);
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', controlCartBar);
-    return () => {
-      window.removeEventListener('scroll', controlCartBar);
-    };
-  }, [lastScrollY]);
-
-  // type HitProps = {
-  //   hit: AlgoliaHit<{
-  //     id?: string;
-  //     canteen_id?: string;
-  //     name?: string;
-  //     image_url?: string;
-  //     type?: string;
-  //     price?: number;
-  //   }>;
-  // };
-
-  // type HitProps = {
-  //   hit: AlgoliaHit<{
-  //     hitted: TMenus;
-  //   }>;
-  // };
-
-  type HitProps = {
-    hit: AlgoliaHit<{
-      id: string;
-      canteen_id: string;
-      type: string;
-      name: string;
-      price: number;
-      signature: boolean;
-      image_url?: string;
-      description?: string;
-      updateAt: Date;
-      createdAt: Date;
-    }>;
-  };
-
-  // type CartProps = {
-  //   // id?: string;
-  //   // canteen_id?: string;
-  //   // name?: string;
-  //   // image_url?: string;
-  //   // type?: string;
-  //   // price?: number;
-  //   // quantity?: number;
-  //   menu: TMenus;
-  // };
 
   const { onShow, setOnShow } = useSearchContext();
   const {
@@ -139,16 +89,12 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
     getTotalItems,
     getTotalPrice,
   } = useCartContext();
-  // const [carts, setCart] = useState<CartProps[]>([]);
-  // const totalHarga = cart.reduce((acc, item) => acc + item.price!!, 0);
 
   const SearchResult = ({ hit }: HitProps) => {
     const canteen = canteens?.find((canteen) => canteen.id === hit.canteen_id);
     const cartItem = cart.find((item) => item.id === hit.id);
     const quantity = cartItem ? cartItem.quantity || 0 : 0;
     console.log(`image: ${hit.name}`);
-
-    // const {menu}: CartProps = cart.find((item) => item.id === hit.id);
 
     const handleAddClick = () => {
       addToCart(hit);
@@ -164,22 +110,10 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
         : removeFromCart(hit.id);
     };
 
-    // const handlePlusQuantity = () => {
-    //   updateQuantity(menu.id, quantity + 1);
-    // };
-
-    // const handleMinusQuantity = () => {
-    //   quantity > 1
-    //     ? updateQuantity(menu.id, quantity - 1)
-    //     : removeFromCart(menu.id);
-    // };
-
-    // useEffect(() => {}, [cart]);
-
     return (
       <Flowbite theme={{ theme: customTheme }}>
         <article
-          className='flex items-center gap-3 md:m-3 text-slate-800 mb-5'
+          className='flex items-center gap-3 md:m-3 text-slate-800 mb-5 sm:px-10 md:px-5'
           key={hit.id}
         >
           <Image
@@ -201,7 +135,7 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
             </p>
           </div>
 
-          <div className='w-[100%] h-12 md:w-fit md:px-2 flex justify-center items-center transition-all duration-500'>
+          <div className='w-[100%] h-12 sm:w-[50%] sm:px-5 md:px-2 flex justify-center items-center transition-all duration-500'>
             {quantity === 0 ? (
               <Button
                 color='primary'

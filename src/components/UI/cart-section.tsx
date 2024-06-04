@@ -22,7 +22,8 @@ const customTheme: CustomFlowbiteTheme = {
     base: 'flex items-center justify-center h-[40px] shadow-[0px_1px_5px_#000]',
     fullSized: 'w-full',
     color: {
-      buttonPrimary: 'bg-[#B5BEE3]',
+      buttonPrimary:
+        'bg-[#B5BEE3] transition-all duration-200 hover:bg-[#A2AACB] active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
     },
     inner: {
       base: 'flex items-center w-full gap-2 text-slate-800 font-bold transition-all duration-200',
