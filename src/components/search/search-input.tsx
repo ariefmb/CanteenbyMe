@@ -16,7 +16,7 @@ export default function SearchInput({ props }: { props: UseSearchBoxProps }) {
 
   return (
     <form
-      className='flex justify-center w-[200%] outline-none'
+      className='flex justify-center w-full md:w-[200%] outline-none'
       onSubmit={(event) => {
         event.preventDefault();
         event.stopPropagation();

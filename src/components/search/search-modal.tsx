@@ -10,7 +10,7 @@ import {
   Flowbite,
   Modal,
 } from 'flowbite-react';
-import { AlgoliaHit } from 'instantsearch.js';
+import { AlgoliaHit, Hit } from 'instantsearch.js';
 import Image from 'next/image';
 import { useState } from 'react';
 import { HiMinus, HiPlus } from 'react-icons/hi';
@@ -76,53 +76,77 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
   };
 
   type CartProps = {
-    id?: string;
-    canteen_id?: string;
-    name?: string;
-    image_url?: string;
-    type?: string;
-    price?: number;
+    // id?: string;
+    // canteen_id?: string;
+    // name?: string;
+    // image_url?: string;
+    // type?: string;
+    // price?: number;
+    // quantity?: number;
+    menu: TMenus;
   };
 
   const { onShow, setOnShow } = useSearchContext();
-
-  const [cart, setCart] = useState<CartProps[]>([]);
+  const {
+    cart,
+    addToCart,
+    updateQuantity,
+    removeFromCart,
+    getTotalItems,
+    getTotalPrice,
+  } = useCartContext();
+  const [carts, setCart] = useState<CartProps[]>([]);
   const totalHarga = cart.reduce((acc, item) => acc + item.price!!, 0);
 
   const SearchResult = ({ hit }: HitProps) => {
     const canteen = canteens?.find((canteen) => canteen.id === hit.canteen_id);
-    const { cart, addToCart, updateQuantity, removeFromCart } =
-      useCartContext();
     const cartItem = cart.find((item) => item.id === hit.id);
     const quantity = cartItem ? cartItem.quantity || 0 : 0;
+    // const {menu}: CartProps = cart.find((item) => item.id === hit.id);
 
-    const handleAddClick = (menu:TMenus) => {
-      addToCart(menu);
-    };
+    // const handleAddClick = () => {
+    //   const menu = {
+    //     id: hit.id,
+    //     name: hit.name,
+    //     price: hit.price,
+    //     quantity: 1,
+    //   };
+    //   addToCart(menu);
+    // };
 
-    const handlePlusQuantity = (menu:TMenus) => {
-      updateQuantity(menu.id, quantity + 1);
-    };
+    // const handlePlusQuantity = () => {
+    //   updateQuantity(hit.id, quantity + 1);
+    // };
 
-    const handleMinusQuantity = (menu:TMenus) => {
+    // const handleMinusQuantity = () => {
+    //   quantity > 1
+    //     ? updateQuantity(hit.id, quantity - 1)
+    //     : removeFromCart(hit.id);
+    // };
+
+    // const handleAddClick = () => {
+    //   addToCart(menu);
+    // };
+
+    // const handlePlusQuantity = () => {
+    //   updateQuantity(menu.id, quantity + 1);
+    // };
+
+    const handleMinusQuantity = () => {
       quantity > 1
         ? updateQuantity(menu.id, quantity - 1)
         : removeFromCart(menu.id);
     };
 
-    const handleAddToChart = (menu: CartProps) => {
-      setCart((prevChart) => [...prevChart, menu]);
-    };
-
     // useEffect(() => {}, [cart]);
 
     return (
-      <article className='hit-item flex m-3 text-slate-800' key={hit.id}>
+      <article className='hit-item flex md:m-3 text-slate-800' key={hit.id}>
         <Image
           src={`${hit.image_url}`}
           width={82}
           height={70}
-          className='rounded-md bg-cover'
+          className='rounded-md bg-cover w-[80px] h-[70px]'
           alt={canteen?.name || 'Image'}
         />
         <div className='ml-2 col-span-5 w-full'>
@@ -145,9 +169,14 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
             Tambah
           </Badge>
         </div> */}
-        {/* <div className='w-fit px-2 h-12 flex justify-center items-center transition-all duration-500 transform'>
+        <div className='w-fit px-2 h-12 flex justify-center items-center transition-all duration-500 transform'>
           {quantity === 0 ? (
-            <Button color='primary' size='sm' onClick={() => handleAddClick(menu)} pill>
+            <Button
+              color='primary'
+              size='sm'
+              onClick={() => handleAddClick(menu)}
+              pill
+            >
               <HiPlus />
               Tambah
             </Button>
@@ -172,7 +201,7 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
               </Button>
             </div>
           )}
-        </div> */}
+        </div>
       </article>
     );
   };

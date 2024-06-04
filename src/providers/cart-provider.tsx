@@ -40,6 +40,12 @@ export default function CartProvider({
     });
   };
 
+  const removeFromCart = (menuItemId: string) => {
+    setCart((prevCart) => {
+      return prevCart.filter((item) => item.id !== menuItemId);
+    });
+  };
+  
   const getTotalItems = () => {
     return cart.reduce((total, item) => total + (item.quantity || 0), 0);
   };
@@ -50,13 +56,7 @@ export default function CartProvider({
       0
     );
   };
-
-  const removeFromCart = (menuItemId: string) => {
-    setCart((prevCart) => {
-      return prevCart.filter((item) => item.id !== menuItemId);
-    });
-  };
-
+  
   return (
     <CartContext.Provider
       value={{

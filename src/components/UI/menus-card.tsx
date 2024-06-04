@@ -1,17 +1,16 @@
 'use client';
 
+import { useCartContext } from '@/context/cart.context';
 import { TMenus } from '@/libs/types';
-import React, { useState } from 'react';
 import {
   Badge,
-  Card,
   Button,
+  Card,
   CustomFlowbiteTheme,
   Flowbite,
 } from 'flowbite-react';
-import { HiMinus, HiPlus } from 'react-icons/hi';
 import Image from 'next/image';
-import { useCartContext } from '@/context/cart.context';
+import { HiMinus, HiPlus } from 'react-icons/hi';
 
 interface MenuCardProps {
   menu: TMenus;

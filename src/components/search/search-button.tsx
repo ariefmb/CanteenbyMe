@@ -6,7 +6,7 @@ import { FaSearch } from 'react-icons/fa';
 
 const customTheme: CustomFlowbiteTheme = {
   button: {
-    base: 'w-full h-10 md:w-2/3 md:h-[54px] flex items-center justify-start px-2 md:px-4 rounded-md',
+    base: 'w-full h-10 md:w-2/3 md:h-[54px] flex items-center justify-start px-2 md:px-4 rounded-md mb-5',
     fullSized: 'w-full',
     color: {
       buttonColor:
