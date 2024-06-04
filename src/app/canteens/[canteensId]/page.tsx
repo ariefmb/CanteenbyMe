@@ -26,7 +26,6 @@ export default async function Canteen({ params }: CanteenProps) {
     menus.length > 0
       ? getCanteenNameById(canteens, menus[0].canteenId)
       : 'Kantin';
-
   return (
     <section className='mx-auto min-h-screen py-5 px-5 md:px-10 bg-background'>
       <div className='w-full flex items-center gap-5 font-bold text-base mb-5 text-slate-800 md:text-2xl'>

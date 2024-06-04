@@ -44,6 +44,7 @@ export default function MenusDesktopContainer({ menus }: MenusContainerProps) {
           Pilih Kategori
         </div>
         <div className='dropdown w-full h-10 bg-slate-400 rounded-xl'></div>
+
         <CartSection />
       </section>
     </div>
