@@ -1,4 +1,4 @@
-import { useAuthContext } from '@/context/auth-context';
+import { useAuthContext } from '@/context/auth.context';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
