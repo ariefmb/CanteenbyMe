@@ -2,9 +2,9 @@
 import SearchBar from '@/components/UI/search-bar';
 import CanteensContainer from '@/components/container/canteens-container';
 import AlgoliaProvider from '@/components/search/algolia-search';
-import { useCanteenContext } from '@/context/canteens-context';
+import { useCanteenContext } from '@/context/canteens.context';
 import { signIn, useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Canteens() {
   const { canteens, loading } = useCanteenContext();
@@ -32,9 +32,6 @@ export default function Canteens() {
           </h1>
           <p className='text-muted-foreground'>email : {userSession?.email}</p>
         </div>
-      </section>
-      <section className='CanteensContainer'>
-        <CanteensContainer loading={loading} canteens={canteens} />
       </section>
       <section>
         <CanteensContainer loading={loading} canteens={canteens} />

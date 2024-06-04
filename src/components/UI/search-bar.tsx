@@ -2,8 +2,8 @@
 
 import SearchButton from '@/components/search/search-button';
 import SearchModal from '@/components/search/search-modal';
-import { SearchProvider } from '@/context/search.context';
 import { TCanteens } from '@/libs/types';
+import SearchProvider from '@/providers/search-provider';
 
 const SearchBar = ({ canteens }: { canteens?: TCanteens[] }) => {
   return (

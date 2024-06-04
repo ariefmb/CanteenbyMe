@@ -1,24 +1,40 @@
 'use client';
+
 import { useSearchContext } from '@/context/search.context';
-import { Button } from 'flowbite-react';
+import { Button, CustomFlowbiteTheme, Flowbite } from 'flowbite-react';
 import { FaSearch } from 'react-icons/fa';
 
-const SearchButton = () => {
-  const { setOnShow, onShow } = useSearchContext();
+const customTheme: CustomFlowbiteTheme = {
+  button: {
+    base: 'w-full h-10 md:w-2/3 md:h-[54px] flex items-center justify-start px-2 md:px-4 rounded-md mb-5',
+    fullSized: 'w-full',
+    color: {
+      buttonColor:
+        'bg-zinc-100 hover:bg-zinc-200 transition-all duration-200 border border-zinc-500 text-zinc-500 active:ring-2 active:ring-primary',
+    },
+    inner: {
+      base: 'flex items-center',
+    },
+    pill: {
+      off: 'rounded-md',
+    },
+  },
+};
+
+export default function SearchButton() {
+  const { setOnShow } = useSearchContext();
 
   return (
-    <div className='flex justify-center w-full'>
-      <div className='relative w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl'>
+    <Flowbite theme={{theme: customTheme}}>
+      <div className='flex justify-center'>
         <Button
           onClick={() => setOnShow(true)}
-          className='block mx-auto w-full bg-zinc-100 p-4 my-2 text-sm rounded-lg outline placeholder-gray-400 text-zinc-500  focus:border-[#E0E4F9]'
+          color='buttonColor'
         >
-          <FaSearch className='mr-4 ' size={18} />
+          <FaSearch className='mr-4' size={18} />
           Mau makan apa?
         </Button>
       </div>
-    </div>
+    </Flowbite>
   );
-};
-
-export default SearchButton;
+}

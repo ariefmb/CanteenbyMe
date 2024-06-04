@@ -1,16 +1,16 @@
 'use client';
 
+import { useCartContext } from '@/context/cart.context';
 import { TMenus } from '@/libs/types';
-import React, { useState } from 'react';
 import {
   Badge,
-  Card,
   Button,
+  Card,
   CustomFlowbiteTheme,
   Flowbite,
 } from 'flowbite-react';
-import { HiMinus, HiPlus } from 'react-icons/hi';
 import Image from 'next/image';
+import { HiMinus, HiPlus } from 'react-icons/hi';
 
 interface MenuCardProps {
   menu: TMenus;
@@ -70,23 +70,27 @@ const customTheme: CustomFlowbiteTheme = {
 };
 
 export default function MenusCard({ menu }: MenuCardProps) {
-  const [quantity, setQuantity] = useState(0);
+  const { cart, addToCart, updateQuantity, removeFromCart } = useCartContext();
+  const cartItem = cart.find((item) => item.id === menu.id);
+  const quantity = cartItem ? cartItem.quantity || 0 : 0;
 
   const handleAddClick = () => {
-    setQuantity(quantity + 1);
+    addToCart(menu);
   };
 
   const handlePlusQuantity = () => {
-    setQuantity(quantity + 1);
+    updateQuantity(menu.id, quantity + 1);
   };
 
   const handleMinusQuantity = () => {
-    setQuantity(quantity > 0 ? quantity - 1 : 0);
+    quantity > 1
+      ? updateQuantity(menu.id, quantity - 1)
+      : removeFromCart(menu.id);
   };
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
-      <Card className='flex'>
+      <Card className='flex md:px-10'>
         <div className='w-2/3 pl-3 flex flex-col gap-2 justify-center'>
           {menu.signature && <Badge color='bestSeller'>Best Seller</Badge>}
           <h3 className='text-sm font-bold text-primary md:text-lg'>
