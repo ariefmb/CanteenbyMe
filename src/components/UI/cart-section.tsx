@@ -1,14 +1,16 @@
 'use client';
 
 import { Button, Card, CustomFlowbiteTheme, Flowbite } from 'flowbite-react';
-import React, { useEffect, useState } from 'react';
+import { signIn, useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import { HiShoppingCart } from 'react-icons/hi';
 
 const customTheme: CustomFlowbiteTheme = {
   card: {
     root: {
       base: 'flex rounded-t-xl bg-primary overflow-hidden',
-      children: 'flex h-full justify-center items-center gap-4 py-3 px-5 md:px-3',
+      children:
+        'flex h-full justify-center items-center gap-4 py-3 px-5 md:px-3',
       horizontal: {
         off: 'flex-col',
         on: 'flex-col md:max-w-xl md:flex-row',
@@ -45,6 +47,8 @@ const customTheme: CustomFlowbiteTheme = {
 export default function CartSection() {
   const [isVisible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const { data: session } = useSession();
+  const userSession = session?.user;
 
   const controlCartBar = () => {
     if (window.scrollY !== lastScrollY) {
@@ -63,6 +67,12 @@ export default function CartSection() {
     };
   }, [lastScrollY]);
 
+  const handleAddToChart = () => {
+    if (!userSession) {
+      signIn('google', { callbackUrl: '/canteens' });
+    }
+  };
+
   return (
     <Flowbite theme={{ theme: customTheme }}>
       <Card
@@ -74,7 +84,7 @@ export default function CartSection() {
           <p className='text-sm text-gray-800'>n item</p>
           <p className='text-sm text-gray-800'>Rp 000</p>
         </div>
-        <Button color='buttonPrimary'>
+        <Button color='buttonPrimary' onClick={handleAddToChart}>
           Bayar
           <HiShoppingCart size={25} />
         </Button>

@@ -7,10 +7,15 @@ import prisma from '@/libs/auth/prisma';
 export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
   adapter: PrismaAdapter(prisma) as Adapter,
-  callbacks: {
-    session({ session, user }) {
-      return session;
-    },
-  },
-  providers: [Google],
+  providers: [
+    Google({
+      authorization: {
+        params: {
+          prompt: 'consent',
+          access_type: 'offline',
+          response_type: 'code',
+        },
+      },
+    }),
+  ],
 });

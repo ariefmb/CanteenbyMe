@@ -2,6 +2,7 @@ import { TCanteens, TMenus } from '@/libs/types';
 import { Alert, CustomFlowbiteTheme } from 'flowbite-react';
 import { HiInformationCircle } from 'react-icons/hi';
 import MenusCard from '../UI/menus-card';
+import { ToastContainer } from 'react-toastify';
 
 interface MenusCanteenContainerProps {
   menus: TMenus[];
@@ -51,12 +52,15 @@ export default function MenusCanteenContainer({
               key={type}
               className='w-full flex flex-col items-center gap-5 md:items-start md:px-5'
             >
-              <h1 className='w-full font-bold text-base text-left md:text-xl'>{type}</h1>
+              <h1 className='w-full font-bold text-base text-left md:text-xl'>
+                {type}
+              </h1>
               {sortedMenus[type].map((menu) => (
                 <MenusCard key={menu.id} menu={menu} />
               ))}
             </div>
           ))}
+          <ToastContainer />
         </div>
       )}
     </div>

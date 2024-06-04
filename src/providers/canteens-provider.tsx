@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { CanteenContext } from '@/context/canteens-context';
 import { retrieveAllCanteens } from '@/libs/apis';
