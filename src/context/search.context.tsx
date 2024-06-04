@@ -1,4 +1,6 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+'use client'
+
+import React, { createContext, useContext } from 'react';
 
 type SearchContextType = {
   onShow: boolean;
@@ -7,24 +9,14 @@ type SearchContextType = {
   setStatus: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
-const SearchContext = createContext<SearchContextType | undefined>(undefined);
+export const SearchContext = createContext<SearchContextType | undefined>(
+  undefined
+);
 
-export const SearchProvider = ({ children }: { children: ReactNode }) => {
-  const [onShow, setOnShow] = useState(false);
-  const [searchStatus, setStatus] = useState<string | undefined>('idle');
-  return (
-    <SearchContext.Provider
-      value={{ onShow, setOnShow, searchStatus, setStatus }}
-    >
-      {children}
-    </SearchContext.Provider>
-  );
-};
-
-export const useSearchContext = () => {
+export function useSearchContext() {
   const context = useContext(SearchContext);
   if (context === undefined) {
     throw new Error('useSearchContext must be used within a SearchProvider');
   }
   return context;
-};
+}

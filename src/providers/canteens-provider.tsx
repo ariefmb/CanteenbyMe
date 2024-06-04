@@ -1,6 +1,6 @@
 'use client';
 
-import { CanteenContext } from '@/context/canteens-context';
+import { CanteenContext } from '@/context/canteens.context';
 import { retrieveAllCanteens } from '@/libs/apis';
 import { TCanteens } from '@/libs/types';
 import React, { useEffect, useState } from 'react';

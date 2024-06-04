@@ -1,5 +1,4 @@
 import { InstantSearch, InstantSearchSSRProvider } from 'react-instantsearch';
-
 import { algoliaClient } from '@/libs/apis/search.services';
 import { FC, PropsWithChildren } from 'react';
 
