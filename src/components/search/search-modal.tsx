@@ -49,7 +49,8 @@ const customTheme: CustomFlowbiteTheme = {
     base: 'border-none',
     color: {
       primary: 'bg-[#A8B2DE] transition-all duration-200 hover:bg-[#959DC2]',
-      buttonCart: 'bg-[#B5BEE3] transition-all duration-200 hover:bg-[#A2AACB] active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
+      buttonCart:
+        'bg-[#B5BEE3] transition-all duration-200 hover:bg-[#A2AACB] active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
     },
     isProcessing: 'cursor-drop',
     spinnerSlot: 'h-full flex items-center animate-fade-in',
@@ -181,7 +182,7 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
         dismissible
         size='2xl'
         position='top-center'
-        className='backdrop-blur-sm overflow-hidden'
+        className='backdrop-blur-sm overflow-hidden rounded-md'
         onClose={() => {
           setOnShow(false);
         }}
@@ -190,17 +191,17 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
           <SearchInput props={{ queryHook: queryHook }} />
         </Modal.Header>
         <Modal.Body>
-          <div className='min-h-screen flex flex-col'>
+          <div className='flex flex-col'>
             <Hits hitComponent={SearchResult} />
           </div>
         </Modal.Body>
         <Modal.Footer
-          className={`p-0 overflow-hidden rounded-md transition-all duration-500 origin-bottom md:border-none ${
-            !cart.length ? 'border-t-2 h-20 rounded-none' : 'h-[400px] py-2' || 'h-[500px]'
+          className={`max-h-[60px] p-0 overflow-hidden rounded-md transition-all duration-500 origin-bottom ${
+            !cart.length ? 'h-10 border-t-2 rounded-none' : 'h-[500px] border-none'
           }`}
         >
           <Card
-            className={`w-full bg-primary overflow-hidden flex items-center justify-center gap-4 py-8 transition-all duration-500 px-0 origin-bottom ${
+            className={`w-full h-full bg-primary overflow-hidden flex items-center justify-center gap-4 transition-all duration-500 px-0 origin-bottom ${
               !cart.length ? 'translate-y-24' : 'translate-y-0'
             }`}
           >
