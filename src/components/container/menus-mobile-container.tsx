@@ -10,7 +10,7 @@ interface MenusContainerProps {
 export default function MenusMobileContainer({ menus }: MenusContainerProps) {
   return (
     <>
-      <section className='dropdown w-full h-20 bg-slate-400 rounded-xl'></section>
+      {/* <section className='dropdown w-full h-20 bg-slate-400 rounded-xl'></section> */}
       <section>
         <MenusCanteenContainer menus={menus} />
       </section>

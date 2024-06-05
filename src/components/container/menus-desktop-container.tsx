@@ -40,10 +40,10 @@ export default function MenusDesktopContainer({ menus }: MenusContainerProps) {
           isFixed ? 'fixed top-10' : 'sticky -top-52'
         }`}
       >
-        <div className='w-full text-left font-bold text-slate-800 text-xl'>
+        <div className='w-full text-left font-bold text-slate-800 text-xl'></div>
+        <div className='dropdown w-full flex items-center justify-center h-10 bg-slate-400 rounded-xl'>
           Pilih Kategori
         </div>
-        <div className='dropdown w-full h-10 bg-slate-400 rounded-xl'></div>
 
         <CartSection />
       </section>

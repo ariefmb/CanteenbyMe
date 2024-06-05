@@ -1,4 +1,9 @@
+'use client';
+
+import BackCTA from '@/components/UI/back-cta';
 // import { useSession } from 'next-auth/react';
+import { useAuthContext } from '@/context/auth.context';
+import { useCartContext } from '@/context/cart.context';
 import {
   Button,
   CustomFlowbiteTheme,
@@ -7,9 +12,19 @@ import {
   Radio,
   TextInput,
 } from 'flowbite-react';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React from 'react';
 import { HiMinus, HiPlus, HiShoppingCart } from 'react-icons/hi';
+
+interface OrdersProps {
+  cart: {
+    id: string;
+    name: string;
+    price: number;
+    quantity?: number;
+  };
+}
 
 const customTheme: CustomFlowbiteTheme = {
   button: {
@@ -67,26 +82,42 @@ const customTheme: CustomFlowbiteTheme = {
 };
 
 export default function Orders() {
-  // const { data: session } = useSession();
-  // const userSession = session?.user;
+  const { data: session } = useSession();
+  const userSession = session?.user;
+  const { cart } = useCartContext();
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
       <div className='bg-background min-h-screen'>
         <div className='container mx-auto p-5 min-h-screen text-slate-800'>
-          {/* {userSession && <h1>Hi, {userSession.name}</h1>} */}
-          <h1 className='font-extrabold text-xl md:text-2xl'>Hi, Arief</h1>
-          <h3 className='text-lg md:text-xl'>Berikut rincian pesan anda.</h3>
+          <div className='w-full flex items-center gap-5 font-bold text-base mb-5 text-slate-800 md:text-2xl'>
+            <BackCTA />
+            <div className=''>
+              <h1 className='font-extrabold text-xl md:text-2xl'>
+                Hi, {userSession?.name}
+              </h1>
+              <h3 className='text-lg md:text-xl'>
+                Berikut rincian pesan anda.
+              </h3>
+            </div>
+          </div>
           <hr className='w-full h-px bg-black my-3' />
           <div className='w-full p-3 flex flex-col gap-6'>
             <div className='flex gap-5 items-center justify-center'>
-              {/* <Image
-            src={`https://source.unsplash.com/150x100?food`}
-            alt='placeholder'
-            width={150}
-            height={100}
-            className='rounded-xl overflow-hidden hover:scale-95 transition-all duration-500'
-          /> */}
+              {/* {cart.map((cart) => (
+                <>
+                  <Image
+                    src={`${cart.imageUrl}`}
+                    alt='placeholder'
+                    width={150}
+                    height={100}
+                    className='rounded-xl overflow-hidden hover:scale-95 transition-all duration-500'
+                  />
+                  <h1 className='font-bold text-2xl text-slate-800'>
+                    TEST {cart.name}
+                  </h1>
+                </>
+              ))} */}
               <div className='w-[150px] h-[100px] rounded-lg overflow-hidden md:col-start-4 relative group hover:scale-90 transition-all duration-500'>
                 <div
                   className={`h-full w-full bg-[url('https://source.unsplash.com/150x100?food')] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500`}
@@ -219,10 +250,7 @@ export default function Orders() {
               />
             </div>
             <div className='w-full flex items-center justify-between rounded-xl border border-slate-800 py-3 px-10 gap-2'>
-              <Label
-                htmlFor='Cash'
-                className='font-bold text-sm md:text-xl'
-              >
+              <Label htmlFor='Cash' className='font-bold text-sm md:text-xl'>
                 Cash
               </Label>
               <Radio

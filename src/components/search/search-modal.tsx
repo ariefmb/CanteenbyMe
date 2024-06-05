@@ -16,6 +16,8 @@ import { HiMinus, HiPlus } from 'react-icons/hi';
 import { HiShoppingCart } from 'react-icons/hi2';
 import { Hits, SearchBoxProps } from 'react-instantsearch';
 import SearchInput from './search-input';
+import { usePathname, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 type HitProps = {
   hit: AlgoliaHit<{
@@ -80,6 +82,9 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
   const queryHook: SearchBoxProps['queryHook'] = (query, search) => {
     search(query);
   };
+  const pathname = usePathname();
+  const params = useSearchParams();
+  const prevPathname = pathname.substring(0, pathname.indexOf('/canteens') + 9);
 
   const { onShow, setOnShow } = useSearchContext();
   const {
@@ -197,7 +202,9 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
         </Modal.Body>
         <Modal.Footer
           className={`max-h-[60px] p-0 overflow-hidden rounded-md transition-all duration-500 origin-bottom ${
-            !cart.length ? 'h-10 max-h-2 border-t-2 rounded-none' : 'h-[500px] border-none'
+            !cart.length
+              ? 'h-10 max-h-2 border-t-2 rounded-none'
+              : 'h-[500px] border-none'
           }`}
         >
           <Card
@@ -214,8 +221,13 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
               className='flex items-center justify-center h-[40px] shadow-[0px_1px_5px_#000]'
               size='md'
             >
-              Bayar
-              <HiShoppingCart size={25} />
+              <Link
+                href={`${prevPathname}/orders?${params}`}
+                className='w-full h-full flex items-center justify-center'
+              >
+                Bayar
+                <HiShoppingCart size={25} />
+              </Link>
             </Button>
           </Card>
         </Modal.Footer>
