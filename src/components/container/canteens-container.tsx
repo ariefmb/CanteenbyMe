@@ -26,7 +26,7 @@ export default function CanteensContainer({
   loading,
 }: CanteensContainerProps) {
   return (
-    <>
+    <div className='w-full min-h-screen'>
       <h1 className='text-slate-800 font-extrabold text-lg'>
         List kantin UPNVJ
       </h1>
@@ -52,6 +52,6 @@ export default function CanteensContainer({
           ))
         )}
       </div>
-    </>
+    </div>
   );
 }
