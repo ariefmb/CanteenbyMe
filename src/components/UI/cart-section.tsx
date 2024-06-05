@@ -3,6 +3,8 @@
 import { useCartContext } from '@/context/cart.context';
 import { Button, Card, CustomFlowbiteTheme, Flowbite } from 'flowbite-react';
 import { signIn, useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { HiShoppingCart } from 'react-icons/hi';
 
@@ -52,6 +54,9 @@ export default function CartSection() {
   const { cart, getTotalItems, getTotalPrice } = useCartContext();
   const { data: session } = useSession();
   const userSession = session?.user;
+  const pathname = usePathname();
+  const params = useSearchParams();
+  const prevPathname = pathname.substring(0, pathname.indexOf('/canteens') + 9);
 
   const controlCartBar = () => {
     if (window.scrollY !== lastScrollY) {
@@ -90,8 +95,13 @@ export default function CartSection() {
           <p className='text-sm text-slate-800'>Rp {getTotalPrice()} ,-</p>
         </div>
         <Button color='buttonPrimary' onClick={handleAddToChart}>
-          Bayar
-          <HiShoppingCart size={25} />
+          <Link
+            href={`${prevPathname}/orders?${params}`}
+            className='w-full h-full flex items-center justify-center'
+          >
+            Bayar
+            <HiShoppingCart size={25} />
+          </Link>
         </Button>
       </Card>
     </Flowbite>

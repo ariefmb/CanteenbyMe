@@ -8,13 +8,13 @@ import { Suspense } from 'react';
 
 const customTheme: CustomFlowbiteTheme['badge'] = {
   root: {
-    base: 'w-[63px] h-[63px] px-2 flex items-center justify-center text-center font-normal text-slate-900 md:w-[70px] md:h-[70px] md:px-0 md:text-xl',
+    base: 'w-[63px] h-[63px] px-2 flex items-center justify-center text-center font-normal text-slate-900 md:w-[70px] md:h-[70px] md:text-xl',
     color: {
       purple: 'bg-[#A8B2DE]/50 rounded-2xl',
     },
   },
   icon: {
-    off: 'rounded-2xl py-5 px-2',
+    off: 'rounded-2xl py-5 px-5',
   },
 };
 
@@ -34,7 +34,8 @@ export default function Header() {
         {tableParams !== null && (
           <Suspense>
             <Badge theme={customTheme} color='purple'>
-              Meja <span className='font-extrabold'>{tableParams}</span>
+              Meja{' '}
+              <span className='font-extrabold'>{tableParams}</span>
             </Badge>
           </Suspense>
         )}
