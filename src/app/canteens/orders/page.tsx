@@ -84,7 +84,7 @@ const customTheme: CustomFlowbiteTheme = {
 export default function Orders() {
   const { data: session } = useSession();
   const userSession = session?.user;
-  const { cart, getTotalItems, getTotalPrice } = useCartContext();
+  const { cart, getTotalPrice } = useCartContext();
 
   const totalPesanan = new Intl.NumberFormat('id', {
     style: 'currency',
