@@ -49,7 +49,8 @@ const customTheme: CustomFlowbiteTheme = {
     base: 'border-none',
     color: {
       primary: 'bg-[#A8B2DE] transition-all duration-200 hover:bg-[#959DC2]',
-      buttonCart: 'bg-[#B5BEE3] transition-all duration-200 hover:bg-[#A2AACB] active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
+      buttonCart:
+        'bg-[#B5BEE3] transition-all duration-200 hover:bg-[#A2AACB] active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
     },
     isProcessing: 'cursor-drop',
     spinnerSlot: 'h-full flex items-center animate-fade-in',
@@ -90,6 +91,11 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
     getTotalPrice,
   } = useCartContext();
 
+  const cartTotalPrice = new Intl.NumberFormat('id', {
+    style: 'currency',
+    currency: 'IDR',
+  }).format(getTotalPrice());
+
   const SearchResult = ({ hit }: HitProps) => {
     const canteen = canteens?.find((canteen) => canteen.id === hit.canteen_id);
     const cartItem = cart.find((item) => item.id === hit.id);
@@ -109,6 +115,11 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
         ? updateQuantity(hit.id, quantity - 1)
         : removeFromCart(hit.id);
     };
+
+    const rupiah = new Intl.NumberFormat('id', {
+      style: 'currency',
+      currency: 'IDR',
+    }).format(hit.price);
 
     return (
       <Flowbite theme={{ theme: customTheme }}>
@@ -130,8 +141,8 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
             <p className='canteen-name w-fit h-fit text-sm md:text-base text-slate-700 text-overflow-ellipsis'>
               {canteen?.name}
             </p>
-            <p className='menu-price w-fit h-fit font-bold text-base text-slate-700 text-overflow-ellipsis text-overflow-ellipsis'>
-              Rp {hit?.price !== undefined ? hit?.price : 'N/A'}
+            <p className='menu-price w-fit h-fit font-semibold text-base text-slate-700 text-overflow-ellipsis text-overflow-ellipsis'>
+              {hit?.price !== undefined ? rupiah : 'N/A'}
             </p>
           </div>
 
@@ -196,7 +207,9 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
         </Modal.Body>
         <Modal.Footer
           className={`p-0 overflow-hidden rounded-md transition-all duration-500 origin-bottom md:border-none ${
-            !cart.length ? 'border-t-2 h-20 rounded-none' : 'h-[400px] py-2' || 'h-[500px]'
+            !cart.length
+              ? 'border-t-2 h-20 rounded-none'
+              : 'h-[400px] py-2' || 'h-[500px]'
           }`}
         >
           <Card
@@ -206,7 +219,7 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
           >
             <div className='flex h-[40px] w-[200px] sm:w-[400px] items-center font-bold justify-between bg-white rounded-[10px] px-5 shadow-[0px_1px_5px_#000,inset_0_1px_5px_#000]'>
               <p className='text-sm text-slate-800'>{getTotalItems()} item</p>
-              <p className='text-sm text-slate-800'>Rp {getTotalPrice()} ,-</p>
+              <p className='text-sm text-slate-800'>{cartTotalPrice} ,-</p>
             </div>
             <Button
               color='buttonCart'
