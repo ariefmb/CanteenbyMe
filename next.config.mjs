@@ -5,12 +5,12 @@ const nextConfig = {
             {
                 source: '/',
                 destination: '/canteens',
-                permanent: true
+                permanent: false
             },
         ]
     },
     images: {
-        domains: ['res.cloudinary.com']
+        domains: ['res.cloudinary.com', 'source.unsplash.com']
     },
 };
 
