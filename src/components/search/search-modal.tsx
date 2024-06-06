@@ -118,7 +118,12 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
     console.log(`image: ${hit.name}`);
 
     const handleAddClick = () => {
-      addToCart(hit);
+      addToCart({
+        id: hit.id!!,
+        name: hit.name!!,
+        imageUrl: hit.image_url!!,
+        price: hit.price!!,
+      });
     };
 
     const handlePlusQuantity = () => {

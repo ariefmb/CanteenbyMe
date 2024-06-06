@@ -1,10 +1,11 @@
-'use client'
+'use client';
 
 import { createContext, useContext } from 'react';
 
 interface MenuItem {
   id: string;
   name: string;
+  imageUrl: string;
   price: number;
   quantity?: number;
 }

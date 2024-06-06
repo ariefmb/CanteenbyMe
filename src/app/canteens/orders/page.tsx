@@ -84,7 +84,22 @@ const customTheme: CustomFlowbiteTheme = {
 export default function Orders() {
   const { data: session } = useSession();
   const userSession = session?.user;
-  const { cart } = useCartContext();
+  const { cart, getTotalItems, getTotalPrice } = useCartContext();
+
+  const totalPesanan = new Intl.NumberFormat('id', {
+    style: 'currency',
+    currency: 'IDR',
+  }).format(getTotalPrice());
+
+  const fee = new Intl.NumberFormat('id', {
+    style: 'currency',
+    currency: 'IDR',
+  }).format(500);
+
+  const totalBayar = new Intl.NumberFormat('id', {
+    style: 'currency',
+    currency: 'IDR',
+  }).format(getTotalPrice() + 500);
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
@@ -103,22 +118,52 @@ export default function Orders() {
           </div>
           <hr className='w-full h-px bg-black my-3' />
           <div className='w-full p-3 flex flex-col gap-6'>
-            <div className='flex gap-5 items-center justify-center'>
-              {/* {cart.map((cart) => (
-                <>
-                  <Image
-                    src={`${cart.imageUrl}`}
-                    alt='placeholder'
-                    width={150}
-                    height={100}
-                    className='rounded-xl overflow-hidden hover:scale-95 transition-all duration-500'
-                  />
-                  <h1 className='font-bold text-2xl text-slate-800'>
-                    TEST {cart.name}
+            {cart.map((cart) => (
+              <div
+                key={cart.id}
+                className='flex items-center gap-3 md:m-3 text-slate-800 mb-5 sm:px-10 md:px-5'
+              >
+                <Image
+                  src={cart.imageUrl}
+                  alt='Menu Image'
+                  width={94}
+                  height={82}
+                  className='rounded-[10px] w-[94px] h-[82px] md:w-[101px] md:h-[89px]'
+                />
+                <div className='p-2'>
+                  <h1 className='font-bold text-lg md:text-xl text-left text-slate-800 md:text-2xl'>
+                    {cart.name}
                   </h1>
-                </>
-              ))} */}
-              <div className='w-[150px] h-[100px] rounded-lg overflow-hidden md:col-start-4 relative group hover:scale-90 transition-all duration-500'>
+                  <div className='flex items-center my-3 w-full gap-1 justify-items-start'>
+                    <Button
+                      color='primary'
+                      size='sm'
+                      // onClick={handleMinusQuantity}
+                      pill
+                    >
+                      <HiMinus />
+                    </Button>
+                    <p className='w-8 text-center'>1</p>
+                    <Button
+                      color='primary'
+                      size='sm'
+                      // onClick={handlePlusQuantity}
+                      pill
+                    >
+                      <HiPlus />
+                    </Button>
+                  </div>
+                  <div className='w-full max-w-md'>
+                    <TextInput
+                      id='base'
+                      placeholder='Tulis jika ada catatan...'
+                      addon='Note'
+                      sizing='sm'
+                    />
+                  </div>
+                </div>
+
+                {/* <div className='w-[150px] h-[100px] rounded-lg overflow-hidden md:col-start-4 relative group hover:scale-90 transition-all duration-500'>
                 <div
                   className={`h-full w-full bg-[url('https://source.unsplash.com/150x100?food')] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500`}
                 ></div>
@@ -127,83 +172,18 @@ export default function Orders() {
                 <h1 className='font-bold text-xl text-left md:text-2xl'>
                   Ayam geprek spesial
                 </h1>
-                <div className='flex items-center w-full gap-1'>
-                  <Button
-                    color='primary'
-                    size='sm'
-                    // onClick={handleMinusQuantity}
-                    pill
-                  >
-                    <HiMinus />
-                  </Button>
-                  {/* <p className='w-8 text-center'>{quantity}</p> */}
-                  <p className='w-8 text-center'>1</p>
-                  <Button
-                    color='primary'
-                    size='sm'
-                    // onClick={handlePlusQuantity}
-                    pill
-                  >
-                    <HiPlus />
-                  </Button>
-                </div>
-                <div className='max-w-md'>
-                  <TextInput
-                    id='base'
-                    placeholder='Tulis jika ada catatan...'
-                    addon='Note'
-                    sizing='sm'
-                  />
-                </div>
               </div>
             </div>
             <div className='flex gap-5 items-center justify-center'>
-              {/* <Image
+              <Image
             src={`https://source.unsplash.com/150x100?food`}
             alt='placeholder'
             width={150}
             height={100}
             className='rounded-xl overflow-hidden hover:scale-95 transition-all duration-500'
           /> */}
-              <div className='w-[150px] h-[100px] rounded-lg overflow-hidden md:col-start-4 relative group hover:scale-90 transition-all duration-500'>
-                <div
-                  className={`h-full w-full bg-[url('https://source.unsplash.com/150x100?food')] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500`}
-                ></div>
               </div>
-              <div className='flex flex-col gap-2 items-center justify-center text-center'>
-                <h1 className='font-bold text-xl text-left md:text-2xl'>
-                  Ayam geprek spesial
-                </h1>
-                <div className='flex items-center w-full gap-1'>
-                  <Button
-                    color='primary'
-                    size='sm'
-                    // onClick={handleMinusQuantity}
-                    pill
-                  >
-                    <HiMinus />
-                  </Button>
-                  {/* <p className='w-8 text-center'>{quantity}</p> */}
-                  <p className='w-8 text-center'>1</p>
-                  <Button
-                    color='primary'
-                    size='sm'
-                    // onClick={handlePlusQuantity}
-                    pill
-                  >
-                    <HiPlus />
-                  </Button>
-                </div>
-                <div className='max-w-md'>
-                  <TextInput
-                    id='base'
-                    placeholder='Tulis jika ada catatan...'
-                    addon='Note'
-                    sizing='sm'
-                  />
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
           <div className='w-full mt-3 mb-6 flex items-center justify-center'>
             <Button color='buttonAdd' pill>
@@ -221,14 +201,14 @@ export default function Orders() {
                 <p>Fee:</p>
               </div>
               <div>
-                <p>Rp 000 ,-</p>
-                <p>Rp 000 ,-</p>
+                <p>{totalPesanan}</p>
+                <p>{fee}</p>
               </div>
             </div>
             <hr className='w-full h-px bg-black my-3' />
             <div className='w-full flex items-center justify-between px-3'>
               <p className='text-sm'>Total Bayar:</p>
-              <p className='font-bold'>Rp 000 ,-</p>
+              <p className='font-bold'>{totalBayar} </p>
             </div>
           </div>
           <h1 className='font-bold text-sm my-3 text-slate-800 w-full pl-5'>

@@ -75,7 +75,12 @@ export default function MenusCard({ menu }: MenuCardProps) {
   const quantity = cartItem ? cartItem.quantity || 0 : 0;
 
   const handleAddClick = () => {
-    addToCart(menu);
+    addToCart({
+      id: menu.id,
+      name: menu.name,
+      imageUrl: menu.imageUrl!!,
+      price: menu.price,
+    });
   };
 
   const handlePlusQuantity = () => {
