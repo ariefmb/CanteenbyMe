@@ -11,13 +11,14 @@ import {
   Modal,
 } from 'flowbite-react';
 import { AlgoliaHit } from 'instantsearch.js';
+import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { HiMinus, HiPlus } from 'react-icons/hi';
 import { HiShoppingCart } from 'react-icons/hi2';
 import { Hits, SearchBoxProps } from 'react-instantsearch';
 import SearchInput from './search-input';
-import { usePathname, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 
 type HitProps = {
   hit: AlgoliaHit<{
@@ -29,8 +30,8 @@ type HitProps = {
     signature: boolean;
     image_url?: string;
     description?: string;
-    updateAt: Date;
-    createdAt: Date;
+    update_at: Date;
+    created_at: Date;
   }>;
 };
 
@@ -84,7 +85,10 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
   };
   const pathname = usePathname();
   const params = useSearchParams();
+  const session = useSession();
+  const userSession = session.status;
   const prevPathname = pathname.substring(0, pathname.indexOf('/canteens') + 9);
+  const router = useRouter();
 
   const { onShow, setOnShow } = useSearchContext();
   const {
@@ -100,6 +104,12 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
     style: 'currency',
     currency: 'IDR',
   }).format(getTotalPrice());
+
+  const handlePayment = () => {
+    userSession !== 'authenticated'
+      ? signIn('google', { callbackUrl: `${prevPathname}/orders?${params}` })
+      : router.push(`${prevPathname}/orders?${params}`);
+  };
 
   const SearchResult = ({ hit }: HitProps) => {
     const canteen = canteens?.find((canteen) => canteen.id === hit.canteen_id);
@@ -120,6 +130,9 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
         ? updateQuantity(hit.id, quantity - 1)
         : removeFromCart(hit.id);
     };
+
+    // const createdAt = new Date(hit.created_at).toLocaleString('zid');
+    // console.log('created at:', createdAt);
 
     const rupiah = new Intl.NumberFormat('id', {
       style: 'currency',
@@ -146,7 +159,7 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
             <p className='canteen-name w-fit h-fit text-sm md:text-base text-slate-700 text-overflow-ellipsis'>
               {canteen?.name}
             </p>
-            <p className='menu-price w-fit h-fit font-semibold text-base text-slate-700 text-overflow-ellipsis text-overflow-ellipsis'>
+            <p className='menu-price text-sm w-fit h-fit font-medium text-base text-slate-700 text-overflow-ellipsis text-overflow-ellipsis'>
               {hit?.price !== undefined ? rupiah : 'N/A'}
             </p>
           </div>
@@ -224,20 +237,16 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
           >
             <div className='flex h-[40px] w-[200px] sm:w-[400px] items-center font-bold justify-between bg-white rounded-[10px] px-5 shadow-[0px_1px_5px_#000,inset_0_1px_5px_#000]'>
               <p className='text-sm text-slate-800'>{getTotalItems()} item</p>
-              <p className='text-sm text-slate-800'>{cartTotalPrice} ,-</p>
+              <p className='text-sm text-slate-800'>{cartTotalPrice} </p>
             </div>
             <Button
               color='buttonCart'
               className='flex items-center justify-center h-[40px] shadow-[0px_1px_5px_#000]'
               size='md'
+              onClick={handlePayment}
             >
-              <Link
-                href={`${prevPathname}/orders?${params}`}
-                className='w-full h-full flex items-center justify-center'
-              >
-                Bayar
-                <HiShoppingCart size={25} />
-              </Link>
+              Bayar
+              <HiShoppingCart size={25} />
             </Button>
           </Card>
         </Modal.Footer>
