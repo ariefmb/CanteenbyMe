@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 interface MenuItem {
   id: string;
   name: string;
+  imageUrl: string;
   price: number;
   quantity?: number;
 }
@@ -45,7 +46,7 @@ export default function CartProvider({
       return prevCart.filter((item) => item.id !== menuItemId);
     });
   };
-  
+
   const getTotalItems = () => {
     return cart.reduce((total, item) => total + (item.quantity || 0), 0);
   };
@@ -56,7 +57,7 @@ export default function CartProvider({
       0
     );
   };
-  
+
   return (
     <CartContext.Provider
       value={{
