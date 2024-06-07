@@ -136,9 +136,6 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
         : removeFromCart(hit.id);
     };
 
-    // const createdAt = new Date(hit.created_at).toLocaleString('zid');
-    // console.log('created at:', createdAt);
-
     const rupiah = new Intl.NumberFormat('id', {
       style: 'currency',
       currency: 'IDR',
@@ -164,7 +161,7 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
             <p className='canteen-name w-fit h-fit text-sm md:text-base text-slate-700 text-overflow-ellipsis'>
               {canteen?.name}
             </p>
-            <p className='menu-price text-sm w-fit h-fit font-medium text-base text-slate-700 text-overflow-ellipsis text-overflow-ellipsis'>
+            <p className='menu-price w-fit h-fit font-medium text-base text-slate-700 text-overflow-ellipsis text-overflow-ellipsis'>
               {hit?.price !== undefined ? rupiah : 'N/A'}
             </p>
           </div>
