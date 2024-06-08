@@ -6,8 +6,7 @@ import { useSearchContext } from '@/context/search.context';
 import {
   Button,
   CustomFlowbiteTheme,
-  Flowbite,
-  TextInput,
+  TextInput
 } from 'flowbite-react';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -24,13 +23,13 @@ interface CartItem {
 }
 
 const customNoteTheme: CustomFlowbiteTheme['textInput'] = {
-  base: 'flex',
+  base: 'flex mb-5 w-full',
   addon:
-    'inline-flex items-center rounded-l-full border border-r-0 border-gray-900 bg-[#B5BEE3] px-2 md:px-3 text-sm text-gray-800',
+    'flex items-center justify-center rounded-l-full border border-r-0 border-gray-900 bg-[#B5BEE3] px-2 md:px-5 text-sm text-gray-800',
   field: {
-    base: 'relative w-full md:w-[266px] md:h-[37px]',
+    base: 'relative w-full',
     input: {
-      base: 'w-full border md:w-[266px] md:h-[37px] disabled:cursor-not-allowed disabled:opacity-50',
+      base: 'w-full border md:h-[37px] disabled:cursor-not-allowed disabled:opacity-50',
       sizes: {
         sm: 'px-3 text-xs md:text-sm',
         md: 'p-2.5 text-sm',
@@ -116,64 +115,70 @@ export default function OrderCard() {
         onConfirm={confirmRemoveCart}
         onCancel={cancelRemoveCart}
       />
-      <div className='w-full md:p-3 flex flex-col gap-6'>
+      <div className='w-full md:p-3 flex flex-col gap-2'>
         {cart.map((cart: CartItem) => {
           const itemQuantity = cart.quantity ?? 0;
           return (
-            <div
-              key={cart.id}
-              className='flex items-center gap-3 md:m-3 text-slate-800 mb-5 md:px-5'
-            >
-              <Image
-                src={cart.imageUrl}
-                alt='Menu Image'
-                width={104}
-                height={92}
-                className='rounded-[10px] w-[104px] h-[92px] md:w-[171px] md:h-[151px]'
-              />
-              <div className='p-2 flex flex-col gap-1 md:gap-2'>
-                <h1 className='font-bold text-sm text-left text-primary md:text-2xl md:tracking-wider'>
-                  {cart.name}
-                </h1>
-                <div className='flex items-center my-3 w-full gap-1 justify-items-start'>
-                  <Button
-                    theme={customButtonTheme}
-                    color='buttonAdd'
-                    size='sm'
-                    onClick={() => handleMinusQuantity(cart)}
-                    pill
-                  >
-                    <HiMinus />
-                  </Button>
-                  <p className='w-8 text-center'>{itemQuantity}</p>
-                  <Button
-                    theme={customButtonTheme}
-                    color='buttonAdd'
-                    size='sm'
-                    onClick={() => handlePlusQuantity(cart.id, itemQuantity)}
-                    pill
-                  >
-                    <HiPlus />
-                  </Button>
+            <div className='flex flex-col items-center justify-center'>
+              <div
+                key={cart.id}
+                className='flex w-full items-center justify-center md:m-3 text-slate-800 md:px-5'
+              >
+                <div className='w-1/2 h-[120px] md:h-fit flex items-center justify-center'>
+                  <Image
+                    src={cart.imageUrl}
+                    alt='Menu Image'
+                    width={122}
+                    height={108}
+                    className='rounded-[10px] h-[108px] shadow-[0_0_5px_2px_gray] md:w-[171px] md:h-[151px]'
+                  />
                 </div>
-                <TextInput
-                  theme={customNoteTheme}
-                  id='base'
-                  placeholder='Tulis jika ada catatan...'
-                  addon='Note'
-                  sizing='sm'
-                  color='note'
-                />
+                <div className='p-2 w-1/2 flex flex-col gap-1 md:gap-2'>
+                  <h1 className='font-bold text-sm text-left text-primary sm:text-2xl tracking-wider'>
+                    {cart.name}
+                  </h1>
+                  <h1 className='font-bold text-sm text-left text-slate-800 sm:text-2xl tracking-wider'>
+                    Rp {cart.price},-
+                  </h1>
+                  <div className='flex items-center my-3 w-full gap-1 justify-items-start'>
+                    <Button
+                      theme={customButtonTheme}
+                      color='buttonAdd'
+                      size='sm'
+                      onClick={() => handleMinusQuantity(cart)}
+                      pill
+                    >
+                      <HiMinus />
+                    </Button>
+                    <p className='w-8 text-center'>{itemQuantity}</p>
+                    <Button
+                      theme={customButtonTheme}
+                      color='buttonAdd'
+                      size='sm'
+                      onClick={() => handlePlusQuantity(cart.id, itemQuantity)}
+                      pill
+                    >
+                      <HiPlus />
+                    </Button>
+                  </div>
+                </div>
               </div>
+              <TextInput
+                theme={customNoteTheme}
+                id='base'
+                placeholder='Tulis jika ada catatan...'
+                addon='Note'
+                sizing='sm'
+                color='note'
+              />
             </div>
           );
         })}
       </div>
-      <div className='w-full mt-3 mb-6 flex items-center justify-center'>
+      <div className='w-full mt-3 flex items-center justify-center'>
         <Button
           theme={customButtonTheme}
           color='buttonAdd'
-          className='hover:rounded-full'
           onClick={() => setOnShow(true)}
           pill
         >

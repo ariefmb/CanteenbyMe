@@ -1,7 +1,7 @@
 'use client';
 
 import { CartContext } from '@/context/cart.context';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface MenuItem {
   id: string;
@@ -16,7 +16,17 @@ export default function CartProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [cart, setCart] = useState<MenuItem[]>([]);
+  const [cart, setCart] = useState<MenuItem[]>(() => {
+    if (typeof window !== 'undefined') {
+      const savedCart = localStorage.getItem('cart');
+      return savedCart ? JSON.parse(savedCart) : [];
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (menuItem: MenuItem) => {
     setCart((prevCart) => {

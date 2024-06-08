@@ -1,5 +1,5 @@
-import { Button, CustomFlowbiteTheme, Flowbite, Modal } from 'flowbite-react';
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { Button, CustomFlowbiteTheme, Modal } from 'flowbite-react';
+import { TbAlertSquareRoundedFilled } from 'react-icons/tb';
 
 interface ModalAlertProps {
   show: boolean;
@@ -7,64 +7,69 @@ interface ModalAlertProps {
   onCancel: () => void;
 }
 
-const customTheme: CustomFlowbiteTheme = {
-  modal: {
-    root: {
-      base: 'fixed inset-x-0 top-0 z-50 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full',
-      show: {
-        on: 'flex bg-gray-900 bg-opacity-50 dark:bg-opacity-80',
-        off: 'hidden',
-      },
+const customModalTheme: CustomFlowbiteTheme['modal'] = {
+  root: {
+    base: 'origin-bottom fixed inset-x-0 top-0 z-50 transition-all duration-500 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full',
+    show: {
+      on: 'flex bg-gray-900 bg-opacity-50',
+      off: 'hidden',
     },
-    content: {
-      base: 'relative h-full w-full p-4 md:h-auto',
-      inner:
-        'relative flex max-h-[90dvh] flex-col rounded-lg bg-white shadow dark:bg-gray-700',
-    },
-    body: {
-      base: 'flex-1 overflow-auto p-6',
-      popup: 'pt-0',
-    },
-    header: {
-      base: 'flex items-start justify-between rounded-t border-b p-5 dark:border-gray-600',
-      popup: 'border-b-0 p-2',
-      title: 'text-xl font-medium text-gray-900 dark:text-white',
-      close: {
-        base: 'ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white',
-        icon: 'h-5 w-5',
-      },
+    positions: {
+      'top-left': 'items-start justify-start',
+      'top-center': 'items-start justify-center',
+      'top-right': 'items-start justify-end',
+      'center-left': 'items-center justify-start',
+      center: 'items-center justify-center',
+      'center-right': 'items-center justify-end',
+      'bottom-right': 'items-end justify-end',
+      'bottom-center': 'items-end justify-center',
+      'bottom-left': 'items-end justify-start',
     },
   },
-  button: {
-    base: 'border-none',
-    color: {
-      primary: 'bg-[#A8B2DE]',
-      buttonAdd:
-        'bg-[#B5BEE3] transition-all duration-200 hover:rounded-full hover:bg-[#A2AACB]  active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
-      buttonPrimary:
-        'w-2/3 bg-[#B5BEE3] transition-all duration-200 hover:rounded-xl hover:bg-[#A2AACB] active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
+  content: {
+    base: 'relative flex items-center h-full w-full p-4 md:h-auto',
+    inner: 'relative flex max-h-[90dvh] flex-col rounded-lg bg-white shadow',
+  },
+  body: {
+    base: 'flex-1 overflow-auto p-6',
+    popup: 'pt-0',
+  },
+  header: {
+    base: 'flex items-start justify-between rounded-t border-b p-5',
+    popup: 'border-b-0 p-2',
+    title: 'text-xl font-medium text-gray-900',
+    close: {
+      base: 'ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900',
+      icon: 'h-5 w-5',
     },
-    isProcessing: 'cursor-drop',
-    spinnerSlot: 'h-full flex items-center animate-fade-in',
-    inner: {
-      base: 'w-full font-bold text-slate-800 flex justify-center gap-2 items-center transition-all duration-200 hover:bg-primary',
-      isProcessingPadding: {
-        xs: 'px-4',
-        sm: 'px-4',
-        md: 'px-4',
-        lg: 'px-4',
-        xl: 'px-4',
-      },
+  },
+};
+
+const customButtonTheme: CustomFlowbiteTheme['button'] = {
+  base: 'border-none',
+  color: {
+    failure:
+      'border border-transparent transition-all duration-200 bg-red-400 hover:bg-red-500 text-white focus:ring-4 focus:ring-red-300',
+    gray: 'ring-cyan-700 border-2 transition-all duration-200 hover:bg-gray-300 border-gray-200 text-gray-900 focus:text-cyan-700 focus:ring-4',
+  },
+  inner: {
+    base: 'w-full font-bold text-slate-800 flex justify-center gap-2 items-center',
+    isProcessingPadding: {
+      xs: 'px-4',
+      sm: 'px-4',
+      md: 'px-4',
+      lg: 'px-4',
+      xl: 'px-4',
     },
-    pill: {
-      off: 'rounded-xl',
-      on: 'rounded-full hover:rounded-full',
-    },
-    size: {
-      xs: 'p-1 text-xs',
-      sm: 'p-2 text-xs',
-      md: 'px-4 py-2 text-lg',
-    },
+  },
+  pill: {
+    off: 'rounded-xl',
+    on: 'rounded-full',
+  },
+  size: {
+    xs: 'p-1 text-xs',
+    sm: 'p-2 text-xs',
+    md: 'px-4 py-2 text-lg',
   },
 };
 
@@ -74,26 +79,35 @@ export default function ModalAlert({
   onCancel,
 }: ModalAlertProps) {
   return (
-    <Flowbite theme={{ theme: customTheme }}>
-      <Modal show={show} size='md' onClose={onCancel} popup>
-        <Modal.Header />
-        <Modal.Body>
-          <div className='text-center'>
-            <HiOutlineExclamationCircle className='mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200' />
-            <h3 className='mb-5 text-lg font-normal text-gray-500 dark:text-gray-400'>
-              Are you sure you want to delete this product?
-            </h3>
-            <div className='flex justify-center gap-4'>
-              <Button color='failure' onClick={onConfirm}>
-                Yes, I'm sure
-              </Button>
-              <Button color='gray' onClick={onCancel}>
-                No, cancel
-              </Button>
-            </div>
+    <Modal
+      theme={customModalTheme}
+      show={show}
+      size='md'
+      onClose={onCancel}
+      className='backdrop-blur-sm'
+      popup
+    >
+      <Modal.Header />
+      <Modal.Body>
+        <div className='text-center'>
+          <TbAlertSquareRoundedFilled className='mx-auto mb-4 h-20 w-20 text-red-400' />
+          <h3 className='mb-5 text-lg font-normal text-gray-500'>
+            Are you sure you want to delete this product?
+          </h3>
+          <div className='flex justify-center gap-4'>
+            <Button
+              theme={customButtonTheme}
+              color='failure'
+              onClick={onConfirm}
+            >
+              Yes, I'm sure
+            </Button>
+            <Button theme={customButtonTheme} color='gray' onClick={onCancel}>
+              No, cancel
+            </Button>
           </div>
-        </Modal.Body>
-      </Modal>
-    </Flowbite>
+        </div>
+      </Modal.Body>
+    </Modal>
   );
 }

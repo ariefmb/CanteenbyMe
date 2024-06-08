@@ -1,20 +1,14 @@
 import { Button, CustomFlowbiteTheme } from 'flowbite-react';
-import React from 'react';
 import { HiShoppingCart } from 'react-icons/hi';
 
 const customTheme: CustomFlowbiteTheme['button'] = {
   base: 'border-none',
   color: {
-    primary: 'bg-[#A8B2DE]',
-    buttonAdd:
-      'bg-[#B5BEE3] transition-all duration-200 hover:bg-[#A2AACB]  active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
     buttonPrimary:
-      'w-2/3 bg-[#B5BEE3] transition-all duration-200 hover:rounded-xl hover:bg-[#A2AACB] active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
+      'w-full md:w-2/3 bg-primary transition-all duration-200 hover:bg-[#58628E] active:bg-[#495076] active:ring-2 active:ring-[#6878BA]',
   },
-  isProcessing: 'cursor-drop',
-  spinnerSlot: 'h-full flex items-center animate-fade-in',
   inner: {
-    base: 'w-full font-bold text-slate-800 flex justify-center gap-2 items-center transition-all duration-200 hover:bg-primary',
+    base: 'w-full text-gray-50 tracking-widest flex justify-center gap-2 items-center transition-all duration-500',
     isProcessingPadding: {
       xs: 'px-4',
       sm: 'px-4',
@@ -24,13 +18,11 @@ const customTheme: CustomFlowbiteTheme['button'] = {
     },
   },
   pill: {
-    off: 'rounded-xl',
+    off: 'rounded-[10px]',
     on: 'rounded-full',
   },
   size: {
-    xs: 'p-1 text-xs',
-    sm: 'p-2 text-xs',
-    md: 'px-4 py-2 text-lg',
+    sm: 'p-2 text-lg md:text-xl font-bold',
   },
 };
 
@@ -40,7 +32,7 @@ export default function OrderCreate() {
       <Button
         theme={customTheme}
         color='buttonPrimary'
-        className='hover:rounded-xl'
+        size='sm'
       >
         Buat Pesanan
         <HiShoppingCart size={25} />
