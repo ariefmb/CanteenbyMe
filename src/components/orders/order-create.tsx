@@ -2,7 +2,7 @@
 
 import { useCartContext } from '@/context/cart.context';
 import { createOrder } from '@/libs/apis';
-import { TCreateOrder, TInvoice } from '@/libs/types';
+import { TCreateOrder, TInvoice, TOrderMenu } from '@/libs/types';
 import { Button, CustomFlowbiteTheme, Label, Radio } from 'flowbite-react';
 import { useSession } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
@@ -44,11 +44,11 @@ const customButtonTheme: CustomFlowbiteTheme['button'] = {
 export default function OrderCreate() {
   const { data: session } = useSession();
   const userSession = session?.user;
-  const { cart, getTotalPrice } = useCartContext();
+  const { cart, getTotalPrice, clearCart } = useCartContext();
   const params = useSearchParams();
   const tableParams = params ? parseInt(params.get('table') || '0') : 0;
   const router = useRouter();
-  const targetUrl: string = 'https://localhost:3001';
+  const targetUrl: string = 'https://canteenbyme.vercel.app';
 
   const [totalPesanan, setTotalPesanan] = useState('Rp 0,00');
   const [fee, setFee] = useState('Rp 0,00');
@@ -76,7 +76,7 @@ export default function OrderCreate() {
     setTotalPesanan(formattedTotalPesanan);
     setFee(formattedFee);
     setTotalBayar(formattedTotalBayar);
-  }, [getTotalPrice]);
+  }, [totalPrice, fees]);
 
   const handleSelectedPaymentMethod = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -85,28 +85,31 @@ export default function OrderCreate() {
   };
 
   const handleCreateOrder = async () => {
-    if (paymentMethod === 'Cash') {
-      router.push(`${targetUrl}/pay-bill`);
-    }
-
     const orderMenus = cart.map((item) => ({
       id: item.id,
       quantity: item.quantity,
     }));
 
     const data: TCreateOrder = {
-      redirectUrl: targetUrl,
+      redirectUrl: `${paymentMethod === 'Cash' ? `${targetUrl}/pay-bill?${params}` : `${targetUrl}`}`,
       userName: userSession?.name,
       userEmail: userSession?.email,
       tableNumber: tableParams,
-      fees: getTotalPrice() + fees,
+      fees: totalPrice + fees,
       orderMenus: orderMenus,
     };
 
     try {
       const response: TInvoice = await createOrder(data);
-      console.log(response.invoiceUrl);
-      
+      if (paymentMethod === 'Cash') {
+        clearCart();
+        router.push(`${targetUrl}/pay-bill?${params}`);
+        return;
+      }
+      if (response && response.invoiceUrl) {
+        clearCart();
+        router.push(response.invoiceUrl);
+      }
     } catch (error) {
       console.error('Error creating order:', error);
       throw error;

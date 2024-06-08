@@ -1,9 +1,13 @@
+'use client'
+
 import circleLeftBottom from '@/images/background/circle-left-bottom.png';
 import circleTopRight from '@/images/background/circle-top-right.png';
 import payBill from '@/images/icon/pay-the-bill.png';
 import { Button, CustomFlowbiteTheme, Flowbite } from 'flowbite-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { HiHome } from 'react-icons/hi';
 import { HiArrowLeftCircle } from 'react-icons/hi2';
 
 const customTheme: CustomFlowbiteTheme = {
@@ -37,6 +41,8 @@ const customTheme: CustomFlowbiteTheme = {
 };
 
 export default function Cash() {
+  const params = useSearchParams()
+  
   return (
     <Flowbite theme={{ theme: customTheme }}>
       <div className='bg-background max-h-screen'>
@@ -58,7 +64,7 @@ export default function Cash() {
               PAYMENT
             </Link>
           </div>
-          <div className='flex flex-col items-center justify-evenly bg-gradient-to-b from-white to-primary rounded-[20px] mx-auto w-[336px] h-[375px] z-10'>
+          <div className='flex flex-col items-center justify-evenly bg-gradient-to-b from-white to-primary rounded-[20px] mx-auto w-[336px] h-[375px] md:h-[325px] z-10'>
             <Image
               src={payBill}
               alt='background top right'
@@ -72,12 +78,13 @@ export default function Cash() {
               <h1 className=''>pembayaran ke kasir</h1>
             </div>
           </div>
-          <Button className='text-white z-10' color='buttonOrder'>
+          <Button className='text-white' color='buttonHome'>
             <Link
-              href={'/'}
-              className='w-full h-full px-5 flex items-center justify-center gap-2'
+              href={`/?${params}`}
+              className='w-full h-full flex items-center tracking-wider justify-center gap-2 md:w-36'
             >
-              SUDAH MEMBAYAR
+              <HiHome size={30} />
+              BERANDA
             </Link>
           </Button>
         </div>

@@ -75,7 +75,7 @@ export async function createOrder(data: TCreateOrder) {
         },
       }
     );
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error('Error creating order:', error);
     throw error;

@@ -16,6 +16,7 @@ export const CartContext = createContext(
     addToCart: (menuItem: MenuItem) => void;
     updateQuantity: (menuItemId: string, quantity: number) => void;
     removeFromCart: (menuItemId: string) => void;
+    clearCart: () => void
     getTotalItems: () => number | 0;
     getTotalPrice: () => number | 0;
   }

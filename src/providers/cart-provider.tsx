@@ -57,6 +57,11 @@ export default function CartProvider({
     });
   };
 
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem('cart');
+  };
+
   const getTotalItems = () => {
     return cart.reduce((total, item) => total + (item.quantity || 0), 0);
   };
@@ -75,6 +80,7 @@ export default function CartProvider({
         addToCart,
         updateQuantity,
         removeFromCart,
+        clearCart,
         getTotalItems,
         getTotalPrice,
       }}
