@@ -27,17 +27,36 @@ export type TMenus = {
   createdAt: Date;
 };
 
-export type TTransaction = {
-  id: string;
-  menus: TMenus[];
-  payment: string;
-  totalItem: number;
-  totalPrice: number;
-  createdAt: Date;
-  paid: boolean;
+export type TCreateOrder = {
+  redirectUrl: string;
+  userName: string | null | undefined;
+  userEmail: string | null | undefined;
+  tableNumber: number | null;
+  fees: number;
+  orderMenus: TOrderMenu[];
 };
 
-export type THistory = {
-  id: string,
-  transaction: TTransaction[]
-}
+export type TOrderMenu = {
+  id: string;
+  quantity: number | undefined;
+};
+
+export type TInvoice = {
+  invoiceId: string;
+  invoiceUrl: string;
+};
+
+// export type TOrders = {
+//   id: string;
+//   menus: TMenus[];
+//   payment: string;
+//   totalItem: number;
+//   totalPrice: number;
+//   createdAt: Date;
+//   paid: boolean;
+// };
+
+// export type THistory = {
+//   id: string;
+//   transaction: TOrders[];
+// };
