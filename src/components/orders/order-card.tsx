@@ -66,7 +66,7 @@ const customButtonTheme: CustomFlowbiteTheme['button'] = {
   },
   size: {
     xs: 'p-1 text-xs',
-    sm: 'p-2 text-xs font-bold',
+    sm: 'p-2 text-lg font-bold',
     md: 'px-4 py-2 text-sm font-bold',
   },
 };
@@ -119,19 +119,20 @@ export default function OrderCard() {
             <div className='flex flex-col items-center justify-center'>
               <div
                 key={cart.id}
-                className='flex w-full items-center justify-center md:m-3 text-slate-800 md:px-5'
+                className='flex w-full items-center justify-center mb-2 gap-5 md:m-3 text-slate-800 md:px-5'
               >
-                <div className='w-1/2 h-[120px] md:h-fit flex items-center justify-center'>
+                <div className='relative w-[122px] h-[120px] md:w-[200px] md:h-[151px] flex items-center justify-center'>
                   <Image
                     src={cart.imageUrl}
                     alt='Menu Image'
-                    width={122}
-                    height={108}
-                    className='rounded-[10px] h-[108px] shadow-[0_0_5px_2px_gray] md:w-[171px] md:h-[151px]'
+                    layout='fill'
+                    quality={100}
+                    objectFit='cover'
+                    className='rounded-[10px] shadow-[0_0_5px_2px_gray]'
                   />
                 </div>
                 <div className='p-2 w-1/2 flex flex-col gap-1 md:gap-2'>
-                  <h1 className='font-bold text-sm text-left text-primary sm:text-2xl tracking-wider'>
+                  <h1 className='font-bold text-[16px] text-left text-primary sm:text-2xl tracking-wider'>
                     {cart.name}
                   </h1>
                   <h1 className='font-bold text-sm text-left text-slate-800 sm:text-2xl tracking-wider'>
