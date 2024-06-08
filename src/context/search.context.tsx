@@ -7,6 +7,8 @@ type SearchContextType = {
   setOnShow: React.Dispatch<React.SetStateAction<boolean>>;
   searchStatus: string | undefined;
   setStatus: React.Dispatch<React.SetStateAction<string | undefined>>;
+  hideCart: boolean;
+  setHideCart: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const SearchContext = createContext<SearchContextType | undefined>(

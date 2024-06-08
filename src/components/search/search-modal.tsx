@@ -14,7 +14,6 @@ import { AlgoliaHit } from 'instantsearch.js';
 import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import { HiMinus, HiPlus } from 'react-icons/hi';
 import { HiShoppingCart } from 'react-icons/hi2';
 import { Hits, SearchBoxProps } from 'react-instantsearch';
@@ -90,7 +89,7 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
   const prevPathname = pathname.substring(0, pathname.indexOf('/canteens') + 9);
   const router = useRouter();
 
-  const { onShow, setOnShow } = useSearchContext();
+  const { onShow, setOnShow, hideCart } = useSearchContext();
   const {
     cart,
     addToCart,
@@ -225,33 +224,35 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
             <Hits hitComponent={SearchResult} />
           </div>
         </Modal.Body>
-        <Modal.Footer
-          className={`max-h-[60px] p-0 overflow-hidden rounded-md transition-all duration-500 origin-bottom ${
-            !cart.length
-              ? 'h-10 max-h-2 border-t-2 rounded-none'
-              : 'h-[500px] border-none'
-          }`}
-        >
-          <Card
-            className={`w-full h-full bg-primary overflow-hidden flex items-center justify-center gap-4 transition-all duration-500 px-0 origin-bottom ${
-              !cart.length ? 'translate-y-24' : 'translate-y-0'
+        {!hideCart && (
+          <Modal.Footer
+            className={`max-h-[60px] p-0 overflow-hidden rounded-md transition-all duration-500 origin-bottom ${
+              !cart.length
+                ? 'h-10 max-h-2 border-t-2 rounded-none'
+                : 'h-[500px] border-none'
             }`}
           >
-            <div className='flex h-[40px] w-[200px] sm:w-[400px] items-center font-bold justify-between bg-white rounded-[10px] px-5 shadow-[0px_1px_5px_#000,inset_0_1px_5px_#000]'>
-              <p className='text-sm text-slate-800'>{getTotalItems()} item</p>
-              <p className='text-sm text-slate-800'>{cartTotalPrice} </p>
-            </div>
-            <Button
-              color='buttonCart'
-              className='flex items-center justify-center h-[40px] shadow-[0px_1px_5px_#000]'
-              size='md'
-              onClick={handlePayment}
+            <Card
+              className={`w-full h-full bg-primary overflow-hidden flex items-center justify-center gap-4 transition-all duration-500 px-0 origin-bottom ${
+                !cart.length ? 'translate-y-24' : 'translate-y-0'
+              }`}
             >
-              Bayar
-              <HiShoppingCart size={25} />
-            </Button>
-          </Card>
-        </Modal.Footer>
+              <div className='flex h-[40px] w-[200px] sm:w-[400px] items-center font-bold justify-between bg-white rounded-[10px] px-5 shadow-[0px_1px_5px_#000,inset_0_1px_5px_#000]'>
+                <p className='text-sm text-slate-800'>{getTotalItems()} item</p>
+                <p className='text-sm text-slate-800'>{cartTotalPrice} </p>
+              </div>
+              <Button
+                color='buttonCart'
+                className='flex items-center justify-center h-[40px] shadow-[0px_1px_5px_#000]'
+                size='md'
+                onClick={handlePayment}
+              >
+                Bayar
+                <HiShoppingCart size={25} />
+              </Button>
+            </Card>
+          </Modal.Footer>
+        )}
       </Modal>
     </Flowbite>
   );

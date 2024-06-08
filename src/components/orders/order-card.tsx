@@ -3,16 +3,12 @@
 import { useCanteenContext } from '@/context/canteens.context';
 import { useCartContext } from '@/context/cart.context';
 import { useSearchContext } from '@/context/search.context';
-import {
-  Button,
-  CustomFlowbiteTheme,
-  TextInput
-} from 'flowbite-react';
+import { Button, CustomFlowbiteTheme, TextInput } from 'flowbite-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { HiMinus, HiPlus } from 'react-icons/hi';
 import SearchModal from '../search/search-modal';
-import ModalAlert from './remove-cart-alert';
+import RemoveItemAlert from './remove-item-alert';
 
 interface CartItem {
   id: string;
@@ -79,7 +75,7 @@ export default function OrderCard() {
   const { cart, updateQuantity, removeFromCart } = useCartContext();
   const [showModal, setShowModal] = useState(false);
   const [itemToRemove, setItemToRemove] = useState<CartItem | null>(null);
-  const { setOnShow } = useSearchContext();
+  const { setOnShow, setHideCart } = useSearchContext();
   const { canteens } = useCanteenContext();
 
   const handlePlusQuantity = (id: string, quantity: number) => {
@@ -110,8 +106,9 @@ export default function OrderCard() {
 
   return (
     <>
-      <ModalAlert
+      <RemoveItemAlert
         show={showModal}
+        itemToRemove={itemToRemove}
         onConfirm={confirmRemoveCart}
         onCancel={cancelRemoveCart}
       />
@@ -179,7 +176,10 @@ export default function OrderCard() {
         <Button
           theme={customButtonTheme}
           color='buttonAdd'
-          onClick={() => setOnShow(true)}
+          onClick={() => {
+            setOnShow(true);
+            setHideCart(true);
+          }}
           pill
         >
           <HiPlus />

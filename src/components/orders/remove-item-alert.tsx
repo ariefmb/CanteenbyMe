@@ -1,8 +1,17 @@
 import { Button, CustomFlowbiteTheme, Modal } from 'flowbite-react';
 import { TbAlertSquareRoundedFilled } from 'react-icons/tb';
 
+interface CartItem {
+  id: string;
+  name: string;
+  imageUrl: string;
+  price: number;
+  quantity?: number;
+}
+
 interface ModalAlertProps {
   show: boolean;
+  itemToRemove: CartItem | null;
   onConfirm: () => void;
   onCancel: () => void;
 }
@@ -73,8 +82,9 @@ const customButtonTheme: CustomFlowbiteTheme['button'] = {
   },
 };
 
-export default function ModalAlert({
+export default function RemoveItemAlert({
   show,
+  itemToRemove,
   onConfirm,
   onCancel,
 }: ModalAlertProps) {
@@ -92,7 +102,7 @@ export default function ModalAlert({
         <div className='text-center'>
           <TbAlertSquareRoundedFilled className='mx-auto mb-4 h-20 w-20 text-red-400' />
           <h3 className='mb-5 text-lg font-normal text-gray-500'>
-            Are you sure you want to delete this product?
+            Apakah kamu yakin tidak jadi pesan {itemToRemove?.name}?
           </h3>
           <div className='flex justify-center gap-4'>
             <Button
