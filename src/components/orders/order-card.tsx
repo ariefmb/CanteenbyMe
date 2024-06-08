@@ -1,6 +1,8 @@
 'use client';
 
+import { useCanteenContext } from '@/context/canteens.context';
 import { useCartContext } from '@/context/cart.context';
+import { useSearchContext } from '@/context/search.context';
 import {
   Button,
   CustomFlowbiteTheme,
@@ -8,13 +10,10 @@ import {
   TextInput,
 } from 'flowbite-react';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { HiMinus, HiPlus } from 'react-icons/hi';
-import ModalAlert from './remove-cart-alert';
-import SearchProvider from '@/providers/search-provider';
 import SearchModal from '../search/search-modal';
-import { useSearchContext } from '@/context/search.context';
-import { useCanteenContext } from '@/context/canteens.context';
+import ModalAlert from './remove-cart-alert';
 
 interface CartItem {
   id: string;
@@ -24,53 +23,56 @@ interface CartItem {
   quantity?: number;
 }
 
-const customTheme: CustomFlowbiteTheme = {
-  button: {
-    base: 'border-none',
-    color: {
-      primary: 'bg-[#A8B2DE]',
-      buttonAdd:
-        'bg-[#B5BEE3] transition-all duration-200 hover:rounded-full hover:bg-[#A2AACB]  active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
-      buttonPrimary:
-        'w-2/3 bg-[#B5BEE3] transition-all duration-200 hover:rounded-xl hover:bg-[#A2AACB] active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
-    },
-    isProcessing: 'cursor-drop',
-    spinnerSlot: 'h-full flex items-center animate-fade-in',
-    inner: {
-      base: 'w-full font-bold text-slate-800 flex justify-center gap-2 items-center transition-all duration-200 hover:bg-primary',
-      isProcessingPadding: {
-        xs: 'px-4',
-        sm: 'px-4',
-        md: 'px-4',
-        lg: 'px-4',
-        xl: 'px-4',
+const customNoteTheme: CustomFlowbiteTheme['textInput'] = {
+  base: 'flex',
+  addon:
+    'inline-flex items-center rounded-l-full border border-r-0 border-gray-900 bg-[#B5BEE3] px-2 md:px-3 text-sm text-gray-800',
+  field: {
+    base: 'relative w-full md:w-[266px] md:h-[37px]',
+    input: {
+      base: 'w-full border md:w-[266px] md:h-[37px] disabled:cursor-not-allowed disabled:opacity-50',
+      sizes: {
+        sm: 'px-3 text-xs md:text-sm',
+        md: 'p-2.5 text-sm',
+        lg: 'p-4 sm:text-base',
       },
-    },
-    pill: {
-      off: 'rounded-xl',
-      on: 'rounded-full hover:rounded-full',
-    },
-    size: {
-      xs: 'p-1 text-xs',
-      sm: 'p-2 text-xs',
-      md: 'px-4 py-2 text-lg',
+      colors: {
+        note: 'border-gray-900 bg-gray-50 text-gray-900 focus:border-primary focus:ring-primary',
+      },
+      withAddon: {
+        on: 'rounded-r-full',
+        off: 'rounded-lg',
+      },
     },
   },
-  textInput: {
-    base: 'flex md:w-[266px] md:h-[37px]',
-    addon:
-      'inline-flex items-center border-2 border-slate-300 rounded-l-md bg-gray-100 px-3 text-sm text-gray-800',
-    field: {
-      base: 'relative w-full',
-      input: {
-        base: 'block w-full border md:w-[266px] md:h-[37px] disabled:cursor-not-allowed disabled:opacity-50',
-        sizes: {
-          sm: 'py-1 px-2 text-xs',
-          md: 'p-2.5 text-sm',
-          lg: 'p-4 sm:text-base',
-        },
-      },
+};
+
+const customButtonTheme: CustomFlowbiteTheme['button'] = {
+  base: 'border-none',
+  color: {
+    buttonAdd:
+      'bg-[#B5BEE3] transition-all duration-200 hover:rounded-full hover:bg-[#A2AACB]  active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
+    buttonPrimary:
+      'w-2/3 bg-[#B5BEE3] transition-all duration-200 hover:rounded-xl hover:bg-[#A2AACB] active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
+  },
+  inner: {
+    base: 'w-full text-slate-800 flex justify-center gap-2 items-center transition-all duration-500',
+    isProcessingPadding: {
+      xs: 'px-4',
+      sm: 'px-4',
+      md: 'px-4',
+      lg: 'px-4',
+      xl: 'px-4',
     },
+  },
+  pill: {
+    off: 'rounded-md',
+    on: 'rounded-full',
+  },
+  size: {
+    xs: 'p-1 text-xs',
+    sm: 'p-2 text-xs font-bold',
+    md: 'px-4 py-2 text-sm font-bold',
   },
 };
 
@@ -108,19 +110,19 @@ export default function OrderCard() {
   };
 
   return (
-    <Flowbite theme={{ theme: customTheme }}>
+    <>
       <ModalAlert
         show={showModal}
         onConfirm={confirmRemoveCart}
         onCancel={cancelRemoveCart}
       />
-      <div className='w-full p-3 flex flex-col gap-6'>
+      <div className='w-full md:p-3 flex flex-col gap-6'>
         {cart.map((cart: CartItem) => {
           const itemQuantity = cart.quantity ?? 0;
           return (
             <div
               key={cart.id}
-              className='flex items-center gap-3 md:m-3 text-slate-800 mb-5 sm:px-10 md:px-5'
+              className='flex items-center gap-3 md:m-3 text-slate-800 mb-5 md:px-5'
             >
               <Image
                 src={cart.imageUrl}
@@ -129,13 +131,14 @@ export default function OrderCard() {
                 height={92}
                 className='rounded-[10px] w-[104px] h-[92px] md:w-[171px] md:h-[151px]'
               />
-              <div className='p-2'>
-                <h1 className='font-bold text-lg text-left text-slate-800 md:text-2xl'>
+              <div className='p-2 flex flex-col gap-1 md:gap-2'>
+                <h1 className='font-bold text-sm text-left text-primary md:text-2xl md:tracking-wider'>
                   {cart.name}
                 </h1>
                 <div className='flex items-center my-3 w-full gap-1 justify-items-start'>
                   <Button
-                    color='primary'
+                    theme={customButtonTheme}
+                    color='buttonAdd'
                     size='sm'
                     onClick={() => handleMinusQuantity(cart)}
                     pill
@@ -144,7 +147,8 @@ export default function OrderCard() {
                   </Button>
                   <p className='w-8 text-center'>{itemQuantity}</p>
                   <Button
-                    color='primary'
+                    theme={customButtonTheme}
+                    color='buttonAdd'
                     size='sm'
                     onClick={() => handlePlusQuantity(cart.id, itemQuantity)}
                     pill
@@ -152,14 +156,14 @@ export default function OrderCard() {
                     <HiPlus />
                   </Button>
                 </div>
-                <div className='w-full max-w-md'>
-                  <TextInput
-                    id='base'
-                    placeholder='Tulis jika ada catatan...'
-                    addon='Note'
-                    sizing='sm'
-                  />
-                </div>
+                <TextInput
+                  theme={customNoteTheme}
+                  id='base'
+                  placeholder='Tulis jika ada catatan...'
+                  addon='Note'
+                  sizing='sm'
+                  color='note'
+                />
               </div>
             </div>
           );
@@ -167,6 +171,7 @@ export default function OrderCard() {
       </div>
       <div className='w-full mt-3 mb-6 flex items-center justify-center'>
         <Button
+          theme={customButtonTheme}
           color='buttonAdd'
           className='hover:rounded-full'
           onClick={() => setOnShow(true)}
@@ -177,6 +182,6 @@ export default function OrderCard() {
         </Button>
         <SearchModal canteens={canteens} />
       </div>
-    </Flowbite>
+    </>
   );
 }
