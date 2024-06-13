@@ -39,8 +39,8 @@ export default function HistoryOrderCard({
             <h1>No Pesanan: {historyOrder.id}</h1>
             <h1>
               No Meja: Meja{' '}
-              {historyOrder.tableNumber == '1'
-                ? '01'
+              {historyOrder.tableNumber.length !== 2
+                ? `0${historyOrder.tableNumber}`
                 : historyOrder.tableNumber}
             </h1>
             <h1>Waktu Pembayaran: {historyOrder.paidAt || 'Belum Membayar'}</h1>
