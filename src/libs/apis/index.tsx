@@ -3,12 +3,14 @@ import axios from 'axios';
 import { TCreateOrder } from '../types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_KEY = process.env.API_KEY;
 
 export async function retrieveAllCanteens() {
   try {
     const response = await axios.get(`${API_URL}/canteens`, {
       headers: {
         'Content-Type': 'application/json',
+        'api-key': API_KEY,
       },
     });
 
@@ -49,6 +51,7 @@ export async function retrieveDetailCanteenWithId(canteenId: string) {
     .get(`${API_URL}/canteens/menu/${canteenId}`, {
       headers: {
         'Content-Type': 'application/json',
+        'api-key': API_KEY,
       },
     })
     .then((response) => response.data.data)
@@ -72,6 +75,7 @@ export async function createOrder(data: TCreateOrder) {
       {
         headers: {
           'Content-Type': 'application/json',
+          'api-key': API_KEY,
         },
       }
     );

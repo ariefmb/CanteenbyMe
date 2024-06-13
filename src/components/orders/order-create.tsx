@@ -2,11 +2,10 @@
 
 import { useCartContext } from '@/context/cart.context';
 import { createOrder } from '@/libs/apis';
-import { TCreateOrder, TInvoice, TOrderMenu } from '@/libs/types';
+import { TCreateOrder, TInvoice } from '@/libs/types';
 import { Button, CustomFlowbiteTheme, Label, Radio } from 'flowbite-react';
 import { useSession } from 'next-auth/react';
-import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { HiShoppingCart } from 'react-icons/hi';
 
@@ -91,7 +90,11 @@ export default function OrderCreate() {
     }));
 
     const data: TCreateOrder = {
-      redirectUrl: `${paymentMethod === 'Cash' ? `${targetUrl}/pay-bill?${params}` : `${targetUrl}`}`,
+      redirectUrl: `${
+        paymentMethod === 'Cash'
+          ? `${targetUrl}/pay-bill?${params}`
+          : `${targetUrl}`
+      }`,
       userName: userSession?.name,
       userEmail: userSession?.email,
       tableNumber: tableParams,

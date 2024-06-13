@@ -1,5 +1,6 @@
 'use client';
 
+import HistoryOrderCta from '@/components/UI/history-order-cta';
 import SearchBar from '@/components/UI/search-bar';
 import { AuthToast } from '@/components/UI/toast/auth-toast';
 import CanteensContainer from '@/components/container/canteens-container';
@@ -14,6 +15,7 @@ export default function Canteens() {
 
   return (
     <section className='mx-auto py-5 px-10 bg-background'>
+      <section className='hidden md:flex'></section>
       <section>
         <AlgoliaProvider>
           <SearchBar canteens={canteens} />
@@ -22,6 +24,9 @@ export default function Canteens() {
       <section className='auth toast'>{userSession && <AuthToast />}</section>
       <section className='CanteensContainer'>
         <CanteensContainer loading={loading} canteens={canteens} />
+      </section>
+      <section className='flex items-center justify-center md:hidden'>
+        <HistoryOrderCta />
       </section>
     </section>
   );
