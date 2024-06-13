@@ -45,7 +45,7 @@ export default function OrderCreate() {
   const userSession = session?.user;
   const { cart, getTotalPrice, clearCart } = useCartContext();
   const params = useSearchParams();
-  const tableParams = params ? parseInt(params.get('table') || '0') : 0;
+  const tableParams = params ? parseInt(params.get('table') || '1') : 0;
   const router = useRouter();
   const targetUrl: string = 'https://canteenbyme.vercel.app';
 
@@ -118,8 +118,6 @@ export default function OrderCreate() {
       throw error;
     }
   };
-
-  console.log('name:', userSession?.name);
 
   return (
     <>

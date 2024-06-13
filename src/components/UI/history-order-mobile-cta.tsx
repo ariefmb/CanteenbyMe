@@ -1,9 +1,9 @@
 'use client';
 
 import { Button, CustomFlowbiteTheme } from 'flowbite-react';
-import React, { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { HiShoppingCart } from 'react-icons/hi';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const customTheme: CustomFlowbiteTheme['button'] = {
   base: 'flex gap-5 items-center justify-center w-full h-full',
@@ -20,11 +20,10 @@ const customTheme: CustomFlowbiteTheme['button'] = {
   },
 };
 
-export default function HistoryOrderCta() {
+export default function HistoryOrderMobileCta() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVisible, setVisible] = useState(true);
   const router = useRouter();
-  const pathname = usePathname();
   const params = useSearchParams();
 
   const controlCartBar = () => {
@@ -45,7 +44,7 @@ export default function HistoryOrderCta() {
   }, [lastScrollY]);
 
   const handleClick = () => {
-    router.push(`/pay-bill?${params}`);
+    router.push(`/canteens/history?${params}`);
   };
 
   return (
@@ -54,7 +53,12 @@ export default function HistoryOrderCta() {
         isVisible ? 'bottom-5' : '-bottom-20'
       }`}
     >
-      <Button theme={customTheme} color='primary' size='sm' onClick={handleClick}>
+      <Button
+        theme={customTheme}
+        color='primary'
+        size='sm'
+        onClick={handleClick}
+      >
         <HiShoppingCart size={25} />
         PESANAN SAYA
       </Button>

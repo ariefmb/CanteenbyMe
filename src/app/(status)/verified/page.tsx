@@ -1,5 +1,6 @@
 'use client'
 
+import HomeButton from '@/components/UI/home-button';
 import circleLeftBottom from '@/images/background/circle-left-bottom.png';
 import circleTopRight from '@/images/background/circle-top-right.png';
 import orderVerified from '@/images/icon/order-verified.png';
@@ -8,7 +9,7 @@ import { Button, CustomFlowbiteTheme, Flowbite } from 'flowbite-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { HiHome, HiShoppingCart } from 'react-icons/hi';
+import { HiShoppingCart } from 'react-icons/hi';
 
 const customTheme: CustomFlowbiteTheme = {
   button: {
@@ -99,15 +100,7 @@ export default function Verified() {
                 PESANAN SAYA
               </Link>
             </Button>
-            <Button className='text-white' color='buttonHome'>
-              <Link
-                href={`/?${params}`}
-                className='w-full h-full md:w-36 flex items-center justify-center gap-2'
-              >
-                <HiHome size={30} />
-                BERANDA
-              </Link>
-            </Button>
+            <HomeButton />
           </div>
         </div>
         <Image

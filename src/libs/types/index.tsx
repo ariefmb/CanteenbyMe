@@ -46,17 +46,23 @@ export type TInvoice = {
   invoiceUrl: string;
 };
 
-// export type TOrders = {
-//   id: string;
-//   menus: TMenus[];
-//   payment: string;
-//   totalItem: number;
-//   totalPrice: number;
-//   createdAt: Date;
-//   paid: boolean;
-// };
+export type THistoryOrders = {
+  id: string;
+  orderNumber: number;
+  tableNumber: string;
+  userId: string;
+  paymentMethod: string;
+  status: string;
+  paidAt: string;
+  totalPrice: number;
+  totalItem: number;
+  updatedAt: string;
+  createdAt: string;
+  orderMenus: OrderList[];
+};
 
-// export type THistory = {
-//   id: string;
-//   transaction: TOrders[];
-// };
+export type OrderList = {
+  name: string;
+  imageUrl: string;
+  price: number;
+};

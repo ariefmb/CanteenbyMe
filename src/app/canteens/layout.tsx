@@ -7,9 +7,11 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className='w-full min-h-dvh bg-background'>
       <Header />
-      <main className='bg-red-500'>{children}</main>
-    </>
+      <main>
+        {children}
+      </main>
+    </div>
   );
 }

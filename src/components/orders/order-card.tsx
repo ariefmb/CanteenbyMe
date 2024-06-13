@@ -116,11 +116,11 @@ export default function OrderCard() {
         {cart.map((cart: CartItem) => {
           const itemQuantity = cart.quantity ?? 0;
           return (
-            <div className='flex flex-col items-center justify-center'>
-              <div
-                key={cart.id}
-                className='flex w-full items-center justify-center mb-2 gap-5 md:m-3 text-slate-800 md:px-5'
-              >
+            <div
+              key={cart.id}
+              className='flex flex-col items-center justify-center'
+            >
+              <div className='flex w-full items-center justify-center mb-2 gap-5 md:m-3 text-slate-800 md:px-5'>
                 <div className='relative w-[122px] h-[120px] md:w-[200px] md:h-[151px] flex items-center justify-center'>
                   <Image
                     src={cart.imageUrl}
@@ -129,6 +129,7 @@ export default function OrderCard() {
                     quality={100}
                     objectFit='cover'
                     className='rounded-[10px] shadow-[0_0_5px_2px_gray]'
+                    priority
                   />
                 </div>
                 <div className='p-2 w-1/2 flex flex-col gap-1 md:gap-2'>

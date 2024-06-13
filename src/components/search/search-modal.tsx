@@ -114,7 +114,6 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
     const canteen = canteens?.find((canteen) => canteen.id === hit.canteen_id);
     const cartItem = cart.find((item) => item.id === hit.id);
     const quantity = cartItem ? cartItem.quantity || 0 : 0;
-    console.log(`image: ${hit.name}`);
 
     const handleAddClick = () => {
       addToCart({
