@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 interface MenuItem {
   id: string;
   name: string;
+  imageUrl: string;
   price: number;
   quantity?: number;
 }

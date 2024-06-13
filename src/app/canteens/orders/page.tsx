@@ -2,8 +2,8 @@
 
 import BackCTA from '@/components/UI/back-cta';
 // import { useSession } from 'next-auth/react';
-import { useAuthContext } from '@/context/auth.context';
 import { useCartContext } from '@/context/cart.context';
+import { createInvoice } from '@/libs/apis';
 import {
   Button,
   CustomFlowbiteTheme,
@@ -14,8 +14,10 @@ import {
 } from 'flowbite-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import React from 'react';
+import { useRouter } from 'next/navigation';
+
 import { HiMinus, HiPlus, HiShoppingCart } from 'react-icons/hi';
+import { ToastContainer, toast } from 'react-toastify';
 
 interface OrdersProps {
   cart: {
@@ -85,6 +87,7 @@ export default function Orders() {
   const { data: session } = useSession();
   const userSession = session?.user;
   const { cart, getTotalItems, getTotalPrice } = useCartContext();
+  const router = useRouter();
 
   const totalPesanan = new Intl.NumberFormat('id', {
     style: 'currency',
@@ -100,6 +103,15 @@ export default function Orders() {
     style: 'currency',
     currency: 'IDR',
   }).format(getTotalPrice() + 500);
+
+  const handlePayment = async () => {
+    const invoice = await createInvoice();
+    if (invoice) {
+      router.push(invoice);
+    } else {
+      toast.error('Invoice not created');
+    }
+  };
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
@@ -242,11 +254,16 @@ export default function Orders() {
             </div>
           </div>
           <div className='w-full my-3 py-3 flex items-center justify-center'>
-            <Button color='buttonPrimary' className='hover:rounded-xl'>
+            <Button
+              color='buttonPrimary'
+              className='hover:rounded-xl'
+              onClick={handlePayment}
+            >
               Buat Pesanan
               <HiShoppingCart size={25} />
             </Button>
           </div>
+          <ToastContainer />
         </div>
       </div>
     </Flowbite>

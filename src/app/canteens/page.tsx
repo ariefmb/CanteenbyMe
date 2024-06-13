@@ -7,7 +7,7 @@ import AlgoliaProvider from '@/components/search/algolia-search';
 import { useCanteenContext } from '@/context/canteens.context';
 import { useSession } from 'next-auth/react';
 
-export default function Canteens() {
+export default async function Canteens() {
   const { canteens, loading } = useCanteenContext();
   const { data: session } = useSession();
   const userSession = session?.user;

@@ -2,7 +2,7 @@
 
 import { createContext, useContext } from 'react';
 
-interface MenuItem {
+export interface MenuItem {
   id: string;
   name: string;
   imageUrl: string;
