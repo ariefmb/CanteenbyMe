@@ -3,7 +3,6 @@
 import BackCTA from '@/components/UI/back-cta';
 // import { useSession } from 'next-auth/react';
 import { useCartContext } from '@/context/cart.context';
-import { createInvoice } from '@/libs/apis';
 import {
   Button,
   CustomFlowbiteTheme,
@@ -104,14 +103,7 @@ export default function Orders() {
     currency: 'IDR',
   }).format(getTotalPrice() + 500);
 
-  const handlePayment = async () => {
-    const invoice = await createInvoice();
-    if (invoice) {
-      router.push(invoice);
-    } else {
-      toast.error('Invoice not created');
-    }
-  };
+  const handlePayment = async () => {};
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
