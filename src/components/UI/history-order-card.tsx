@@ -11,6 +11,18 @@ interface HistoryOrderCardProps {
 export default function HistoryOrderCard({
   historyOrder,
 }: HistoryOrderCardProps) {
+  let paidAtFormatted = 'Belum Membayar';
+  if (historyOrder.paidAt) {
+    const paidAt = Date.parse(historyOrder.paidAt);
+    paidAtFormatted = new Intl.DateTimeFormat('id', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    }).format(paidAt);
+  }
+
   return (
     <section className='text-slate-800'>
       <hr className='w-full h-1 bg-slate-300 rounded-xl' />
@@ -43,7 +55,7 @@ export default function HistoryOrderCard({
                 ? `0${historyOrder.tableNumber}`
                 : historyOrder.tableNumber}
             </h1>
-            <h1>Waktu Pembayaran: {historyOrder.paidAt || 'Belum Membayar'}</h1>
+            <h1>Waktu Pembayaran: {paidAtFormatted}</h1>
             <h1>Jenis Pembayaran: {historyOrder.paymentMethod || 'Cash'}</h1>
             <h1>Status: {historyOrder.status}</h1>
           </div>
