@@ -73,11 +73,12 @@ export async function createOrder(data: TCreateOrder) {
   }
 }
 
-export async function getHistoryOrderByUserId(
-  userId: string | undefined,
-  sessionToken: string
-) {
+export async function getHistoryOrderByUserId() {
   try {
+    const session = (await getSession()) as Session;
+    const sessionToken: string = session?.sessionToken ?? '';
+    const userId: string = session?.user.id ?? '';
+    
     const response = await axios.get(`${API_URL}/orders/user/${userId}`, {
       headers: {
         'Content-Type': 'application/json',

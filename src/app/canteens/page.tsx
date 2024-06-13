@@ -1,14 +1,13 @@
 'use client';
 
-import HistoryOrderMobileCta from '@/components/UI/history-order-mobile-cta';
 import HistoryOrderDesktopCTA from '@/components/UI/history-order-desktop-cta';
+import HistoryOrderMobileCta from '@/components/UI/history-order-mobile-cta';
 import SearchBar from '@/components/UI/search-bar';
 import { AuthToast } from '@/components/UI/toast/auth-toast';
 import CanteensContainer from '@/components/container/canteens-container';
 import AlgoliaProvider from '@/components/search/algolia-search';
 import { useCanteenContext } from '@/context/canteens.context';
 import { useSession } from 'next-auth/react';
-import { HiShoppingCart } from 'react-icons/hi';
 
 export default function Canteens() {
   const { canteens, loading } = useCanteenContext();

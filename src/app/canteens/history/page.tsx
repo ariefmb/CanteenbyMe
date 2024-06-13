@@ -6,18 +6,11 @@ import React from 'react';
 import circleLeftBottom from '@/images/background/circle-left-bottom.png';
 import Image from 'next/image';
 
-interface HistoryProps {
-  params: {
-    userId: string;
-  };
-}
-
-export default function History({ params }: HistoryProps) {
-  const { userId } = params;
+export default function History() {
   return (
-    <section className='w-full h-full flex flex-col gap-5 items-center justify-center bg-background p-14 md:p-0 md:gap-0'>
-      <div className='w-[336px] h-[401px] md:scale-90 flex items-center justify-center rounded-xl bg-gradient-to-b from-white to-primary'>
-        <HistoryOrdersContainer userId={userId} />
+    <section className='w-full h-full flex flex-col gap-5 items-center justify-center bg-background p-14 md:py-10 md:p-0 md:gap-0'>
+      <div className='w-[336px] min:h-[401px] md:w-[461px] md:scale-90 flex items-center justify-center rounded-xl bg-gradient-to-b from-white to-primary z-10'>
+        <HistoryOrdersContainer />
       </div>
       <HomeButton />
       <Image
@@ -25,7 +18,7 @@ export default function History({ params }: HistoryProps) {
         alt='background top right'
         width={100}
         height={100}
-        className='absolute bottom-0 left-0'
+        className='fixed bottom-0 left-0'
         priority
       />
     </section>

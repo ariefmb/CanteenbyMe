@@ -1,20 +1,16 @@
+'use client';
+
 import { getHistoryOrderByUserId } from '@/libs/apis';
 import { THistoryOrders } from '@/libs/types';
-import { getSessionToken } from '@/libs/utils';
-import { Alert, CustomFlowbiteTheme } from 'flowbite-react';
 import { useEffect, useState } from 'react';
-import { HiInformationCircle } from 'react-icons/hi';
 import HistoryOrderCard from '../UI/history-order-card';
-import OrderNotFoundIcon from '@/images/icon/order-not-found.png';
-import Image from 'next/image';
+import HistoryOrderNotFound from '../UI/history-order-notfound';
 
 interface HistoryContainerProps {
   userId: string;
 }
 
-export default async function HistoryOrdersContainer({
-  userId,
-}: HistoryContainerProps) {
+export default function HistoryOrdersContainer() {
   const [historyOrders, setHistoryOrders] = useState<
     THistoryOrders[] | undefined
   >();
@@ -22,12 +18,7 @@ export default async function HistoryOrdersContainer({
   useEffect(() => {
     const getAllHistoryOrders = async () => {
       try {
-        const session = await getSessionToken();
-        const sessionToken = session.sessionToken;
-        const historyOrders: THistoryOrders[] = await getHistoryOrderByUserId(
-          userId,
-          sessionToken
-        );
+        const historyOrders: THistoryOrders[] = await getHistoryOrderByUserId();
         setHistoryOrders(historyOrders);
       } catch (error) {
         console.error('error when fetching canteens', error);
@@ -40,26 +31,18 @@ export default async function HistoryOrdersContainer({
   return (
     <div className='w-full h-full'>
       {!historyOrders ? (
-        <div className='w-full h-full p-3 text-slate-800 flex flex-col items-center justify-around'>
-          <h1 className='text-2xl text-center font-extrabold'>Order Not Found</h1>
-          <p className='text-[15px] text-center font-bold'>
-            Upss, sepertinya anda belum memesan apapun.
-          </p>
-          <Image
-            src={OrderNotFoundIcon}
-            alt='Order Not Found'
-            width={197}
-            height={36}
-            priority
-          />
-          <p className='text-[15px] text-center font-bold'>
-            Yuk pesan makan sekarang juga!
-          </p>
-        </div>
+        <HistoryOrderNotFound />
       ) : (
-        historyOrders.map((historyOrder) => (
-          <HistoryOrderCard historyOrder={historyOrder} />
-        ))
+        <div className='w-full h-full'>
+          <div className='w-full py-3'>
+            <h1 className='text-center text-xl font-bold text-slate-800'>
+              Riwayat Pesanan
+            </h1>
+          </div>
+          {historyOrders.map((historyOrder) => (
+            <HistoryOrderCard historyOrder={historyOrder} />
+          ))}
+        </div>
       )}
     </div>
   );
