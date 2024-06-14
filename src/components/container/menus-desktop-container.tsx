@@ -7,9 +7,13 @@ import CartSection from '../UI/cart-section';
 
 interface MenusContainerProps {
   menus: TMenus[];
+  isLoading: boolean;
 }
 
-export default function MenusDesktopContainer({ menus }: MenusContainerProps) {
+export default function MenusDesktopContainer({
+  menus,
+  isLoading,
+}: MenusContainerProps) {
   const [isFixed, setIsFixed] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -33,7 +37,7 @@ export default function MenusDesktopContainer({ menus }: MenusContainerProps) {
   return (
     <div className='relative flex justify-center gap-14'>
       <section className='w-2/3 flex justify-center'>
-        <MenusCanteenContainer menus={menus} />
+        <MenusCanteenContainer menus={menus} isLoading={isLoading} />
       </section>
       <section
         className={`scrollbar w-[350px] max-h-[350px] flex flex-col justify-start items-center gap-5 transition-all duration-500 sticky top-0 ${
@@ -45,7 +49,7 @@ export default function MenusDesktopContainer({ menus }: MenusContainerProps) {
           Pilih Kategori
         </div>
 
-        <CartSection />
+        <CartSection isLoading={isLoading} />
       </section>
     </div>
   );

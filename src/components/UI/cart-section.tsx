@@ -7,6 +7,10 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { HiShoppingCart } from 'react-icons/hi';
 
+interface CartSectionProps {
+  isLoading: boolean;
+}
+
 const customTheme: CustomFlowbiteTheme = {
   card: {
     root: {
@@ -47,9 +51,10 @@ const customTheme: CustomFlowbiteTheme = {
   },
 };
 
-export default function CartSection() {
+export default function CartSection({ isLoading }: CartSectionProps) {
   const [isVisible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const { cart, getTotalItems, getTotalPrice } = useCartContext();
   const session = useSession();
   const userSession = session.status;
@@ -57,6 +62,10 @@ export default function CartSection() {
   const params = useSearchParams();
   const prevPathname = pathname.substring(0, pathname.indexOf('/canteens') + 9);
   const router = useRouter();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const controlCartBar = () => {
     if (window.scrollY !== lastScrollY) {
@@ -81,6 +90,10 @@ export default function CartSection() {
       : router.push(`${prevPathname}/orders?${params}`);
   };
 
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <Flowbite theme={{ theme: customTheme }}>
       <Card
@@ -90,10 +103,17 @@ export default function CartSection() {
           !cart.length ? 'translate-y-20' : 'translate-y-0'
         } md:absolute md:translate-y-0 md:bottom-5 md:w-[350px] md:rounded-xl`}
       >
-        <div className='flex h-[40px] items-center font-bold justify-between bg-white rounded-[10px] px-5 w-2/3 shadow-[0px_1px_5px_#000,inset_0_1px_5px_#000]'>
-          <p className='text-sm text-slate-800'>{getTotalItems()} item</p>
-          <p className='text-sm text-slate-800'>Rp {getTotalPrice()} ,-</p>
-        </div>
+        {isLoading ? (
+          <div
+            role='status'
+            className='animate-pulse flex h-[40px] items-center font-bold bg-white justify-between rounded-[10px] w-2/3 shadow-[0px_1px_5px_#000,inset_0_1px_5px_#000] overflow-hidden'
+          ></div>
+        ) : (
+          <div className='flex h-[40px] items-center font-bold justify-between bg-white rounded-[10px] px-5 w-2/3 shadow-[0px_1px_5px_#000,inset_0_1px_5px_#000]'>
+            <p className='text-sm text-slate-800'>{getTotalItems()} item</p>
+            <p className='text-sm text-slate-800'>Rp {getTotalPrice()} ,-</p>
+          </div>
+        )}
         <Button color='buttonPrimary' onClick={handlePayment}>
           Bayar
           <HiShoppingCart size={25} />

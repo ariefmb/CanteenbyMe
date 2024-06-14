@@ -110,10 +110,10 @@ export default function RemoveItemAlert({
               color='failure'
               onClick={onConfirm}
             >
-              Yes, I'm sure
+              Iya, saya yakin
             </Button>
             <Button theme={customButtonTheme} color='gray' onClick={onCancel}>
-              No, cancel
+              Engga jadi, deh
             </Button>
           </div>
         </div>

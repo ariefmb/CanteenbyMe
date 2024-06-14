@@ -1,24 +1,24 @@
-import React from 'react';
-import MenusCanteenContainer from './menus-canteen-container';
-import CartSection from '../UI/cart-section';
 import { TMenus } from '@/libs/types';
-import { SkeletonTheme } from 'react-loading-skeleton';
+import CartSection from '../UI/cart-section';
+import MenusCanteenContainer from './menus-canteen-container';
 
 interface MenusContainerProps {
   menus: TMenus[];
+  isLoading: boolean;
 }
 
-export default function MenusMobileContainer({ menus }: MenusContainerProps) {
+export default function MenusMobileContainer({
+  menus,
+  isLoading,
+}: MenusContainerProps) {
   return (
     <>
       {/* <section className='dropdown w-full h-20 bg-slate-400 rounded-xl'></section> */}
-      <SkeletonTheme baseColor='#313131' highlightColor='#525252'>
-        <section>
-          <MenusCanteenContainer menus={menus} />
-        </section>
-      </SkeletonTheme>
+      <section>
+        <MenusCanteenContainer menus={menus} isLoading={isLoading} />
+      </section>
       <section className='w-full flex justify-center'>
-        <CartSection />
+        <CartSection isLoading={isLoading} />
       </section>
     </>
   );

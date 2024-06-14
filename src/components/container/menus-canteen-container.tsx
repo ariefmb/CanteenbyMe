@@ -3,10 +3,12 @@ import { Alert, CustomFlowbiteTheme } from 'flowbite-react';
 import { HiInformationCircle } from 'react-icons/hi';
 import MenusCard from '../UI/menus-card';
 import { ToastContainer } from 'react-toastify';
-import CardSkeleton from '../UI/card-skeleton';
+import MenusCardSkeleton from '../UI/menus-card-skeleton';
+import Skeleton from 'react-loading-skeleton';
 
 interface MenusCanteenContainerProps {
   menus: TMenus[];
+  isLoading: boolean;
 }
 
 const customTheme: CustomFlowbiteTheme['alert'] = {
@@ -37,33 +39,43 @@ const sortMenus = (menus: TMenus[]): Record<string, TMenus[]> => {
 
 export default function MenusCanteenContainer({
   menus,
+  isLoading,
 }: MenusCanteenContainerProps) {
   const sortedMenus = sortMenus(menus);
 
   return (
     <div className='text-slate-800'>
-      {!menus?.length ? (
-        <Alert theme={customTheme} color='failure' icon={HiInformationCircle}>
-          <p className='px-3'>All Menus will be displayed here.</p>
-        </Alert>
+      {isLoading ? (
+        <MenusCardSkeleton cards={5} />
       ) : (
-        <div className='flex flex-col items-center gap-5 mx-auto'>
-          {Object.keys(sortedMenus).map((type) => (
-            <div
-              key={type}
-              className='w-full flex flex-col items-center gap-5 md:items-start md:px-5'
+        <>
+          {!menus?.length ? (
+            <Alert
+              theme={customTheme}
+              color='failure'
+              icon={HiInformationCircle}
             >
-              <h1 className='w-full font-bold text-base text-left md:text-xl'>
-                {type}
-              </h1>
-              <CardSkeleton cards={8} />
-              {sortedMenus[type].map((menu) => (
-                <MenusCard key={menu.id} menu={menu} />
+              <p className='px-3'>All Menus will be displayed here.</p>
+            </Alert>
+          ) : (
+            <div className='flex flex-col items-center gap-5 mx-auto'>
+              {Object.keys(sortedMenus).map((type) => (
+                <div
+                  key={type}
+                  className='w-full flex flex-col items-center gap-5 md:items-start md:px-5'
+                >
+                  <h1 className='w-full font-bold text-base text-left md:text-xl'>
+                    {type}
+                  </h1>
+                  {sortedMenus[type].map((menu) => (
+                    <MenusCard key={menu.id} menu={menu} />
+                  ))}
+                </div>
               ))}
+              <ToastContainer />
             </div>
-          ))}
-          <ToastContainer />
-        </div>
+          )}
+        </>
       )}
     </div>
   );
