@@ -47,35 +47,27 @@ export default function MenusCanteenContainer({
     <div className='text-slate-800'>
       {isLoading ? (
         <MenusCardSkeleton cards={5} />
+      ) : !menus?.length ? (
+        <Alert theme={customTheme} color='failure' icon={HiInformationCircle}>
+          <p className='px-3'>All Menus will be displayed here.</p>
+        </Alert>
       ) : (
-        <>
-          {!menus?.length ? (
-            <Alert
-              theme={customTheme}
-              color='failure'
-              icon={HiInformationCircle}
+        <div className='flex flex-col items-center gap-5 mx-auto'>
+          {Object.keys(sortedMenus).map((type) => (
+            <div
+              key={type}
+              className='w-full flex flex-col items-center gap-5 md:items-start md:px-5'
             >
-              <p className='px-3'>All Menus will be displayed here.</p>
-            </Alert>
-          ) : (
-            <div className='flex flex-col items-center gap-5 mx-auto'>
-              {Object.keys(sortedMenus).map((type) => (
-                <div
-                  key={type}
-                  className='w-full flex flex-col items-center gap-5 md:items-start md:px-5'
-                >
-                  <h1 className='w-full font-bold text-base text-left md:text-xl'>
-                    {type}
-                  </h1>
-                  {sortedMenus[type].map((menu) => (
-                    <MenusCard key={menu.id} menu={menu} />
-                  ))}
-                </div>
+              <h1 className='w-full font-bold text-base text-left md:text-xl'>
+                {type}
+              </h1>
+              {sortedMenus[type].map((menu) => (
+                <MenusCard key={menu.id} menu={menu} />
               ))}
-              <ToastContainer />
             </div>
-          )}
-        </>
+          ))}
+          <ToastContainer />
+        </div>
       )}
     </div>
   );

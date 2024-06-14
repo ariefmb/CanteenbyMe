@@ -7,6 +7,7 @@ import { Alert, CustomFlowbiteTheme } from 'flowbite-react';
 import Skeleton from 'react-loading-skeleton';
 import { Card } from 'flowbite-react';
 import 'react-loading-skeleton/dist/skeleton.css';
+import CanteensCardSkeleton from '../UI/canteens-card-skeleton';
 
 interface CanteensContainerProps {
   canteens?: TCanteens[];
@@ -32,17 +33,8 @@ export default function CanteensContainer({
       </h1>
       <div className='flex flex-wrap py-5 justify-center gap-5 md:justify-around'>
         {loading ? (
-          Array(4)
-            .fill(null)
-            .map((_, index) => (
-              <Card
-                key={index}
-                className='w-[327px] md:w-[498px] h-[160px] rounded-lg'
-              >
-                <Skeleton height='100%' width='100%' />
-              </Card>
-            ))
-        ) : !canteens?.length ? (
+          <CanteensCardSkeleton cards={6} />
+        ) : !canteens ? (
           <Alert theme={customTheme} color='failure' icon={HiInformationCircle}>
             <p className='px-3'>All Menus will be displayed here.</p>
           </Alert>

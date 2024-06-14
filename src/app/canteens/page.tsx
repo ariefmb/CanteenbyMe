@@ -2,10 +2,9 @@
 
 import HistoryOrderDesktopCTA from '@/components/UI/history-order-desktop-cta';
 import HistoryOrderMobileCta from '@/components/UI/history-order-mobile-cta';
-import SearchBar from '@/components/UI/search-bar';
 import { AuthToast } from '@/components/UI/toast/auth-toast';
 import CanteensContainer from '@/components/container/canteens-container';
-import AlgoliaProvider from '@/components/search/algolia-search';
+import SearchBarContainer from '@/components/container/search-bar-container';
 import { useCanteenContext } from '@/context/canteens.context';
 import { useSession } from 'next-auth/react';
 
@@ -20,9 +19,7 @@ export default function Canteens() {
         <HistoryOrderDesktopCTA />
       </section>
       <section>
-        <AlgoliaProvider>
-          <SearchBar canteens={canteens} />
-        </AlgoliaProvider>
+        <SearchBarContainer canteens={canteens} loading={loading} />
       </section>
       <section className='auth toast'>{userSession && <AuthToast />}</section>
       <section className='CanteensContainer'>

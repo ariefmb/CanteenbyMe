@@ -5,12 +5,10 @@ import { THistoryOrders } from '@/libs/types';
 import { useEffect, useState } from 'react';
 import HistoryOrderCard from '../UI/history-order-card';
 import HistoryOrderNotFound from '../UI/history-order-notfound';
-
-interface HistoryContainerProps {
-  userId: string;
-}
+import HistoryCardSkeleton from '../UI/history-card-skeleton';
 
 export default function HistoryOrdersContainer() {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [historyOrders, setHistoryOrders] = useState<
     THistoryOrders[] | undefined
   >();
@@ -18,8 +16,10 @@ export default function HistoryOrdersContainer() {
   useEffect(() => {
     const getAllHistoryOrders = async () => {
       try {
+        setIsLoading(true);
         const historyOrders: THistoryOrders[] = await getHistoryOrderByUserId();
         setHistoryOrders(historyOrders);
+        setIsLoading(false);
       } catch (error) {
         console.error('error when fetching canteens', error);
       }
@@ -30,7 +30,9 @@ export default function HistoryOrdersContainer() {
 
   return (
     <div className='w-full h-full'>
-      {!historyOrders ? (
+      {isLoading ? (
+        <HistoryCardSkeleton cards={3} />
+      ) : !historyOrders ? (
         <HistoryOrderNotFound />
       ) : (
         <div className='w-full h-full'>
