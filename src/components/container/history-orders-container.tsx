@@ -5,7 +5,7 @@ import { THistoryOrders } from '@/libs/types';
 import { useEffect, useState } from 'react';
 import HistoryOrderCard from '../UI/history-order-card';
 import HistoryOrderNotFound from '../UI/history-order-notfound';
-import HistoryCardSkeleton from '../UI/history-card-skeleton';
+import HistoryCardSkeleton from '../skeletons/history-card-skeleton';
 
 export default function HistoryOrdersContainer() {
   const [isLoading, setIsLoading] = useState<boolean>(true);

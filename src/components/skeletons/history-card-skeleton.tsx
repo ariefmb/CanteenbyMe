@@ -38,9 +38,9 @@ export default function HistoryCardSkeleton({ cards }: CardSkeletonProps) {
                 </div>
                 <div className='w-full text-sm flex flex-col text-wrap text-slate-800 gap-2'>
                   <div className='w-[80%] h-5 bg-gray-200 rounded-full'></div>
-                  <div className='w-[80%] h-5 bg-gray-200 rounded-full'></div>
-                  <div className='w-[80%] h-5 bg-gray-200 rounded-full'></div>
-                  <div className='w-[80%] h-5 bg-gray-200 rounded-full'></div>
+                  <div className='w-[60%] h-5 bg-gray-200 rounded-full'></div>
+                  <div className='w-[90%] h-5 bg-gray-200 rounded-full'></div>
+                  <div className='w-[50%] h-5 bg-gray-200 rounded-full'></div>
                 </div>
               </div>
             </div>

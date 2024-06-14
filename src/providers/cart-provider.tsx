@@ -24,8 +24,12 @@ export default function CartProvider({
     return [];
   });
 
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
   useEffect(() => {
+    setIsLoading(true)
     localStorage.setItem('cart', JSON.stringify(cart));
+    setIsLoading(false)
   }, [cart]);
 
   const addToCart = (menuItem: MenuItem) => {
@@ -77,6 +81,7 @@ export default function CartProvider({
     <CartContext.Provider
       value={{
         cart,
+        isLoading,
         addToCart,
         updateQuantity,
         removeFromCart,

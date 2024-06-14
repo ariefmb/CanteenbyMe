@@ -28,9 +28,10 @@ export default function MenusCardSkeleton({ cards }: CardSkeletonProps) {
                 className='w-full h-full flex items-center justify-center animate-pulse gap-4'
               >
                 <div className='w-2/3 pl-3 flex flex-col gap-5 justify-center'>
-                  <div className='w-full h-5 bg-gray-200 rounded-full'></div>
-                  <div className='w-full h-5 bg-gray-200 rounded-full max-w-[440px]'></div>
-                  <div className='w-full h-5 bg-gray-200 rounded-full max-w-[460px]'></div>
+                  <div className='w-[30%] h-5 bg-gray-200 rounded-full'></div>
+                  <div className='w-[50%] h-5 bg-gray-200 rounded-full'></div>
+                  <div className='w-[100%] h-5 bg-gray-200 rounded-full max-w-[440px]'></div>
+                  <div className='w-[30%] h-5 bg-gray-200 rounded-full max-w-[460px]'></div>
                 </div>
                 <div className='flex flex-col items-center justify-center w-1/3 gap-2'>
                   <div className='rounded-[10px] w-[94px] h-[82px] md:w-[101px] md:h-[89px] bg-gray-300 flex items-center justify-center'>

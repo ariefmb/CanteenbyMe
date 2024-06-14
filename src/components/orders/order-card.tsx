@@ -121,7 +121,7 @@ export default function OrderCard() {
               className='flex flex-col items-center justify-center'
             >
               <div className='flex w-full items-center justify-center mb-2 gap-5 md:m-3 text-slate-800 md:px-5'>
-                <div className='relative w-[122px] h-[120px] md:w-[200px] md:h-[151px] flex items-center justify-center'>
+                <div className='relative w-[122px] h-[120px] md:w-[170px] md:h-[120px] flex items-center justify-center'>
                   <Image
                     src={cart.imageUrl}
                     alt='Menu Image'
@@ -139,7 +139,7 @@ export default function OrderCard() {
                   <h1 className='font-bold text-sm text-left text-slate-800 sm:text-2xl tracking-wider'>
                     Rp {cart.price},-
                   </h1>
-                  <div className='flex items-center my-3 w-full gap-1 justify-items-start'>
+                  <div className='flex items-center w-full gap-1 justify-items-start'>
                     <Button
                       theme={customButtonTheme}
                       color='buttonAdd'

@@ -7,7 +7,7 @@ import { Alert, CustomFlowbiteTheme } from 'flowbite-react';
 import Skeleton from 'react-loading-skeleton';
 import { Card } from 'flowbite-react';
 import 'react-loading-skeleton/dist/skeleton.css';
-import CanteensCardSkeleton from '../UI/canteens-card-skeleton';
+import CanteensCardSkeleton from '../skeletons/canteens-card-skeleton';
 
 interface CanteensContainerProps {
   canteens?: TCanteens[];
