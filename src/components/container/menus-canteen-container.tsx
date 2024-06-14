@@ -3,6 +3,7 @@ import { Alert, CustomFlowbiteTheme } from 'flowbite-react';
 import { HiInformationCircle } from 'react-icons/hi';
 import MenusCard from '../UI/menus-card';
 import { ToastContainer } from 'react-toastify';
+import CardSkeleton from '../UI/card-skeleton';
 
 interface MenusCanteenContainerProps {
   menus: TMenus[];
@@ -55,6 +56,7 @@ export default function MenusCanteenContainer({
               <h1 className='w-full font-bold text-base text-left md:text-xl'>
                 {type}
               </h1>
+              <CardSkeleton cards={8} />
               {sortedMenus[type].map((menu) => (
                 <MenusCard key={menu.id} menu={menu} />
               ))}
