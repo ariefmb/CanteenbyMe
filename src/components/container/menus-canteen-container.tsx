@@ -1,10 +1,10 @@
-import { TCanteens, TMenus } from '@/libs/types';
+import { TMenus } from '@/libs/types';
 import { Alert, CustomFlowbiteTheme } from 'flowbite-react';
 import { HiInformationCircle } from 'react-icons/hi';
-import MenusCard from '../UI/menus-card';
 import { ToastContainer } from 'react-toastify';
+import MenusCard from '../UI/menus-card';
 import MenusCardSkeleton from '../skeletons/menus-card-skeleton';
-import Skeleton from 'react-loading-skeleton';
+import { useCategoryContext } from '@/context/category-filter.context';
 
 interface MenusCanteenContainerProps {
   menus: TMenus[];
@@ -16,6 +16,8 @@ const customTheme: CustomFlowbiteTheme['alert'] = {
   color: {
     failure:
       'bg-red-200 text-red-700 transition-all duration-300 hover:bg-red-300',
+    info:
+      'bg-primary text-white transition-all duration-300 hover:bg-[#58628E]',
   },
 };
 
@@ -41,7 +43,14 @@ export default function MenusCanteenContainer({
   menus,
   isLoading,
 }: MenusCanteenContainerProps) {
-  const sortedMenus = sortMenus(menus);
+  const { categoryFilter } = useCategoryContext();
+
+  const filteredMenus =
+    categoryFilter === 'Pilih Kategori Menu'
+      ? menus
+      : menus.filter((menu) => menu.type === categoryFilter);
+
+  const sortedMenus = sortMenus(filteredMenus);
 
   return (
     <div className='text-slate-800'>
@@ -50,6 +59,12 @@ export default function MenusCanteenContainer({
       ) : !menus?.length ? (
         <Alert theme={customTheme} color='failure' icon={HiInformationCircle}>
           <p className='px-3'>All Menus will be displayed here.</p>
+        </Alert>
+      ) : !filteredMenus.length ? (
+        <Alert theme={customTheme} color='info' icon={HiInformationCircle}>
+          <p className='px-3'>
+            Tidak ada menu untuk kategori {categoryFilter}.
+          </p>
         </Alert>
       ) : (
         <div className='flex flex-col items-center gap-5 mx-auto'>

@@ -1,6 +1,7 @@
 import { TMenus } from '@/libs/types';
 import CartSection from '../UI/cart-section';
 import MenusCanteenContainer from './menus-canteen-container';
+import DropdownComponent from '../UI/dropdown';
 
 interface MenusContainerProps {
   menus: TMenus[];
@@ -13,7 +14,9 @@ export default function MenusMobileContainer({
 }: MenusContainerProps) {
   return (
     <>
-      {/* <section className='dropdown w-full h-20 bg-slate-400 rounded-xl'></section> */}
+      <section className='flex items-center justify-center w-full mb-3'>
+        <DropdownComponent />
+      </section>
       <section>
         <MenusCanteenContainer menus={menus} isLoading={isLoading} />
       </section>

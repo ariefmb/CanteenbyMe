@@ -27,7 +27,7 @@ export function useCartContext() {
   const context = useContext(CartContext);
 
   if (!context) {
-    throw new Error('useCanteenContext harus digunakan dalam CanteenProvider');
+    throw new Error('useCartContext harus digunakan dalam CanteenProvider');
   }
 
   return context;
