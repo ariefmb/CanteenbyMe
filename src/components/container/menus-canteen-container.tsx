@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import MenusCard from '../UI/menus-card';
 import MenusCardSkeleton from '../skeletons/menus-card-skeleton';
 import { useCategoryContext } from '@/context/category-filter.context';
+import { useEffect, useState } from 'react';
 
 interface MenusCanteenContainerProps {
   menus: TMenus[];
@@ -12,12 +13,11 @@ interface MenusCanteenContainerProps {
 }
 
 const customTheme: CustomFlowbiteTheme['alert'] = {
-  base: 'flex flex-col p-4 text-sm mx-auto md:w-1/2',
+  base: 'flex flex-col p-4 text-sm mx-auto md:w-fit',
   color: {
     failure:
       'bg-red-200 text-red-700 transition-all duration-300 hover:bg-red-300',
-    info:
-      'bg-primary text-white transition-all duration-300 hover:bg-[#58628E]',
+    info: 'bg-primary text-white transition-all duration-300 hover:bg-[#58628E]',
   },
 };
 
@@ -44,17 +44,29 @@ export default function MenusCanteenContainer({
   isLoading,
 }: MenusCanteenContainerProps) {
   const { categoryFilter } = useCategoryContext();
+  const [loading, setLoading] = useState(isLoading);
+  const [filteredMenus, setFilteredMenus] = useState<TMenus[]>([]);
 
-  const filteredMenus =
-    categoryFilter === 'Pilih Kategori Menu'
-      ? menus
-      : menus.filter((menu) => menu.type === categoryFilter);
+  useEffect(() => {
+    setLoading(true);
+    const timeoutId = setTimeout(() => {
+      if (categoryFilter === 'Pilih Kategori Menu') {
+        setFilteredMenus(menus);
+      } else {
+        const filtered = menus.filter((menu) => menu.type === categoryFilter);
+        setFilteredMenus(filtered);
+      }
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, [categoryFilter, menus]);
 
   const sortedMenus = sortMenus(filteredMenus);
 
   return (
     <div className='text-slate-800'>
-      {isLoading ? (
+      {loading ? (
         <MenusCardSkeleton cards={5} />
       ) : !menus?.length ? (
         <Alert theme={customTheme} color='failure' icon={HiInformationCircle}>
@@ -63,7 +75,7 @@ export default function MenusCanteenContainer({
       ) : !filteredMenus.length ? (
         <Alert theme={customTheme} color='info' icon={HiInformationCircle}>
           <p className='px-3'>
-            Tidak ada menu untuk kategori {categoryFilter}.
+            Tidak ada kategori {categoryFilter}.
           </p>
         </Alert>
       ) : (

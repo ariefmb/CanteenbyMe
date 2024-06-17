@@ -6,7 +6,6 @@ import MenusMobileContainer from '@/components/container/menus-mobile-container'
 import { retrieveAllCanteens, retrieveDetailCanteenWithId } from '@/libs/apis';
 import { TCanteens, TMenus } from '@/libs/types';
 import { useEffect, useState } from 'react';
-import { SkeletonTheme } from 'react-loading-skeleton';
 
 interface CanteenProps {
   params: {
