@@ -144,7 +144,7 @@ export default function CartSection({ isLoading }: CartSectionProps) {
         isVisible ? 'bottom-0' : '-bottom-20'
       } ${
         !cart.length ? 'translate-y-20' : 'translate-y-0'
-      } md:absolute md:translate-y-0 md:bottom-5 md:w-[350px] md:rounded-xl`}
+      } md:absolute md:translate-y-0 md:bottom-3 md:w-[350px] md:rounded-xl`}
     >
       {isLoading ? (
         <div

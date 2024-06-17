@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import MenusCanteenContainer from './menus-canteen-container';
 import { TMenus } from '@/libs/types';
 import CartSection from '../UI/cart-section';
+import CategoryFilter from '../UI/category-filter';
 
 interface MenusContainerProps {
   menus: TMenus[];
@@ -35,7 +36,7 @@ export default function MenusDesktopContainer({
   }, [lastScrollY]);
 
   return (
-    <div className='relative flex justify-center gap-14'>
+    <div className='relative w-full min-h-[350px] flex justify-center gap-14'>
       <section className='w-2/3 flex justify-center'>
         <MenusCanteenContainer menus={menus} isLoading={isLoading} />
       </section>
@@ -44,10 +45,14 @@ export default function MenusDesktopContainer({
           isFixed ? 'fixed top-10' : 'sticky -top-52'
         }`}
       >
-        <div className='w-full text-left font-bold text-slate-800 text-xl'></div>
-        <div className='dropdown w-full flex items-center justify-center h-10 bg-slate-400 rounded-xl'>
-          Pilih Kategori
-        </div>
+        <section className='w-full'>
+          <div className='w-full text-left font-bold text-slate-800 text-xl mb-2'>
+            Pilih Kategori Menu
+          </div>
+          <div className='dropdown w-full flex flex-col gap-1 items-center justify-center min-h-10 text-slate-800 font-bold rounded-xl'>
+            <CategoryFilter />
+          </div>
+        </section>
 
         <CartSection isLoading={isLoading} />
       </section>

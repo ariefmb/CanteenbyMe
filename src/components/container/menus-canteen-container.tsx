@@ -13,7 +13,7 @@ interface MenusCanteenContainerProps {
 }
 
 const customTheme: CustomFlowbiteTheme['alert'] = {
-  base: 'flex flex-col p-4 text-sm mx-auto md:w-fit',
+  base: 'flex flex-col p-4 text-sm mx-auto md:w-full md:items-center',
   color: {
     failure:
       'bg-red-200 text-red-700 transition-all duration-300 hover:bg-red-300',
@@ -65,7 +65,7 @@ export default function MenusCanteenContainer({
   const sortedMenus = sortMenus(filteredMenus);
 
   return (
-    <div className='text-slate-800'>
+    <div className='text-slate-800 w-full'>
       {loading ? (
         <MenusCardSkeleton cards={5} />
       ) : !menus?.length ? (
@@ -74,9 +74,7 @@ export default function MenusCanteenContainer({
         </Alert>
       ) : !filteredMenus.length ? (
         <Alert theme={customTheme} color='info' icon={HiInformationCircle}>
-          <p className='px-3'>
-            Tidak ada kategori {categoryFilter}.
-          </p>
+          <p className='px-3'>Tidak ada kategori {categoryFilter}.</p>
         </Alert>
       ) : (
         <div className='flex flex-col items-center gap-5 mx-auto'>
