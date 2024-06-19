@@ -23,7 +23,7 @@ const customTheme: CustomFlowbiteTheme['button'] = {
 
 interface SearchBarProps {
   canteens: TCanteens[] | undefined;
-  loading: boolean;
+  loading?: boolean;
 }
 
 export default function SearchBarContainer({
@@ -37,9 +37,9 @@ export default function SearchBarContainer({
         Mau makan apa?
       </Button>
     </div>
-  ) : (
+  ) : canteens ? (
     <AlgoliaProvider>
       <SearchBar canteens={canteens} />
     </AlgoliaProvider>
-  );
+  ) : null;
 }

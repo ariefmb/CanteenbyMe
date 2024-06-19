@@ -1,17 +1,16 @@
 'use client';
 
-import { TCanteens } from '@/libs/types';
 import CanteenCard from '@/components/UI/canteen-card';
-import { HiInformationCircle } from 'react-icons/hi';
+import { TCanteens } from '@/libs/types';
 import { Alert, CustomFlowbiteTheme } from 'flowbite-react';
-import Skeleton from 'react-loading-skeleton';
-import { Card } from 'flowbite-react';
+import { HiInformationCircle } from 'react-icons/hi';
 import 'react-loading-skeleton/dist/skeleton.css';
 import CanteensCardSkeleton from '../skeletons/canteens-card-skeleton';
 
 interface CanteensContainerProps {
   canteens?: TCanteens[];
   loading?: boolean;
+  error?: string;
 }
 
 const customTheme: CustomFlowbiteTheme['alert'] = {
@@ -25,6 +24,7 @@ const customTheme: CustomFlowbiteTheme['alert'] = {
 export default function CanteensContainer({
   canteens,
   loading,
+  error,
 }: CanteensContainerProps) {
   return (
     <div className='w-full min-h-screen'>
@@ -34,12 +34,12 @@ export default function CanteensContainer({
       <div className='flex flex-wrap py-5 justify-center gap-5 md:justify-around'>
         {loading ? (
           <CanteensCardSkeleton cards={6} />
-        ) : !canteens ? (
+        ) : error ? (
           <Alert theme={customTheme} color='failure' icon={HiInformationCircle}>
-            <p className='px-3'>All Menus will be displayed here.</p>
+            <p className='px-3'>{error}</p>
           </Alert>
         ) : (
-          canteens.map((canteen) => (
+          canteens?.map((canteen) => (
             <CanteenCard key={canteen.id} canteen={canteen} />
           ))
         )}
