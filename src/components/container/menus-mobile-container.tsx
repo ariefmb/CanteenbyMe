@@ -6,11 +6,13 @@ import DropdownComponent from '../UI/dropdown';
 interface MenusContainerProps {
   menus: TMenus[];
   isLoading: boolean;
+  error?: string;
 }
 
 export default function MenusMobileContainer({
   menus,
   isLoading,
+  error,
 }: MenusContainerProps) {
   return (
     <>
@@ -18,7 +20,11 @@ export default function MenusMobileContainer({
         <DropdownComponent />
       </section>
       <section>
-        <MenusCanteenContainer menus={menus} isLoading={isLoading} />
+        <MenusCanteenContainer
+          menus={menus}
+          isLoading={isLoading}
+          error={error}
+        />
       </section>
       <section className='w-full flex justify-center'>
         <CartSection isLoading={isLoading} />

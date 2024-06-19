@@ -52,10 +52,18 @@ export default function Canteen({ params }: CanteenProps) {
         {canteenName}
       </div>
       <div className='w-full flex flex-col gap-2 py-2 mb-5 md:hidden'>
-        <MenusMobileContainer menus={menus} isLoading={fetchMenusIsLoading} />
+        <MenusMobileContainer
+          menus={menus}
+          isLoading={fetchMenusIsLoading}
+          error={fetchMenusError?.message}
+        />
       </div>
       <div className='hidden md:flex justify-center w-full py-2 mb-5'>
-        <MenusDesktopContainer menus={menus} isLoading={fetchMenusIsLoading} />
+        <MenusDesktopContainer
+          menus={menus}
+          isLoading={fetchMenusIsLoading}
+          error={fetchMenusError?.message}
+        />
       </div>
     </section>
   );

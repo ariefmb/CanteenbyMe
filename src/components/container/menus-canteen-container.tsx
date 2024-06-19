@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 interface MenusCanteenContainerProps {
   menus: TMenus[];
   isLoading: boolean;
+  error?: string;
 }
 
 const customTheme: CustomFlowbiteTheme['alert'] = {
@@ -42,6 +43,7 @@ const sortMenus = (menus: TMenus[]): Record<string, TMenus[]> => {
 export default function MenusCanteenContainer({
   menus,
   isLoading,
+  error,
 }: MenusCanteenContainerProps) {
   const { categoryFilter } = useCategoryContext();
   const [loading, setLoading] = useState(isLoading);
@@ -68,9 +70,9 @@ export default function MenusCanteenContainer({
     <div className='text-slate-800 w-full'>
       {loading ? (
         <MenusCardSkeleton cards={5} />
-      ) : !menus?.length ? (
+      ) : error ? (
         <Alert theme={customTheme} color='failure' icon={HiInformationCircle}>
-          <p className='px-3'>All Menus will be displayed here.</p>
+          <p className='px-3'>{error}</p>
         </Alert>
       ) : !filteredMenus.length ? (
         <Alert theme={customTheme} color='info' icon={HiInformationCircle}>

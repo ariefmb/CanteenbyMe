@@ -1,19 +1,21 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import MenusCanteenContainer from './menus-canteen-container';
 import { TMenus } from '@/libs/types';
+import { useEffect, useState } from 'react';
 import CartSection from '../UI/cart-section';
 import CategoryFilter from '../UI/category-filter';
+import MenusCanteenContainer from './menus-canteen-container';
 
 interface MenusContainerProps {
   menus: TMenus[];
   isLoading: boolean;
+  error?: string;
 }
 
 export default function MenusDesktopContainer({
   menus,
   isLoading,
+  error,
 }: MenusContainerProps) {
   const [isFixed, setIsFixed] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -38,7 +40,11 @@ export default function MenusDesktopContainer({
   return (
     <div className='relative w-full min-h-[350px] flex justify-center gap-14'>
       <section className='w-2/3 flex justify-center'>
-        <MenusCanteenContainer menus={menus} isLoading={isLoading} />
+        <MenusCanteenContainer
+          menus={menus}
+          isLoading={isLoading}
+          error={error}
+        />
       </section>
       <section
         className={`scrollbar w-[350px] max-h-[350px] flex flex-col justify-start items-center gap-5 transition-all duration-500 sticky top-0 ${
