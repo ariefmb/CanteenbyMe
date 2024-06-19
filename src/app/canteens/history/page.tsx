@@ -2,9 +2,9 @@
 
 import HomeButton from '@/components/UI/home-button';
 import HistoryOrdersContainer from '@/components/container/history-orders-container';
-import React from 'react';
 import circleLeftBottom from '@/images/background/circle-left-bottom.png';
 import Image from 'next/image';
+import { ToastContainer } from 'react-toastify';
 
 export default function History() {
   return (

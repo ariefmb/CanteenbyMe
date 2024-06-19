@@ -1,9 +1,15 @@
 'use client';
 
 import { useCartContext } from '@/context/cart.context';
-import { createOrder } from '@/libs/apis';
-import { TCreateOrder, TInvoice } from '@/libs/types';
-import { Button, CustomFlowbiteTheme, Label, Radio } from 'flowbite-react';
+import { useCreateOrder } from '@/hook/useCreateOrder';
+import { TCreateOrder } from '@/libs/types';
+import {
+  Button,
+  CustomFlowbiteTheme,
+  Label,
+  Radio,
+  Spinner,
+} from 'flowbite-react';
 import { useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -12,6 +18,13 @@ import { HiShoppingCart } from 'react-icons/hi';
 const customRadioTheme: CustomFlowbiteTheme['radio'] = {
   root: {
     base: 'h-4 w-4 border border-gray-500 text-primary focus:ring-2 focus:ring-primary',
+  },
+};
+
+const customSpinnerTheme: CustomFlowbiteTheme['spinner'] = {
+  base: 'inline animate-spin text-gray-200',
+  color: {
+    purple: 'fill-purple-600',
   },
 };
 
@@ -47,14 +60,22 @@ export default function OrderCreate() {
   const params = useSearchParams();
   const tableParams = params ? parseInt(params.get('table') || '1') : 0;
   const router = useRouter();
-  const targetUrl: string = 'https://canteenbyme.vercel.app';
+  const targetUrl = window.location.origin;
 
   const [totalPesanan, setTotalPesanan] = useState('Rp 0,00');
   const [fee, setFee] = useState('Rp 0,00');
   const [totalBayar, setTotalBayar] = useState('Rp 0,00');
   const [paymentMethod, setPaymentMethod] = useState('');
+  const [error, setError] = useState<string | undefined>();
   const totalPrice = getTotalPrice();
   const fees = totalPrice !== 0 ? 500 : 0;
+
+  const {
+    mutate: createOrder,
+    isPending: createOrderIsLoading,
+    error: createOrderError,
+    data: createOrderResponse,
+  } = useCreateOrder();
 
   useEffect(() => {
     const formattedTotalPesanan = new Intl.NumberFormat('id', {
@@ -89,7 +110,7 @@ export default function OrderCreate() {
       quantity: item.quantity,
     }));
 
-    const data: TCreateOrder = {
+    const orderData: TCreateOrder = {
       redirectUrl: `${
         paymentMethod === 'Cash'
           ? `${targetUrl}/pay-bill?${params}`
@@ -98,27 +119,24 @@ export default function OrderCreate() {
       userName: userSession?.name,
       userEmail: userSession?.email,
       tableNumber: tableParams,
-      fees: totalPrice + fees,
+      fees: fees,
       orderMenus: orderMenus,
     };
 
-    try {
-      const response: TInvoice = await createOrder(data);
-      if (paymentMethod === 'Cash') {
+    createOrder(orderData, {
+      onSuccess: (response) => {
         clearCart();
-        router.push(`${targetUrl}/pay-bill?${params}`);
-        return;
-      }
-      if (response && response.invoiceUrl) {
-        clearCart();
-        router.push(response.invoiceUrl);
-      }
-    } catch (error) {
-      console.error('Error creating order:', error);
-      throw error;
-    }
+        if (response.invoiceUrl) {
+          router.push(response.invoiceUrl);
+        } else {
+          router.push(`${targetUrl}/pay-bill?${params}`);
+        }
+      },
+      onError: (error) => {
+        setError(error.message);
+      },
+    });
   };
-
   return (
     <>
       <div className='w-full flex flex-col shadow-[0_0_5px_#333] rounded-xl border border-slate-800 text-slate-600 p-3 my-3 gap-2'>
@@ -185,10 +203,15 @@ export default function OrderCreate() {
           theme={customButtonTheme}
           color='buttonPrimary'
           size='sm'
+          disabled={createOrderIsLoading}
           onClick={handleCreateOrder}
         >
-          Buat Pesanan
-          <HiShoppingCart size={25} />
+          {!createOrderIsLoading && <HiShoppingCart size={25} />}
+          {createOrderIsLoading ? (
+            <Spinner theme={customSpinnerTheme} color='purple' />
+          ) : (
+            'Buat Pesanan'
+          )}
         </Button>
       </div>
     </>

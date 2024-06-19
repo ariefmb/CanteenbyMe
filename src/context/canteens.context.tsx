@@ -6,7 +6,8 @@ import { createContext, useContext } from 'react';
 export const CanteenContext = createContext(
   {} as {
     canteens: TCanteens[] | undefined;
-    loading: boolean;
+    loading: boolean | undefined;
+    error: string | undefined;
   }
 );
 
@@ -17,5 +18,5 @@ export function useCanteenContext() {
     throw new Error('useCanteenContext harus digunakan dalam CanteenProvider');
   }
 
-  return context
+  return context;
 }

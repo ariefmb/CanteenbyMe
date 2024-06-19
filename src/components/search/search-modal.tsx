@@ -81,18 +81,9 @@ const customTheme: CustomFlowbiteTheme = {
 };
 
 export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const queryHook: SearchBoxProps['queryHook'] = (query, search) => {
-    setIsLoading(true);
     search(query);
   };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const pathname = usePathname();
   const params = useSearchParams();
@@ -232,11 +223,7 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
         </Modal.Header>
         <Modal.Body>
           <div className='flex flex-col'>
-            {isLoading ? (
-              <SearchResultSkeleton cards={10} />
-            ) : (
-              <Hits hitComponent={SearchResult} />
-            )}
+            <Hits hitComponent={SearchResult} />
           </div>
         </Modal.Body>
         {!hideCart && (
