@@ -15,9 +15,12 @@ export default function Canteens() {
 
   return (
     <section className='mx-auto py-5 px-10 bg-background'>
-      <section className='hidden bg-primary rounded-full w-[75px] h-[75px] shadow-[0_0_5px_#000] hover:scale-105 transition-all duration-500 md:block absolute right-10'>
-        {userSession === 'authenticated' && <HistoryOrderDesktopCTA />}
-      </section>
+      {userSession === 'authenticated' && (
+        <section className='hidden bg-primary rounded-full w-[75px] h-[75px] shadow-[0_0_5px_#000] hover:scale-105 transition-all duration-500 md:block absolute right-10'>
+          <HistoryOrderDesktopCTA />
+        </section>
+      )}
+
       <section>
         <SearchBarContainer canteens={canteens} loading={loading} />
       </section>

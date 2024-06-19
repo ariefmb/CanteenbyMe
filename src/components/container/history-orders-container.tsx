@@ -1,38 +1,35 @@
 'use client';
 
-import { getHistoryOrderByUserId } from '@/libs/apis';
-import { THistoryOrders } from '@/libs/types';
-import { useEffect, useState } from 'react';
+import { useFetchOrderHistory } from '@/hook/useFetchOrderHistory';
+import { useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import HistoryOrderCard from '../UI/history-order-card';
 import HistoryOrderNotFound from '../UI/history-order-notfound';
 import HistoryCardSkeleton from '../skeletons/history-card-skeleton';
 
 export default function HistoryOrdersContainer() {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [historyOrders, setHistoryOrders] = useState<
-    THistoryOrders[] | undefined
-  >();
+  const {
+    data: fetchOrderHistory,
+    isLoading: fetchOrderHistoryIsLoading,
+    error: fetchOrderHistoryError,
+  } = useFetchOrderHistory();
 
   useEffect(() => {
-    const getAllHistoryOrders = async () => {
-      try {
-        setIsLoading(true);
-        const historyOrders: THistoryOrders[] = await getHistoryOrderByUserId();
-        setHistoryOrders(historyOrders);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('error when fetching canteens', error);
-      }
-    };
-
-    getAllHistoryOrders();
-  }, []);
+    toast.error(fetchOrderHistoryError?.message, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      progress: undefined,
+      theme: 'light',
+    });
+  }, [fetchOrderHistoryError]);
 
   return (
     <div className='w-full h-full'>
-      {isLoading ? (
+      {fetchOrderHistoryIsLoading ? (
         <HistoryCardSkeleton cards={3} />
-      ) : !historyOrders ? (
+      ) : !fetchOrderHistory || fetchOrderHistoryError ? (
         <HistoryOrderNotFound />
       ) : (
         <div className='w-full h-full'>
@@ -41,11 +38,13 @@ export default function HistoryOrdersContainer() {
               Riwayat Pesanan
             </h1>
           </div>
-          {historyOrders.map((historyOrder) => (
+          {fetchOrderHistory.map((historyOrder) => (
             <HistoryOrderCard historyOrder={historyOrder} />
           ))}
         </div>
       )}
+
+      <ToastContainer />
     </div>
   );
 }

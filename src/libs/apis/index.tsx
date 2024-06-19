@@ -1,7 +1,13 @@
 'use server';
 import { Session } from 'next-auth';
 import getSession from '../auth/getSession';
-import { TCanteens, TCreateOrder, TMenus } from '../types';
+import {
+  TCanteens,
+  TCreateOrder,
+  THistoryOrders,
+  TInvoice,
+  TMenus,
+} from '../types';
 import axiosInstance from '../utils/axios';
 
 export async function retrieveAllCanteens(): Promise<TCanteens[]> {
@@ -26,7 +32,7 @@ export async function retrieveDetailCanteenWithId(
   }
 }
 
-export async function createOrder(data: TCreateOrder) {
+export async function createOrder(data: TCreateOrder): Promise<TInvoice> {
   try {
     const session = (await getSession()) as Session;
     const userId: string = session?.user.id ?? '';
@@ -47,7 +53,7 @@ export async function createOrder(data: TCreateOrder) {
   }
 }
 
-export async function getHistoryOrderByUserId() {
+export async function getHistoryOrderByUserId(): Promise<THistoryOrders[]> {
   try {
     const session = (await getSession()) as Session;
     const userId: string = session?.user.id ?? '';
