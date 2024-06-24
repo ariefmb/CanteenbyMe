@@ -115,10 +115,6 @@ const customModalTheme: CustomFlowbiteTheme['modal'] = {
   },
 };
 
-// const customTheme: CustomFlowbiteTheme = {
-//   button: {},
-// };
-
 export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
   const queryHook: SearchBoxProps['queryHook'] = (query, search) => {
     search(query);
