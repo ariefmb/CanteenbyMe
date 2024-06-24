@@ -3,13 +3,7 @@
 import { useCartContext } from '@/context/cart.context';
 import { useSearchContext } from '@/context/search.context';
 import { TCanteens } from '@/libs/types';
-import {
-  Button,
-  Card,
-  CustomFlowbiteTheme,
-  Flowbite,
-  Modal,
-} from 'flowbite-react';
+import { Button, Card, CustomFlowbiteTheme, Modal } from 'flowbite-react';
 import { AlgoliaHit } from 'instantsearch.js';
 import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -98,7 +92,8 @@ const customModalTheme: CustomFlowbiteTheme['modal'] = {
   },
   content: {
     base: 'relative flex items-center justify-center h-full w-full p-4 md:h-auto md:w-1/2',
-    inner: 'relative flex max-h-[90dvh] flex-col rounded-lg bg-white shadow md:w-[100%]',
+    inner:
+      'relative flex max-h-[90dvh] flex-col rounded-lg bg-white shadow md:w-[100%]',
   },
   body: {
     base: 'flex-1 overflow-auto p-6 w-full',

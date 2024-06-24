@@ -36,7 +36,7 @@ const customModalTheme: CustomFlowbiteTheme['modal'] = {
     },
   },
   content: {
-    base: 'relative flex items-center justify-center h-full w-full p-4 md:h-auto md:w-full md:mx-auto',
+    base: 'relative flex items-center justify-center h-full w-full p-4 md:h-auto md:w-fit md:mx-auto',
     inner:
       'relative flex max-h-[90dvh] flex-col rounded-lg bg-white shadow md:w-[100%]',
   },
