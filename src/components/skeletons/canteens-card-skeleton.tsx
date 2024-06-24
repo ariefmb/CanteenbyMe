@@ -1,4 +1,3 @@
-import { Popover } from 'flowbite-react';
 import React from 'react';
 
 interface CardSkeletonProps {

@@ -18,8 +18,6 @@ import { HiMinus, HiPlus } from 'react-icons/hi';
 import { HiShoppingCart } from 'react-icons/hi2';
 import { Hits, SearchBoxProps } from 'react-instantsearch';
 import SearchInput from './search-input';
-import SearchResultSkeleton from '../skeletons/search-result-skeleton';
-import { useEffect, useState } from 'react';
 
 type HitProps = {
   hit: AlgoliaHit<{

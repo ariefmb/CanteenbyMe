@@ -3,7 +3,6 @@
 import { CanteenContext } from '@/context/canteens.context';
 import { retrieveAllCanteens } from '@/libs/apis';
 import { TCanteens } from '@/libs/types';
-import { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 
 export default function CanteensProvider({

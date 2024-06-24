@@ -1,10 +1,8 @@
 'use client';
 
-import HistoryButton from '@/components/UI/history-button';
 import HomeButton from '@/components/UI/home-button';
 import circleLeftBottom from '@/images/background/circle-left-bottom.png';
 import circleTopRight from '@/images/background/circle-top-right.png';
-import orderVerified from '@/images/icon/order-verified.png';
 import icon404 from '@/images/icon/404-icon.png';
 import CBMLogo from '@/images/logo/cbm-side-logo.png';
 import Image from 'next/image';
