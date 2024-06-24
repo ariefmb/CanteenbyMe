@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CanteenbyMe
+
+<div align='center' style='width:fit-content; height:100%; background-color:white; margin:0 auto; border-radius:20px; padding:10px 0;'>
+  <img src='./public/images/logo/cbm-side-logo.png' alt='Logo CanteenbyMe' />
+</div>
+
+> Meet Our Best Team
+>
+> 1. [Muhammad Arief Budiman](https://github.com/ariefmb)
+> 2. [Agung Dwi Kurniyanto](https://github.com/dhekaag)
+> 3. [Tegar Hartoto Rahmatulloh](https://github.com/ggghart)
+
+> CanteenbyMe adalah web yang kami buat dengan sepenuh hati. CanteenbyMe adalah solusi untuk pemesanan menu makanan yang efisien di kantin UPNVJ. Dengan CanteenbyMe, kami berharap dapat mempermudah proses pemesanan dan membangun hubungan sosial yang baik antara penjual dan konsumen di kantin UPNVJ.
 
 ## Getting Started
 
-First, run the development server:
+Silakan ikuti langkah-langkah di bawah ini untuk memulai sesuatu yang lebih besar!
+
+1. Clone Repository
+
+```bash
+git clone https://github.com/ariefmb/CanteenbyMe.git
+```
+
+2. Install Packages
+
+```bash
+npm install
+```
+
+3. Jalankan Aplikasi
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka [http://localhost:3001](http://localhost:3001) menggunakan browser Anda untuk melihat hasilnya.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Kontribusi Tim
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+> "Dalam kesatuan ada kekuatan. Ketika ada kerja sama dan kolaborasi, hal-hal indah dapat dicapai."
 
-## Learn More
+Untuk pengembangan lebih lanjut, silakan ikuti pedoman berikut ini.
 
-To learn more about Next.js, take a look at the following resources:
+1. Membuat local branch bernama `development` sekaligus mengubungkannya ke remote branch bernama `origin/development`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+git checkout development
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. Kembali membuat local branch untuk menampung perubahan yang telah dibuat.
 
-## Deploy on Vercel
+```bash
+git checkout -b <branch-name>
+git push -u origin <branch-name>
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Buat perubahan dan commit perubahan tersebut.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+git add .
+git commit -m <commit-name>
+```
+
+4. Lakukan push untuk mengumpulkan perubahan yang sudah dibuat.
+
+```bash
+git push
+```
+
+5. kirim permintaan untuk `pull & merge request` dengan mengunjungi halaman [repository ini](https://github.com/ariefmb/CanteenbyMe.git).
+6. Ulangi langkah-langkah tersebut.
+
+<div align="center">
+  </br>
+  </br>
+  <p style="font-weight: 700;">~~~~~~ | SELAMAT BERSENANG-SENANG! | ~~~~~~~</p>
+</div>
