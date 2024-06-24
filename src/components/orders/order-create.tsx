@@ -13,7 +13,9 @@ import {
 import { useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import { FaCheckCircle } from 'react-icons/fa';
 import { HiShoppingCart } from 'react-icons/hi';
+import { ToastContainer, toast } from 'react-toastify';
 
 const customRadioTheme: CustomFlowbiteTheme['radio'] = {
   root: {
@@ -51,6 +53,20 @@ const customButtonTheme: CustomFlowbiteTheme['button'] = {
   size: {
     sm: 'p-2 text-lg md:text-xl font-bold',
   },
+};
+
+const toastOrder = (message: string) => {
+  return toast.info(message, {
+    bodyStyle: { color: 'slategray' },
+    icon: <FaCheckCircle color='#6B76AD' size={24} />,
+    progressStyle: { backgroundColor: '#6B76AD' },
+    position: 'top-right',
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    progress: undefined,
+    theme: 'light',
+  });
 };
 
 export default function OrderCreate() {
@@ -126,13 +142,17 @@ export default function OrderCreate() {
     createOrder(orderData, {
       onSuccess: (response) => {
         clearCart();
-        if (response.invoiceUrl) {
+        toastOrder('order created, redirect for payment');
+        if (paymentMethod === 'Cash') {
+          router.push(`${targetUrl}/pay-bill?${params}`);
+        } else if (response.invoiceUrl && paymentMethod === 'E-Wallet') {
           router.push(response.invoiceUrl);
         } else {
           router.push(`${targetUrl}/pay-bill?${params}`);
         }
       },
       onError: (error) => {
+        toast.error(error.message);
         setError(error.message);
       },
     });
@@ -213,6 +233,7 @@ export default function OrderCreate() {
             'Buat Pesanan'
           )}
         </Button>
+        <ToastContainer />
       </div>
     </>
   );
