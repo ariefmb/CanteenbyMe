@@ -1,8 +1,8 @@
 'use client';
 
 import BackCTA from '@/components/UI/back-cta';
-import MenusDesktopContainer from '@/components/container/menus-desktop-container';
-import MenusMobileContainer from '@/components/container/menus-mobile-container';
+import MenusDesktopContainer from '@/components/menus/menus-desktop-container';
+import MenusMobileContainer from '@/components/menus/menus-mobile-container';
 import { useCanteenContext } from '@/context/canteens.context';
 import { useFetchMenus } from '@/hook/useFetchMenus';
 import { TCanteens, TMenus } from '@/libs/types';

@@ -152,11 +152,6 @@ export default function OrderCreate() {
             response.invoiceId,
             new Date(Date.now() + 60 * 60 * 1000)
           );
-          // cookie.set('invoiceId', response.invoiceId, {
-          //   httpOnly: true,
-          //   secure: true,
-          //   expires: new Date(Date.now() + 60 * 60 * 1000),
-          // });
           router.push(response.invoiceUrl);
         } else {
           router.push(`${targetUrl}/pay-bill?${params}`);

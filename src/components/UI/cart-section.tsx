@@ -1,7 +1,7 @@
 'use client';
 
 import { useCartContext } from '@/context/cart.context';
-import { Button, Card, CustomFlowbiteTheme, Flowbite } from 'flowbite-react';
+import { Button, Card, CustomFlowbiteTheme } from 'flowbite-react';
 import { signIn, useSession } from 'next-auth/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -97,7 +97,6 @@ export default function CartSection({ isLoading }: CartSectionProps) {
   }
 
   return (
-    // <Flowbite theme={{ theme: customTheme }}>
     <Card
       theme={customCardTheme}
       className={`fixed w-full h-[62px] transition-all duration-500 ${
@@ -126,6 +125,5 @@ export default function CartSection({ isLoading }: CartSectionProps) {
         <HiShoppingCart size={25} />
       </Button>
     </Card>
-    // </Flowbite>
   );
 }

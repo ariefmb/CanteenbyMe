@@ -3,8 +3,8 @@
 import { useFetchOrderHistory } from '@/hook/useFetchOrderHistory';
 import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import HistoryOrderCard from '../UI/history-order-card';
-import HistoryOrderNotFound from '../UI/history-order-notfound';
+import HistoryOrderCard from './history-order-card';
+import HistoryOrderNotFound from './history-order-notfound';
 import HistoryCardSkeleton from '../skeletons/history-card-skeleton';
 
 export default function HistoryOrdersContainer() {

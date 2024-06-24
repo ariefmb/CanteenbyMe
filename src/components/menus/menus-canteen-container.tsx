@@ -4,7 +4,7 @@ import { Alert, CustomFlowbiteTheme } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { HiInformationCircle } from 'react-icons/hi';
 import { ToastContainer } from 'react-toastify';
-import MenusCard from '../UI/menus-card';
+import MenusCard from './menus-card';
 import MenusCardSkeleton from '../skeletons/menus-card-skeleton';
 
 interface MenusCanteenContainerProps {
