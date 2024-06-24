@@ -23,7 +23,6 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log('🚀 axiosInstance ~ error:', error);
     return Promise.reject(error);
   }
 );
@@ -37,7 +36,6 @@ axiosInstance.interceptors.response.use(
       error.response.status >= 400 &&
       error.response.status <= 500
     ) {
-      console.log('Request error:', error);
       throw new Error('Terjadi Kesalahan pada server, mohon hubungi developer');
     } else {
       console.error('Response error:', error);
