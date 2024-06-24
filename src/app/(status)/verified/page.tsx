@@ -43,9 +43,15 @@ export default function Verified() {
             <h1 className='font-extrabold text-lg text-slate-800'>
               Pembayaran Terverifikasi
             </h1>
-            <p className='text-lg text-slate-800'>
-              No pesanan anda: xxx-xxx-xxx
-            </p>
+            <Suspense
+              fallback={
+                <Skeleton width={200} height={100} baseColor='#495076' />
+              }
+            >
+              <p className='text-lg text-slate-800'>
+                No pesanan anda: {invoiceId}
+              </p>
+            </Suspense>
           </div>
           <Image
             src={orderVerified}
@@ -55,52 +61,28 @@ export default function Verified() {
             className='block z-10 md:w-[150px] md:h-[150px]'
             priority
           />
-          <div className='flex flex-col items-center justify-evenly bg-gradient-to-b from-white to-primary rounded-[20px] mx-auto w-[321px] h-[402px] md:h-[325px] z-10'>
-            <div className='text-center'>
-              <h1 className='font-extrabold text-lg text-slate-800'>
-                Pembayaran Terverifikasi
-              </h1>
-              <Suspense
-                fallback={
-                  <Skeleton width={200} height={100} baseColor='#495076' />
-                }
-              >
-                <p className='text-lg text-slate-800'>
-                  No pesanan anda: {invoiceId}
-                </p>
-              </Suspense>
-            </div>
-            <Image
-              src={orderVerified}
-              alt='background top right'
-              width={204}
-              height={204}
-              className='block z-10 md:w-[150px] md:h-[150px]'
-              priority
-            />
-            <div className='text-center'>
-              <h1 className='font-extrabold text-lg text-slate-800'>
-                Mohon tunggu,
-              </h1>
-              <p className='text-sm font-bold text-slate-800'>
-                pesanan anda sedang diproses
-              </p>
-            </div>
-          </div>
-          <div className='flex flex-col gap-3 md:flex-row'>
-            <HistoryButton />
-            <HomeButton />
+          <div className='text-center'>
+            <h1 className='font-extrabold text-lg text-slate-800'>
+              Mohon tunggu,
+            </h1>
+            <p className='text-sm font-bold text-slate-800'>
+              pesanan anda sedang diproses
+            </p>
           </div>
         </div>
-        <Image
-          src={circleLeftBottom}
-          alt='background top right'
-          width={100}
-          height={100}
-          className='fixed bottom-0 left-0'
-          priority
-        />
+        <div className='flex flex-col gap-3 md:flex-row'>
+          <HistoryButton />
+          <HomeButton />
+        </div>
       </div>
+      <Image
+        src={circleLeftBottom}
+        alt='background top right'
+        width={100}
+        height={100}
+        className='fixed bottom-0 left-0'
+        priority
+      />
     </div>
   );
 }

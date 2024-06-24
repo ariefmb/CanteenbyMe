@@ -72,12 +72,12 @@ const toastOrder = (message: string) => {
 
 export default function OrderCreate() {
   const { data: session } = useSession();
+  const [targetUrl, setTargetUrl] = useState('')
   const userSession = session?.user;
   const { cart, getTotalPrice, clearCart } = useCartContext();
   const params = useSearchParams();
   const tableParams = params ? parseInt(params.get('table') || '1') : 0;
   const router = useRouter();
-  const targetUrl = window.location.origin;
 
   const [totalPesanan, setTotalPesanan] = useState('Rp 0,00');
   const [fee, setFee] = useState('Rp 0,00');
@@ -95,6 +95,7 @@ export default function OrderCreate() {
   } = useCreateOrder();
 
   useEffect(() => {
+    setTargetUrl(window.location.origin)
     const formattedTotalPesanan = new Intl.NumberFormat('id', {
       style: 'currency',
       currency: 'IDR',
@@ -152,11 +153,6 @@ export default function OrderCreate() {
             response.invoiceId,
             new Date(Date.now() + 60 * 60 * 1000)
           );
-          // cookie.set('invoiceId', response.invoiceId, {
-          //   httpOnly: true,
-          //   secure: true,
-          //   expires: new Date(Date.now() + 60 * 60 * 1000),
-          // });
           router.push(response.invoiceUrl);
         } else {
           router.push(`${targetUrl}/pay-bill?${params}`);

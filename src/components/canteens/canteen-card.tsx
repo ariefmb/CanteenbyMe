@@ -1,8 +1,8 @@
 'use client';
 
 import { TCanteens } from '@/libs/types';
-import CanteenOpenCard from '@/components/UI/canteen-open-card';
-import CanteenCloseCard from '@/components/UI/canteen-close-card';
+import CanteenOpenCard from './canteen-open-card';
+import CanteenCloseCard from './canteen-close-card';
 
 interface CanteenCardProps {
   canteen: TCanteens;

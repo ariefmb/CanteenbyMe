@@ -1,6 +1,6 @@
 import SearchProvider from '@/providers/search-provider';
-import OrderCard from '../orders/order-card';
-import OrderCreate from '../orders/order-create';
+import OrderCard from './order-card';
+import OrderCreate from './order-create';
 import AlgoliaProvider from '../search/algolia-search';
 
 export default function OrderContainer() {

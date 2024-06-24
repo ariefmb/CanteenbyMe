@@ -1,6 +1,6 @@
 'use client';
 
-import OrderContainer from '@/components/container/orders-container';
+import OrderContainer from '@/components/orders/orders-container';
 import OrderHeader from '@/components/orders/order-header';
 
 export default function Orders() {

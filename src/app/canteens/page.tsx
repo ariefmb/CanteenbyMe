@@ -2,9 +2,9 @@
 
 import HistoryOrderDesktopCTA from '@/components/UI/history-order-desktop-cta';
 import HistoryOrderMobileCta from '@/components/UI/history-order-mobile-cta';
-import { AuthToast } from '@/components/UI/toast/auth-toast';
-import CanteensContainer from '@/components/container/canteens-container';
-import SearchBarContainer from '@/components/container/search-bar-container';
+import { AuthToast } from '@/components/UI/auth-toast';
+import CanteensContainer from '@/components/canteens/canteens-container';
+import SearchBarContainer from '@/components/search/search-bar-container';
 import { useCanteenContext } from '@/context/canteens.context';
 import { useSession } from 'next-auth/react';
 

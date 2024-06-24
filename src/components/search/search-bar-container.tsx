@@ -2,8 +2,8 @@ import { TCanteens } from '@/libs/types';
 import { Button, CustomFlowbiteTheme } from 'flowbite-react';
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
-import AlgoliaProvider from '../search/algolia-search';
-import SearchBar from '../UI/search-bar';
+import AlgoliaProvider from './algolia-search';
+import SearchBar from './search-bar';
 
 const customTheme: CustomFlowbiteTheme['button'] = {
   base: 'w-full h-10 md:w-2/3 md:h-[54px] flex items-center justify-start px-2 md:px-4 rounded-md mb-5',
