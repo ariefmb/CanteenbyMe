@@ -46,7 +46,7 @@ const customButtonTheme: CustomFlowbiteTheme['button'] = {
   base: 'border-none',
   color: {
     buttonAdd:
-      'bg-[#B5BEE3] transition-all duration-200 hover:rounded-full hover:bg-[#A2AACB]  active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
+      'bg-[#B5BEE3] transition-all duration-200 shadow-[0px_1px_5px_#000] hover:rounded-full hover:bg-[#A2AACB]  active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
     buttonPrimary:
       'w-2/3 bg-[#B5BEE3] transition-all duration-200 hover:rounded-xl hover:bg-[#A2AACB] active:bg-[#868EAF] active:ring-2 active:ring-[#6878BA]',
   },

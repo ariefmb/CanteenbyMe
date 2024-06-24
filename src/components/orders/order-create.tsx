@@ -32,7 +32,7 @@ const customSpinnerTheme: CustomFlowbiteTheme['spinner'] = {
 };
 
 const customButtonTheme: CustomFlowbiteTheme['button'] = {
-  base: 'border-none',
+  base: 'border-none shadow-[0px_1px_5px_#000]',
   color: {
     buttonPrimary:
       'w-full md:w-2/3 bg-primary transition-all duration-200 hover:bg-[#58628E] active:bg-[#495076] active:ring-2 active:ring-[#6878BA]',
