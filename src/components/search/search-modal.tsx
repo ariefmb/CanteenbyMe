@@ -91,7 +91,7 @@ const customModalTheme: CustomFlowbiteTheme['modal'] = {
     },
   },
   content: {
-    base: 'relative flex items-center justify-center h-full w-full p-4 md:h-auto md:w-1/2',
+    base: 'relative flex md:items-center justify-center h-full w-full p-4 md:h-auto md:w-1/2',
     inner:
       'relative flex max-h-[90dvh] flex-col rounded-lg bg-white shadow md:w-[100%]',
   },
