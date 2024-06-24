@@ -95,6 +95,7 @@ export default function RemoveItemAlert({
       size='md'
       onClose={onCancel}
       className='backdrop-blur-sm'
+      position='center'
       popup
     >
       <Modal.Header />

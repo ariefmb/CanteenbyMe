@@ -77,47 +77,47 @@ const customButtonTheme: CustomFlowbiteTheme['button'] = {
   },
 };
 
-// const customModalTheme: CustomFlowbiteTheme['modal'] = {
-//   root: {
-//     base: 'origin-bottom fixed z-50 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:w-full md:h-full',
-//     show: {
-//       on: 'flex bg-gray-900 bg-opacity-50',
-//       off: 'hidden',
-//     },
-//     positions: {
-//       'top-left': 'items-start justify-start',
-//       'top-center': 'items-start justify-center',
-//       'top-right': 'items-start justify-end',
-//       'center-left': 'items-center justify-start',
-//       center: 'items-center justify-center',
-//       'center-right': 'items-center justify-end',
-//       'bottom-right': 'items-end justify-end',
-//       'bottom-center': 'items-end justify-center',
-//       'bottom-left': 'items-end justify-start',
-//     },
-//   },
-//   content: {
-//     base: 'relative flex items-center h-full w-[200px] p-4 md:h-auto md:mx-auto',
-//     inner: 'relative flex max-h-[90dvh] flex-col rounded-lg bg-white shadow',
-//   },
-//   body: {
-//     base: 'flex-1 overflow-auto p-6',
-//     popup: 'pt-0',
-//   },
-//   header: {
-//     base: 'flex items-start justify-between rounded-t border-b p-5',
-//     popup: 'border-b-0 p-2',
-//     title: 'text-xl font-medium text-gray-900',
-//     close: {
-//       base: 'ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900',
-//       icon: 'h-5 w-5',
-//     },
-//   },
-// };
-
-const customTheme: CustomFlowbiteTheme = {
-  button: {},
+const customModalTheme: CustomFlowbiteTheme['modal'] = {
+  root: {
+    base: 'origin-bottom fixed inset-x-0 top-0 z-50 transition-all duration-500 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:w-full md:h-full',
+    show: {
+      on: 'flex bg-gray-900 bg-opacity-50',
+      off: 'hidden',
+    },
+    positions: {
+      'top-left': 'items-start justify-start',
+      'top-center': 'items-start justify-center',
+      'top-right': 'items-start justify-end',
+      'center-left': 'items-center justify-start',
+      center: 'items-center justify-center',
+      'center-right': 'items-center justify-end',
+      'bottom-right': 'items-end justify-end',
+      'bottom-center': 'items-end justify-center',
+      'bottom-left': 'items-end justify-start',
+    },
+  },
+  content: {
+    base: 'relative flex items-center justify-center h-full w-full p-4 md:h-auto md:w-1/2',
+    inner: 'relative flex max-h-[90dvh] flex-col rounded-lg bg-white shadow md:w-[100%]',
+  },
+  body: {
+    base: 'flex-1 overflow-auto p-6 w-full',
+    popup: 'pt-0',
+  },
+  header: {
+    base: 'flex items-start justify-between rounded-t border-b p-5',
+    popup: 'border-b-0 p-2',
+    title: 'text-xl font-medium text-gray-900',
+    close: {
+      base: 'ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900',
+      icon: 'h-5 w-5',
+    },
+  },
 };
+
+// const customTheme: CustomFlowbiteTheme = {
+//   button: {},
+// };
 
 export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
   const queryHook: SearchBoxProps['queryHook'] = (query, search) => {
@@ -248,7 +248,7 @@ export default function SearchModal({ canteens }: { canteens?: TCanteens[] }) {
 
   return (
     <Modal
-      // theme={customModalTheme}
+      theme={customModalTheme}
       show={onShow}
       dismissible
       size='2xl'
