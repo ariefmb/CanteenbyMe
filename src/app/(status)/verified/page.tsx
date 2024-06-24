@@ -1,15 +1,18 @@
-'use client'
+'use client';
 
 import HomeButton from '@/components/UI/home-button';
 import circleLeftBottom from '@/images/background/circle-left-bottom.png';
 import circleTopRight from '@/images/background/circle-top-right.png';
 import orderVerified from '@/images/icon/order-verified.png';
 import CBMLogo from '@/images/logo/cbm-side-logo.png';
+import { deleteCookie, getCookie } from '@/libs/cookies/cookies';
 import { Button, CustomFlowbiteTheme, Flowbite } from 'flowbite-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { Suspense, useEffect, useState } from 'react';
 import { HiShoppingCart } from 'react-icons/hi';
+import Skeleton from 'react-loading-skeleton';
 
 const customTheme: CustomFlowbiteTheme = {
   button: {
@@ -44,6 +47,13 @@ const customTheme: CustomFlowbiteTheme = {
 export default function Verified() {
   const params = useSearchParams();
 
+  const [invoiceId, setInvoiceId] = useState<string | undefined>();
+
+  useEffect(() => {
+    const invoiceId = getCookie('invoiceId');
+    setInvoiceId(invoiceId);
+  }, []);
+
   return (
     <Flowbite theme={{ theme: customTheme }}>
       <div className='bg-background max-h-screen'>
@@ -69,9 +79,15 @@ export default function Verified() {
               <h1 className='font-extrabold text-lg text-slate-800'>
                 Pembayaran Terverifikasi
               </h1>
-              <p className='text-lg text-slate-800'>
-                No pesanan anda: xxx-xxx-xxx
-              </p>
+              <Suspense
+                fallback={
+                  <Skeleton width={200} height={100} baseColor='#495076' />
+                }
+              >
+                <p className='text-lg text-slate-800'>
+                  No pesanan anda: {invoiceId}
+                </p>
+              </Suspense>
             </div>
             <Image
               src={orderVerified}
@@ -93,6 +109,9 @@ export default function Verified() {
           <div className='flex flex-col gap-3 md:flex-row'>
             <Button className='text-white' color='buttonOrder'>
               <Link
+                onClick={() => {
+                  deleteCookie('invoiceId');
+                }}
                 href={`/?${params}`}
                 className='w-full h-full md:w-36 flex items-center justify-center gap-2'
               >

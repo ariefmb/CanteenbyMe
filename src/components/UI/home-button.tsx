@@ -1,3 +1,4 @@
+import { deleteCookie } from '@/libs/cookies/cookies';
 import { Button, CustomFlowbiteTheme } from 'flowbite-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -36,6 +37,9 @@ export default function HomeButton() {
   return (
     <Button theme={customTheme} className='text-white' color='buttonHome'>
       <Link
+        onClick={() => {
+          deleteCookie('invoiceId');
+        }}
         href={`/?${params}`}
         className='w-full h-full md:w-36 flex items-center justify-center gap-2'
       >

@@ -2,6 +2,7 @@
 
 import { useCartContext } from '@/context/cart.context';
 import { useCreateOrder } from '@/hook/useCreateOrder';
+import { setCookie } from '@/libs/cookies/cookies';
 import { TCreateOrder } from '@/libs/types';
 import {
   Button,
@@ -146,6 +147,16 @@ export default function OrderCreate() {
         if (paymentMethod === 'Cash') {
           router.push(`${targetUrl}/pay-bill?${params}`);
         } else if (response.invoiceUrl && paymentMethod === 'E-Wallet') {
+          setCookie(
+            'invoiceId',
+            response.invoiceId,
+            new Date(Date.now() + 60 * 60 * 1000)
+          );
+          // cookie.set('invoiceId', response.invoiceId, {
+          //   httpOnly: true,
+          //   secure: true,
+          //   expires: new Date(Date.now() + 60 * 60 * 1000),
+          // });
           router.push(response.invoiceUrl);
         } else {
           router.push(`${targetUrl}/pay-bill?${params}`);
