@@ -1,11 +1,11 @@
+import { useCategoryContext } from '@/context/category-filter.context';
 import { TMenus } from '@/libs/types';
 import { Alert, CustomFlowbiteTheme } from 'flowbite-react';
+import { useEffect, useState } from 'react';
 import { HiInformationCircle } from 'react-icons/hi';
 import { ToastContainer } from 'react-toastify';
 import MenusCard from '../UI/menus-card';
 import MenusCardSkeleton from '../skeletons/menus-card-skeleton';
-import { useCategoryContext } from '@/context/category-filter.context';
-import { useEffect, useState } from 'react';
 
 interface MenusCanteenContainerProps {
   menus: TMenus[];
@@ -74,7 +74,7 @@ export default function MenusCanteenContainer({
         <Alert theme={customTheme} color='failure' icon={HiInformationCircle}>
           <p className='px-3'>{error}</p>
         </Alert>
-      ) : !filteredMenus.length ? (
+      ) : categoryFilter !== 'Pilih Kategori Menu' && !filteredMenus.length ? (
         <Alert theme={customTheme} color='info' icon={HiInformationCircle}>
           <p className='px-3'>Tidak ada kategori {categoryFilter}.</p>
         </Alert>
