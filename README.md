@@ -1,7 +1,7 @@
 # CanteenbyMe
 
 <div align='center' style='overflow: hidden; margin:0 auto; border-radius:20px; padding:10px 0;'>
-  <img src='./public/images/logo/logo-readme.png' alt='Logo CanteenbyMe' width='20%' style='border-radius:20px;' />
+  <img src='./public/images/logo/logo-readme.png' alt='Logo CanteenbyMe' width='40%' style='border-radius:20px;' />
 </div>
 
 > Meet Our Best Team
